@@ -50,9 +50,10 @@ body{background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI
 .card-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .card-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .card-grid-2>*,.card-grid-3>*,.card-grid-4>*{min-width:0}
-@media(max-width:1024px){.card-grid-4{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:768px){.card-grid-4,.card-grid-3{grid-template-columns:1fr 1fr}.card-grid-2{grid-template-columns:1fr}.cover-title{font-size:38px}}
-@media(max-width:480px){.card-grid-4,.card-grid-3,.card-grid-2{grid-template-columns:1fr}}
+@media(max-width:1024px){.card-grid-4{grid-template-columns:repeat(2,1fr)}.card-grid-2{gap:12px}}
+@media(max-width:768px){.card-grid-4,.card-grid-3{grid-template-columns:1fr 1fr}.card-grid-2{grid-template-columns:1fr}.cover-title{font-size:38px}.cover{padding:32px 28px}}
+@media(max-width:480px){.card-grid-4,.card-grid-3,.card-grid-2{grid-template-columns:1fr}.cover-title{font-size:28px}.kpi-value{font-size:22px}}
+@media print{.card-grid-2,.card-grid-3,.card-grid-4{grid-template-columns:1fr!important}.page{max-width:100%;padding:0 10px}.chart-wrap{break-inside:avoid;page-break-inside:avoid}.section{page-break-before:auto;margin-top:30px}table{font-size:11px}}
 
 /* KPIs */
 .kpi-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
@@ -71,7 +72,9 @@ body{background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI
 .tab:hover:not(.active){background:var(--bg);color:var(--text)}
 
 /* TABLES */
-.table-wrap{overflow-x:auto;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.table-wrap{overflow-x:auto;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.06);-webkit-overflow-scrolling:touch}
+.table-wrap::-webkit-scrollbar{height:6px}
+.table-wrap::-webkit-scrollbar-thumb{background:var(--primary-20);border-radius:3px}
 table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card)}
 thead th{background:var(--dark);color:#fff;padding:11px 14px;text-align:left;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
 thead th:first-child{border-radius:8px 0 0 0}
@@ -89,7 +92,7 @@ tfoot tr td{padding:11px 14px;font-weight:800;background:var(--primary-10);borde
 
 /* CHARTS */
 .chart-wrap{background:var(--card);border-radius:14px;padding:24px;position:relative;overflow:hidden;min-width:0}
-.chart-wrap canvas{max-width:100%;height:auto!important}
+.chart-wrap canvas{width:100%!important;max-width:100%;height:auto!important}
 .chart-title{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:4px}
 .chart-sub{font-size:12px;color:var(--muted);margin-bottom:18px}
 
@@ -525,7 +528,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
 
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Cenário de reinvestimento</th><th>Clientes M36</th><th>MRR M36</th><th>ARR M36</th><th>Valuation 3×</th><th>Equity inv. (22,5%)</th><th>Distribuído ao inv. 36M</th><th>MOIC</th></tr></thead>
+      <thead><tr><th>Cenário</th><th>Cl. M36</th><th>MRR M36</th><th>ARR M36</th><th>Val. 3×</th><th>Eq. inv.</th><th>Distrib. 36M</th><th>MOIC</th></tr></thead>
       <tbody id="roi-comparison"></tbody>
     </table>
   </div>
@@ -1377,7 +1380,21 @@ function initRender() {
   renderTeamCapacity();
 }
 
-initRender();
+// Defer init to ensure CSS grid layout is computed
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initRender);
+} else {
+  initRender();
+}
+
+// Re-render charts on window resize to fix layout issues
+let resizeTimer;
+window.addEventListener('resize', function() {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function() {
+    renderCharts(currentScenario);
+  }, 250);
+});
 </script>
 </body>
 </html>
