@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investor Pack — Pulso · v3 · Clínicas da Saúde</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #EEF0FF;
+  --primary: #6366F1;
+  --primary-d: #4F46E5;
+  --primary-10: rgba(99,102,241,0.10);
+  --primary-20: rgba(99,102,241,0.20);
+  --dark: #0B0B0F;
+  --card: #FFFFFF;
+  --muted: #6B7280;
+  --text: #1F2937;
+  --border: #E5E7EB;
+  --green: #10B981;
+  --green-10: rgba(16,185,129,0.10);
+  --red: #EF4444;
+  --red-10: rgba(239,68,68,0.10);
+  --amber: #F59E0B;
+  --amber-10: rgba(245,158,11,0.10);
+  --purple-light: #A5B4FC;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--text);font-size:14px;line-height:1.5}
+.page{max-width:1100px;margin:0 auto;padding:0 20px 100px}
+.section{margin-top:60px}
+.section-eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);font-weight:700;margin-bottom:6px}
+.section-heading{font-size:22px;font-weight:800;color:var(--dark);margin-bottom:8px;line-height:1.3}
+.section-sub{font-size:13px;color:var(--muted);max-width:640px;margin-bottom:24px;line-height:1.7}
+
+/* COVER */
+.cover{background:var(--dark);border-radius:20px;padding:52px 56px;margin-top:24px;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:-80px;right:-80px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,.35) 0%,transparent 70%)}
+.cover::after{content:'';position:absolute;bottom:-40px;left:40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,.15) 0%,transparent 70%)}
+.cover-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(99,102,241,.2);border:1px solid rgba(99,102,241,.4);border-radius:20px;padding:4px 14px;font-size:11px;color:var(--purple-light);letter-spacing:.06em;margin-bottom:20px;position:relative;z-index:1}
+.cover-title{font-size:52px;font-weight:900;color:#fff;line-height:1;margin-bottom:8px;letter-spacing:-.02em;position:relative;z-index:1}
+.cover-sub{font-size:20px;color:rgba(255,255,255,.55);margin-bottom:36px;font-weight:400;position:relative;z-index:1}
+.cover-meta{display:flex;gap:40px;flex-wrap:wrap;position:relative;z-index:1}
+.cover-meta-label{font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em}
+.cover-meta-value{font-size:15px;color:#fff;font-weight:700;margin-top:3px}
+
+/* CARDS */
+.card{background:var(--card);border-radius:14px;padding:22px 26px}
+.card-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:768px){.card-grid-4,.card-grid-3{grid-template-columns:1fr 1fr}.card-grid-2{grid-template-columns:1fr}.cover-title{font-size:38px}}
+
+/* KPIs */
+.kpi-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.kpi-value{font-size:28px;font-weight:800;color:var(--dark);letter-spacing:-.02em}
+.kpi-sub{font-size:12px;color:var(--muted);margin-top:3px}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:10px;margin-top:6px}
+.badge-green{background:var(--green-10);color:var(--green)}
+.badge-primary{background:var(--primary-10);color:var(--primary)}
+.badge-amber{background:var(--amber-10);color:var(--amber)}
+.badge-red{background:var(--red-10);color:var(--red)}
+
+/* TABS */
+.tabs{display:inline-flex;background:var(--card);border-radius:12px;padding:6px;gap:6px;margin-bottom:24px;flex-wrap:wrap}
+.tab{padding:9px 22px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;color:var(--muted);border:none;background:none}
+.tab.active{background:var(--primary);color:#fff;box-shadow:0 2px 8px rgba(99,102,241,.35)}
+.tab:hover:not(.active){background:var(--bg);color:var(--text)}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card)}
+thead th{background:var(--dark);color:#fff;padding:11px 14px;text-align:left;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+thead th:first-child{border-radius:8px 0 0 0}
+thead th:last-child{border-radius:0 8px 0 0}
+tbody tr{border-bottom:1px solid var(--border);transition:background .12s}
+tbody tr:hover{background:var(--bg)}
+tbody td{padding:9px 14px;white-space:nowrap}
+tfoot tr td{padding:11px 14px;font-weight:800;background:var(--primary-10);border-top:2px solid var(--primary);white-space:nowrap}
+.num{text-align:right;font-variant-numeric:tabular-nums;font-family:'SF Mono','Fira Code',monospace;font-size:12px}
+.pos{color:var(--green);font-weight:700}
+.neg{color:var(--red);font-weight:700}
+.accent{color:var(--primary);font-weight:800}
+.yr-row td{background:rgba(99,102,241,.07)!important;font-weight:700}
+.phase-header td{background:var(--primary)!important;color:#fff!important;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:6px 14px!important}
+
+/* CHARTS */
+.chart-wrap{background:var(--card);border-radius:14px;padding:24px}
+.chart-title{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:4px}
+.chart-sub{font-size:12px;color:var(--muted);margin-bottom:18px}
+
+/* INFO BOXES */
+.info{background:var(--primary-10);border-left:3px solid var(--primary);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;line-height:1.6;margin:14px 0}
+.warn{background:var(--amber-10);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;line-height:1.6;margin:14px 0}
+.success{background:var(--green-10);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;line-height:1.6;margin:14px 0}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:32px}
+.timeline::before{content:'';position:absolute;left:10px;top:8px;bottom:0;width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:28px}
+.tl-dot{position:absolute;left:-26px;top:5px;width:14px;height:14px;border-radius:50%;background:var(--primary);border:3px solid #fff;box-shadow:0 0 0 2px var(--primary)}
+.tl-trigger{font-size:11px;color:var(--primary);font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.tl-role{font-size:16px;font-weight:800;color:var(--dark);margin:2px 0}
+.tl-detail{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* CAP TABLE PILLS */
+.cap-pill{display:inline-block;padding:3px 10px;border-radius:10px;font-size:12px;font-weight:700}
+.cap-inv{background:#EDE9FE;color:#7C3AED}
+.cap-fam{background:#D1FAE5;color:#059669}
+.cap-tec{background:#FEE2E2;color:#DC2626}
+.cap-pool{background:#FEF3C7;color:#D97706}
+
+/* SCENARIO TAG */
+.scenario-tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--primary);background:var(--primary-10);padding:4px 12px;border-radius:8px;margin-bottom:16px}
+
+/* PROTECTION CARDS */
+.prot-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:768px){.prot-grid{grid-template-columns:1fr}}
+.prot-card{background:var(--card);border-radius:12px;padding:18px 20px;border-left:3px solid var(--primary)}
+.prot-card.obr{border-left-color:var(--amber)}
+.prot-label{font-size:10px;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+.prot-card.obr .prot-label{color:var(--amber)}
+.prot-title{font-size:14px;font-weight:800;color:var(--dark);margin-bottom:6px}
+.prot-desc{font-size:12px;color:var(--muted);line-height:1.6}
+
+/* APORTE PARCELAS */
+.aporte-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin-top:12px}
+.aporte-mes{background:var(--primary-10);border-radius:6px;padding:10px 4px;text-align:center}
+.aporte-mes-lbl{font-size:9px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
+.aporte-mes-val{font-size:11px;font-weight:800;color:var(--primary);font-variant-numeric:tabular-nums}
+@media(max-width:768px){.aporte-grid{grid-template-columns:repeat(6,1fr)}}
+
+/* DIVIDER */
+hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
+
+/* LEGEND */
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* VERTICAL CARDS */
+.vert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+@media(max-width:768px){.vert-grid{grid-template-columns:1fr 1fr}}
+.vert{background:var(--card);border-radius:10px;padding:14px 16px;border-top:2px solid var(--primary)}
+.vert-name{font-size:13px;font-weight:800;color:var(--dark);margin-bottom:3px}
+.vert-desc{font-size:11px;color:var(--muted);line-height:1.5}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══ COVER ═══ -->
+<div class="cover">
+  <div class="cover-badge">🔒 Documento Confidencial — Apresentação Exclusiva ao Grupo Investidor</div>
+  <div class="cover-title">Pulso</div>
+  <div class="cover-sub">Agência de Marketing Digital · Clínicas da Saúde</div>
+  <div class="cover-meta">
+    <div><div class="cover-meta-label">Cenário</div><div class="cover-meta-value">B — Multi-vertical · Cenário Único 20% com Escalonamento</div></div>
+    <div><div class="cover-meta-label">Período</div><div class="cover-meta-value">Mai/2026 – Abr/2029 · 36 meses</div></div>
+    <div><div class="cover-meta-label">Aporte Total</div><div class="cover-meta-value">R$ 285.000 · Ano 1</div></div>
+    <div><div class="cover-meta-label">Versão</div><div class="cover-meta-value">v3 · Maio 2026</div></div>
+    <div><div class="cover-meta-label">Composição Societária</div><div class="cover-meta-value">2 Investidores · 3 Técnicos · 2 Filhos</div></div>
+  </div>
+</div>
+
+<!-- ═══ GLOSSÁRIO ═══ -->
+<div class="section">
+  <div class="section-eyebrow">Glossário</div>
+  <div class="section-heading">Siglas e termos utilizados neste documento</div>
+  <div class="card" style="margin-bottom:16px">
+    <div style="columns:2;column-gap:32px;font-size:13px;line-height:2">
+      <strong>ARR</strong> — Receita Anual Recorrente (faturamento bruto anual da empresa)<br>
+      <strong>MRR</strong> — Receita Mensal Recorrente (faturamento bruto mensal)<br>
+      <strong>MOIC</strong> — Múltiplo sobre Capital Investido (quantas vezes o investidor recebe de volta)<br>
+      <strong>CAC</strong> — Custo de Aquisição de Cliente<br>
+      <strong>LTV</strong> — Valor do Cliente ao Longo do Tempo<br>
+      <strong>TAM</strong> — Mercado Total Endereçável<br>
+      <strong>EBITDA</strong> — Lucro Operacional (antes de juros, impostos, depreciação e amortização)<br>
+      <strong>SHA</strong> — Acordo de Sócios (Shareholders' Agreement)<br>
+      <strong>ROFR</strong> — Direito de Primeira Recusa<br>
+      <strong>CPL</strong> — Custo por Lead<br>
+      <strong>NPS</strong> — Índice de Satisfação do Cliente (Net Promoter Score)<br>
+      <strong>DRE</strong> — Demonstração de Resultado do Exercício
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 1. TESE ═══ -->
+<div class="section">
+  <div class="section-eyebrow">1. Tese de Investimento</div>
+  <div class="section-heading">Payback rápido, escala comprovada, proteção dos dois lados</div>
+  <p class="section-sub">Agência full-service para clínicas médicas, odontológicas, estéticas, plásticas, fisioterápicas e psicológicas. Modelo recorrente, aporte único no Y1, operação autofinanciada a partir do M6. Cenário único de reinvestimento escalonado (20% → 15% → 12%), com reserva de caixa dinâmica e distribuição efetiva.</p>
+
+  <div class="card-grid-4" style="margin-bottom:20px">
+    <div class="card">
+      <div class="kpi-label">Aporte total Y1</div>
+      <div class="kpi-value">R$ 285k</div>
+      <div class="kpi-sub">12 parcelas · cronograma firme</div>
+      <span class="badge badge-primary">Único aporte previsto</span>
+    </div>
+    <div class="card">
+      <div class="kpi-label">Payback 1×</div>
+      <div class="kpi-value">~M10</div>
+      <div class="kpi-sub">R$ 285k ao investidor</div>
+      <span class="badge badge-green">Preferencial integral</span>
+    </div>
+    <div class="card">
+      <div class="kpi-label">MRR M36 · base 20%</div>
+      <div class="kpi-value">R$ 1,72M</div>
+      <div class="kpi-sub">ARR R$ 20,6M</div>
+      <span class="badge badge-primary">Cenário base</span>
+    </div>
+    <div class="card">
+      <div class="kpi-label">MOIC 36M · base</div>
+      <div class="kpi-value">7,8×</div>
+      <div class="kpi-sub">Retorno sobre capital</div>
+      <span class="badge badge-green">Melhor que agressivo</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 2. MODELO DE NEGÓCIO ═══ -->
+<div class="section">
+  <div class="section-eyebrow">2. Modelo de Negócio</div>
+  <div class="section-heading">O que a Pulso faz e como ganha dinheiro</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Elemento</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Serviço</strong></td><td>Gestão completa de marketing digital para profissionais da saúde</td></tr>
+        <tr><td><strong>Entregáveis</strong></td><td>Campanhas Meta/Google Ads · landing pages · criativos · copies · relatórios · social media</td></tr>
+        <tr><td><strong>Público-alvo</strong></td><td>Clínicas médicas, odontologia, estética, cirurgia plástica, fisioterapia, psicologia — Brasil</td></tr>
+        <tr><td><strong>Modelo de receita</strong></td><td>Mensalidade recorrente — <em>sem taxa de setup</em></td></tr>
+        <tr><td><strong>Ticket médio</strong></td><td>Escalonado: R$ 2.500 (M1–M6) → R$ 3.000 (Y1) → R$ 4.000 (Y2) → R$ 6.500 (M36)</td></tr>
+        <tr><td><strong>Fidelidade mínima</strong></td><td>3 meses contratuais (lock-in efetivo ≈ 4 meses)</td></tr>
+        <tr><td><strong>Capacidade inicial (5 sócios)</strong></td><td>40 clientes — gatilho para expansão do time</td></tr>
+        <tr><td><strong>Alavanca de escala</strong></td><td>Claude Pro (IA) — 10 novos onboardings/mês + gestão de 20 em ongoing</td></tr>
+        <tr><td><strong>Canais de aquisição</strong></td><td>Canal Edu · 4–5 indicações/mês (fixo) + Tráfego pago a partir do M3</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px;margin-top:20px">Multi-vertical desde o M1 · TAM expande 6×</p>
+  <div class="vert-grid">
+    <div class="vert"><div class="vert-name">Medicina</div><div class="vert-desc">Clínicas de especialidades, ticket alto, procedimentos recorrentes</div></div>
+    <div class="vert"><div class="vert-name">Odontologia</div><div class="vert-desc">Consultórios e clínicas · estéticos + tratamentos</div></div>
+    <div class="vert"><div class="vert-name">Estética</div><div class="vert-desc">Alto LTV · gatilhos visuais · funil já validado no nicho</div></div>
+    <div class="vert"><div class="vert-name">Cirurgia Plástica</div><div class="vert-desc">Ticket muito alto · ciclo de venda consultivo · branding forte</div></div>
+    <div class="vert"><div class="vert-name">Fisioterapia</div><div class="vert-desc">Ciclo de venda curto · demanda contínua</div></div>
+    <div class="vert"><div class="vert-name">Psicologia</div><div class="vert-desc">Copy suave · LGPD sensível · alta taxa de conversão orgânica</div></div>
+  </div>
+  <div class="info"><strong>Por que multi-vertical importa:</strong> TAM sai de ~80k clínicas (só medicina) para ~500k clínicas elegíveis no Brasil. Em 36 meses, mesmo no cenário mais agressivo, atingimos menos de 0,1% do mercado. Sem teto de demanda na janela do plano.</div>
+</div>
+
+<!-- ═══ 3. PREMISSAS ═══ -->
+<div class="section">
+  <div class="section-eyebrow">3. Premissas do Modelo Financeiro</div>
+  <div class="section-heading">Base de cálculo — válida para os 36 meses</div>
+
+  <div class="card-grid-2" style="margin-bottom:16px">
+    <div>
+      <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px">Remuneração dos sócios · escalonada por clientes</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Clientes</th><th>Sócios</th><th>Individual</th><th>Total</th></tr></thead>
+          <tbody>
+            <tr><td>0–9 clientes</td><td>4</td><td class="num">R$ 2.000</td><td class="num">R$ 8.000</td></tr>
+            <tr><td>10–24 clientes</td><td>5</td><td class="num">R$ 2.500</td><td class="num">R$ 12.500</td></tr>
+            <tr><td>25–34 clientes</td><td>5</td><td class="num">R$ 3.000</td><td class="num">R$ 15.000</td></tr>
+            <tr><td>35–39 clientes</td><td>5</td><td class="num">R$ 4.000</td><td class="num">R$ 20.000</td></tr>
+            <tr class="yr-row"><td>40+ clientes</td><td>5</td><td class="num">R$ 5.000</td><td class="num">R$ 25.000</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5">5º sócio entra a partir de 10 clientes. Apenas R$ 1.621/sócio é pró-labore formal (otimização tributária); complemento é antecipação de distribuição.<br><strong>Revisão por MRR:</strong> R$ 7.000/sócio quando MRR &gt; R$ 500k · R$ 10.000/sócio quando MRR &gt; R$ 1M.</div>
+    </div>
+    <div>
+      <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px">Custos Fixos Mensais · base</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Item</th><th>R$/mês</th></tr></thead>
+          <tbody>
+            <tr><td>Aluguel de escritório</td><td class="num">R$ 4.000</td></tr>
+            <tr><td>Claude Pro + IA complementares</td><td class="num">R$ 500</td></tr>
+            <tr><td>Internet, água, energia</td><td class="num">R$ 500</td></tr>
+            <tr><td>Hospedagem e servidores</td><td class="num">R$ 700</td></tr>
+            <tr><td>Materiais comerciais</td><td class="num">R$ 300</td></tr>
+            <tr><td>Contador (Y1–Y2)</td><td class="num">R$ 1.000</td></tr>
+          </tbody>
+          <tfoot><tr><td><strong>TOTAL FIXO BASE</strong></td><td class="num accent">R$ 7.000</td></tr></tfoot>
+        </table>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5">Contador sobe para R$ 2.000/mês a partir do Y3 (migração do Simples para Lucro Presumido).</div>
+    </div>
+  </div>
+
+  <div class="card-grid-3" style="margin-bottom:16px">
+    <div class="card">
+      <div class="kpi-label">Churn Mensal</div>
+      <div class="kpi-value">5%</div>
+      <div class="kpi-sub">Base realista · aumenta com escala</div>
+      <span class="badge badge-primary">+0,5 a +2 p.p. acima de 100 clientes</span>
+    </div>
+    <div class="card">
+      <div class="kpi-label">CAC via tráfego</div>
+      <div class="kpi-value">R$ 2k → 1,5k</div>
+      <div class="kpi-sub">M1–M6: R$ 2k · M7–M12: R$ 1,5k</div>
+      <span class="badge badge-amber">M13+: R$ 1,8k–2,5k por saturação</span>
+    </div>
+    <div class="card">
+      <div class="kpi-label">Canal Edu · indicações</div>
+      <div class="kpi-value">4/mês</div>
+      <div class="kpi-sub">Fixo · independente do caixa</div>
+      <span class="badge badge-green">CAC = R$ 0</span>
+    </div>
+  </div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px;margin-top:20px">Impostos · Simples Nacional Anexo III · alíquota progressiva</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Faixa anual</th><th>MRR aproximado</th><th>Alíquota efetiva</th><th>Período provável</th></tr></thead>
+      <tbody>
+        <tr><td>Até R$ 180k</td><td class="num">até R$ 15k/mês</td><td class="num accent">6,0%</td><td>M1–M4</td></tr>
+        <tr><td>R$ 180k – R$ 360k</td><td class="num">R$ 15k–30k/mês</td><td class="num">8,0%</td><td>M5–M7</td></tr>
+        <tr><td>R$ 360k – R$ 720k</td><td class="num">R$ 30k–60k/mês</td><td class="num">10,5%</td><td>M8–M10</td></tr>
+        <tr><td>R$ 720k – R$ 1,8M</td><td class="num">R$ 60k–150k/mês</td><td class="num">13,0%</td><td>M11–M14</td></tr>
+        <tr class="yr-row"><td>R$ 1,8M – R$ 3,6M</td><td class="num">R$ 150k–300k/mês</td><td class="num">15,8%</td><td>M15–M28</td></tr>
+        <tr><td>Acima de R$ 4,8M</td><td class="num">Lucro Presumido</td><td class="num">~13,3% + ISS</td><td>M29+</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info"><strong>Aquisição parte do M3:</strong> nos M1–M2 só trabalhamos com indicações do Edu (sem budget de tráfego). A partir do M3, R$ 5k/mês em tráfego pago — período em que já temos 1–2 cases iniciais que sustentam a conversão. No Y2+ o budget vira % do lucro conforme o cenário escolhido.</div>
+</div>
+
+<!-- ═══ 4. AQUISIÇÃO ═══ -->
+<div class="section">
+  <div class="section-eyebrow">4. Funil de Aquisição e Canais</div>
+  <div class="section-heading">Como os clientes chegam — dois canais complementares</div>
+  <div class="card-grid-2" style="margin-bottom:16px">
+    <div class="card" style="border-top:3px solid var(--green)">
+      <div class="kpi-label">Canal 1 — Edu (indicações diretas)</div>
+      <div class="kpi-value" style="color:var(--green)">4–5/mês</div>
+      <div class="kpi-sub" style="margin-top:8px;line-height:1.7">Volume fixo, independente do ciclo financeiro. CAC = R$ 0. Gerado pela rede do sócio-investidor Eduardo — médicos indicando médicos. Alta qualidade de lead (ticket cheio, baixo churn). <strong>Formalizado em cláusula SHA</strong> com mínimo de 4 leads/mês por 24 meses.</div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--primary)">
+      <div class="kpi-label">Canal 2 — Tráfego pago (a partir do M3)</div>
+      <div class="kpi-value" style="color:var(--primary)">Escala com lucro</div>
+      <div class="kpi-sub" style="margin-top:8px;line-height:1.7">R$ 5k/mês fixo no Y1 (a partir do M3). No Y2+ vira % do lucro operacional conforme o cenário. <strong>Motor do crescimento</strong>: quanto mais reinvestimos, mais clientes. CAC sobe com escala (saturação de audiência).</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Métrica</th><th>M1–M6 (sem cases)</th><th>M7–M12 (cases novos)</th><th>M13–M24 (escala)</th><th>M25–M36 (saturação)</th></tr></thead>
+      <tbody>
+        <tr><td>CAC via tráfego pago</td><td class="num">R$ 2.000</td><td class="num">R$ 1.500</td><td class="num">R$ 1.800</td><td class="num">R$ 2.500</td></tr>
+        <tr><td>Conversão Lead → Cliente</td><td class="num">3–5%</td><td class="num">8–10%</td><td class="num">7–9%</td><td class="num">5–7%</td></tr>
+        <tr><td>Clientes/mês via tráfego (Y1)</td><td class="num">0 (só Edu)</td><td class="num accent">2–3</td><td class="num">—</td><td class="num">—</td></tr>
+        <tr><td>Clientes/mês via Edu (fixo)</td><td class="num">4</td><td class="num">4</td><td class="num">4</td><td class="num">3</td></tr>
+        <tr class="yr-row"><td>Total novos/mês</td><td class="num">4</td><td class="num">6–7</td><td class="num">escala c/ % reinv.</td><td class="num">escala c/ % reinv.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ 5. PROJEÇÃO EXPONENCIAL ═══ -->
+<div class="section">
+  <div class="section-eyebrow">5. Projeção de Crescimento — 36 Meses</div>
+  <div class="section-heading">Cenário único · reinvestimento escalonado</div>
+  <p class="section-sub">A partir do M13 (Y2), a empresa reinveste parte do lucro operacional em tráfego pago. O percentual de reinvestimento diminui ao longo do tempo conforme a empresa estabiliza: <strong>20%</strong> nos primeiros 24 meses, <strong>15%</strong> dos M25 ao M36, e <strong>12%</strong> a partir do M37. A reserva de caixa acompanha: 20% (Y1), 15% (Y2), 10% (Y3+). Somente o lucro efetivamente distribuível (após reinvestimento, reserva e impostos) é distribuído aos sócios.</p>
+
+  <div class="scenario-tag" id="scenario-label">Reinvestimento de 20% do lucro operacional em tráfego pago — cenário base</div>
+
+  <div class="card-grid-4" id="kpi-row" style="margin-bottom:20px"></div>
+
+  <div class="card-grid-2" style="margin-bottom:16px">
+    <div class="chart-wrap">
+      <div class="chart-title">Clientes ativos — 36 meses</div>
+      <div class="chart-sub">Base total acumulada após churn</div>
+      <canvas id="chartClients" height="200"></canvas>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">MRR e custos totais</div>
+      <div class="chart-sub">Receita mensal recorrente vs. custos operacionais</div>
+      <canvas id="chartMRR" height="200"></canvas>
+    </div>
+  </div>
+
+  <div class="card-grid-2">
+    <div class="chart-wrap">
+      <div class="chart-title">Lucro operacional líquido</div>
+      <div class="chart-sub">Após reinvestimento em tráfego e impostos</div>
+      <canvas id="chartProfit" height="200"></canvas>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Headcount total da empresa</div>
+      <div class="chart-sub">Sócios + colaboradores contratados</div>
+      <canvas id="chartTeam" height="200"></canvas>
+    </div>
+  </div>
+
+  <div class="info" style="margin-top:20px"><strong>Nota sobre o escalonamento:</strong> O reinvestimento começa em 20% (M1–M24), reduz para 15% (M25–M36) e 12% após o M36. Isso maximiza o crescimento no início e libera mais lucro distribuível conforme a empresa estabiliza. A reserva de caixa segue lógica similar: maior no início (20%), reduzindo conforme a previsibilidade de receita aumenta.</div>
+</div>
+
+<!-- ═══ 6. EXPANSÃO DE TIME ═══ -->
+<div class="section">
+  <div class="section-eyebrow">6. Expansão de Time</div>
+  <div class="section-heading">Da equipe de sócios à organização escalável</div>
+  <p class="section-sub">Contratações são ativadas por gatilhos de capacidade — nunca antes. A expansão começa quando os 5 sócios atingem o teto de 40 clientes.</p>
+
+  <div class="card-grid-2">
+    <div class="card">
+      <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:20px">Ordem de contratação ao escalar</p>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-trigger">Gatilho: 40 clientes</div>
+          <div class="tl-role">1º CS + 1º Social Media</div>
+          <div class="tl-detail">CS assume gestão de relacionamento (até 33 clientes). SM cobre 10 clientes com pacote social (25% da base). Salário: R$ 3.500 + R$ 3.000 = R$ 6.500/mês.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-trigger">Gatilho: 41 clientes</div>
+          <div class="tl-role">1º Analista de Marketing + 1º Designer</div>
+          <div class="tl-detail">Cobre análise de performance e criativos para os novos clientes. Capacidade: 40 contas cada. Salário: R$ 4.500 + R$ 4.000 = R$ 8.500/mês.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-trigger">Gatilho: 4 colaboradores</div>
+          <div class="tl-role">Coordenador Operacional</div>
+          <div class="tl-detail">Gestão da equipe de 4–8 pessoas. Libera sócios para foco estratégico e vendas. Salário: R$ 6.000/mês.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--dark)"></div>
+          <div class="tl-trigger" style="color:var(--dark)">Gatilho: 73 clientes</div>
+          <div class="tl-role">2º CS + 2º Social Media</div>
+          <div class="tl-detail">Cada CS adicional sustenta mais 33 clientes. 2º SM a cada 40 clientes. Ciclo se repete.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--dark)"></div>
+          <div class="tl-trigger" style="color:var(--dark)">Gatilho: 8+ colaboradores</div>
+          <div class="tl-role">Head / Gerente de Operações</div>
+          <div class="tl-detail">Gestão média da equipe. Processos, qualidade, onboarding. Salário: R$ 10.000/mês.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--dark)"></div>
+          <div class="tl-trigger" style="color:var(--dark)">Gatilho: 15+ colaboradores</div>
+          <div class="tl-role">Diretor de Operações ou Comercial</div>
+          <div class="tl-detail">Dirige departamentos. Responsável por P&amp;L de área. Salário: R$ 15.000/mês.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--dark)"></div>
+          <div class="tl-trigger" style="color:var(--dark)">Gatilho: 25+ headcount total</div>
+          <div class="tl-role">C-Level: COO e/ou CMO</div>
+          <div class="tl-detail">Empresa com estrutura corporativa. COO lidera operações, CMO lidera marketing e aquisição. Salário: R$ 18.000/mês cada. Os sócios migram para papéis de conselho e estratégia.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="chart-wrap" style="margin-bottom:16px">
+        <div class="chart-title">Composição do time ao longo do tempo</div>
+        <div class="chart-sub">Stacked por área · cenário base</div>
+        <canvas id="chartTeamStack" height="240"></canvas>
+      </div>
+      <div class="card">
+        <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:12px">Capacidade operacional por time</p>
+        <table>
+          <thead><tr><th>Clientes</th><th>CS</th><th>Analistas</th><th>Designers</th><th>SM</th><th>Headcount</th></tr></thead>
+          <tbody id="team-capacity-table"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 7. TABELA FINANCEIRA ═══ -->
+<div class="section">
+  <div class="section-eyebrow">7. Projeção Financeira Completa — 36 meses</div>
+  <div class="section-heading">Demonstrativo mensal · cenário selecionado</div>
+  <p class="section-sub">Ano 1 com investidor cobrindo o gap de caixa. Ano 2 e 3 com operação autofinanciada e reinvestimento ativo conforme cenário.</p>
+
+  <div class="table-wrap">
+    <table id="financial-table">
+      <thead>
+        <tr>
+          <th>Mês</th><th>Data</th><th>Clientes</th>
+          <th>MRR</th><th>Tráfego</th>
+          <th>Custos</th><th>Impostos</th><th>Lucro líq.</th><th>Lucro acum.</th>
+          <th>HC</th>
+        </tr>
+      </thead>
+      <tbody id="financial-body"></tbody>
+      <tfoot id="financial-foot"></tfoot>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ 8. PAYBACK & ROI ═══ -->
+<div class="section">
+  <div class="section-eyebrow">8. Payback e Retorno do Investidor</div>
+  <div class="section-heading">O que o investidor recebe — em números</div>
+
+  <div class="card-grid-3" style="margin-bottom:16px">
+    <div class="card">
+      <div class="kpi-label">ARR no M36 · base 20%</div>
+      <div class="kpi-value" id="roi-arr">—</div>
+      <div class="kpi-sub">Receita anual recorrente projetada</div>
+    </div>
+    <div class="card">
+      <div class="kpi-label">Valuation conservador (3× ARR)</div>
+      <div class="kpi-value" id="roi-val3">—</div>
+      <div class="kpi-sub">22,5% investidor = equity M36</div>
+    </div>
+    <div class="card">
+      <div class="kpi-label">Valuation otimista (5× ARR)</div>
+      <div class="kpi-value" id="roi-val5">—</div>
+      <div class="kpi-sub">22,5% investidor = equity M36</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Cenário de reinvestimento</th><th>Clientes M36</th><th>MRR M36</th><th>ARR M36</th><th>Valuation 3×</th><th>Equity inv. (22,5%)</th><th>Distribuído ao inv. 36M</th><th>MOIC</th></tr></thead>
+      <tbody id="roi-comparison"></tbody>
+    </table>
+  </div>
+
+  <div style="margin-top:24px">
+    <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:12px">Retorno financeiro completo · cenário base (20% reinvestimento)</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Componente de retorno</th><th>Estimativa</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr><td>Capital investido (Y1)</td><td class="num neg">−R$ 285.000</td><td>12 parcelas mensais · cobre custos Y1</td></tr>
+          <tr><td>Preferência 1× no payback</td><td class="num pos">+R$ 285.000</td><td>100% das distribuições até esse piso</td></tr>
+          <tr><td>Distribuições pós 1× · Y1–Y2</td><td class="num pos" id="dist-y1y2">—</td><td>Pro-rata por equity (48% → 36% → 22,5%)</td></tr>
+          <tr><td>Distribuições pós 1× · Y3</td><td class="num pos" id="dist-y3">—</td><td>Pro-rata · equity 22,5% após milestone 3</td></tr>
+          <tr><td>Valor do equity no M36 (3× ARR)</td><td class="num pos" id="eq-val3-ret">—</td><td>22,5% do valuation conservador</td></tr>
+          <tr><td>Valor do equity no M36 (5× ARR)</td><td class="num pos" id="eq-val5-ret">—</td><td>22,5% do valuation otimista</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td><strong>RETORNO TOTAL (3× ARR)</strong></td><td class="num accent" id="total-ret-3">—</td><td id="moic-label">MOIC sobre R$ 285k investidos</td></tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px;margin-top:24px">Cronograma de aporte · 12 parcelas</p>
+  <div class="aporte-grid">
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M1</div><div class="aporte-mes-val">R$ 30k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M2</div><div class="aporte-mes-val">R$ 25k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M3</div><div class="aporte-mes-val">R$ 30k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M4</div><div class="aporte-mes-val">R$ 25k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M5</div><div class="aporte-mes-val">R$ 25k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M6</div><div class="aporte-mes-val">R$ 25k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M7</div><div class="aporte-mes-val">R$ 25k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M8</div><div class="aporte-mes-val">R$ 20k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M9</div><div class="aporte-mes-val">R$ 20k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M10</div><div class="aporte-mes-val">R$ 20k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M11</div><div class="aporte-mes-val">R$ 20k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M12</div><div class="aporte-mes-val">R$ 20k</div></div>
+  </div>
+  <div style="font-size:11px;color:var(--muted);margin-top:8px">Total R$ 285k · parcelas ajustáveis em até ±15% mediante consenso dos blocos.</div>
+</div>
+
+<!-- ═══ 9. RENDA DOS SÓCIOS ═══ -->
+<div class="section">
+  <div class="section-eyebrow">9. Renda dos Sócios Operacionais</div>
+  <div class="section-heading">Aperto no início, retorno exponencial</div>
+  <p class="section-sub">Durante o payback 1× (~10 meses), sócios vivem de pró-labore escalonado. Após o payback, passa a valer a distribuição pro-rata do lucro efetivamente distribuível. Pró-labore evolui por marcos de MRR: R$ 5k (base) → R$ 7k (MRR &gt; R$ 500k) → R$ 10k (MRR &gt; R$ 1M).</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Mês</th><th>Clientes</th><th>MRR</th><th>Pró-labore/sócio</th><th>Distribuição mensal/sócio</th><th>Total/mês por sócio</th></tr></thead>
+      <tbody>
+        <tr><td>M3</td><td class="num">14</td><td class="num">R$ 35k</td><td class="num">R$ 2.500</td><td class="num">—</td><td class="num accent">R$ 2.500</td></tr>
+        <tr><td>M6</td><td class="num">29</td><td class="num">R$ 73k</td><td class="num">R$ 3.000</td><td class="num">—</td><td class="num accent">R$ 3.000</td></tr>
+        <tr><td>M12</td><td class="num">57</td><td class="num">R$ 152k</td><td class="num">R$ 5.000</td><td class="num">—</td><td class="num accent">R$ 5.000</td></tr>
+        <tr><td>M18</td><td class="num">98</td><td class="num">R$ 306k</td><td class="num">R$ 5.000</td><td class="num">R$ 13.100</td><td class="num accent">R$ 18.100</td></tr>
+        <tr><td>M24</td><td class="num">166</td><td class="num">R$ 644k</td><td class="num">R$ 5.000</td><td class="num">R$ 31.500</td><td class="num accent">R$ 36.500</td></tr>
+        <tr><td>M30</td><td class="num">218</td><td class="num">R$ 1,06M</td><td class="num">R$ 5.000</td><td class="num">R$ 65.500</td><td class="num accent">R$ 70.500</td></tr>
+        <tr class="yr-row"><td>M36</td><td class="num">274</td><td class="num">R$ 1,72M</td><td class="num">R$ 5.000</td><td class="num">R$ 119.500</td><td class="num accent">R$ 124.500</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="success"><strong>A recompensa do aperto:</strong> nos ~10 primeiros meses os sócios vivem apenas de pró-labore (escalonado de R$ 2k a R$ 5k), enquanto o investidor recupera 1× do capital (R$ 285k). A partir do ~M11 (pós-payback), começam as distribuições pro-rata do lucro efetivamente distribuível. O pró-labore sobe para R$ 7k quando MRR atinge R$ 500k e R$ 10k quando MRR ultrapassa R$ 1M. No M36, cada sócio operacional aufere pró-labore + distribuição em patamar elevado.</div>
+  <div class="info" style="margin-top:12px"><strong>Impostos sobre distribuição:</strong> Distribuição de lucros é isenta de IR para sócios em empresa do Simples Nacional. A partir do faturamento acima de R$ 4,8M/ano (estimado M29+), empresa migra para Lucro Presumido com alíquota efetiva de ~13,3% + ISS sobre receita.</div>
+</div>
+
+<!-- ═══ 10. PROPOSTA SOCIETÁRIA ═══ -->
+<div class="section">
+  <div class="section-eyebrow">10. Proposta Societária</div>
+  <div class="section-heading">Construção Gradual · Paridade Real · Valor Crescente</div>
+  <p class="section-sub">A estrutura alinha o interesse de todos os sócios em torno de um objetivo: fazer a empresa crescer. O equity de cada parte aumenta em valor absoluto à medida que o MRR cresce — mesmo com diluição percentual dos investidores ao longo dos milestones.</p>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px">10.1 Composição inicial · Dia 1</p>
+  <div class="table-wrap" style="margin-bottom:20px">
+    <table>
+      <thead><tr><th>Sócio / Grupo</th><th>Qtd.</th><th>% Individual</th><th>% Total do Grupo</th><th>Papel</th></tr></thead>
+      <tbody>
+        <tr><td><span class="cap-pill cap-inv">Sócios Investidores</span></td><td>2</td><td class="num">30% cada</td><td class="num"><strong>60%</strong></td><td>Capital + networking (Edu: 4–5 leads/mês)</td></tr>
+        <tr><td><span class="cap-pill cap-fam">Filhos (Operacionais)</span></td><td>2</td><td class="num">5% cada</td><td class="num"><strong>10%</strong></td><td>Execução · vesting 36m · cliff 12m</td></tr>
+        <tr><td><span class="cap-pill cap-tec">Sócios Técnicos</span></td><td>3</td><td class="num">5% cada</td><td class="num"><strong>15%</strong></td><td>Execução técnica · vesting 36m · cliff 12m</td></tr>
+        <tr><td><span class="cap-pill cap-pool">Pool de Talentos</span></td><td>—</td><td class="num">—</td><td class="num"><strong>15%</strong></td><td>Reserva para futuros talentos-chave · expira em 48 meses · equity não alocado redistribui pro-rata</td></tr>
+      </tbody>
+      <tfoot><tr><td><strong>TOTAL</strong></td><td>—</td><td>—</td><td class="num accent"><strong>100%</strong></td><td>—</td></tr></tfoot>
+    </table>
+  </div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px">10.2 Evolução do cap table por milestone</p>
+  <div class="table-wrap" style="margin-bottom:12px">
+    <table>
+      <thead><tr><th>Fase</th><th>Invest. (2×)</th><th>Filhos (2×)</th><th>Técnicos (3×)</th><th>Pool</th><th>Gatilho verificável</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Dia 1</strong></td><td class="num"><span class="cap-pill cap-inv">30% cada = 60%</span></td><td class="num">5% cada = 10%</td><td class="num">5% cada = 15%</td><td class="num">15%</td><td>Assinatura do SHA</td></tr>
+        <tr><td><strong>M1 · Payback 1×</strong></td><td class="num"><span class="cap-pill cap-inv">24% cada = 48%</span></td><td class="num">6,5% cada = 13%</td><td class="num">8% cada = 24%</td><td class="num">15%</td><td>Investidor recebeu R$ 285k acumulado</td></tr>
+        <tr><td><strong>M2 · 40 clientes</strong></td><td class="num"><span class="cap-pill cap-inv">18% cada = 36%</span></td><td class="num">8% cada = 16%</td><td class="num">11% cada = 33%</td><td class="num">15%</td><td>40 clientes ativos por 30 dias consecutivos</td></tr>
+        <tr class="yr-row"><td><strong>M3 · ARR ≥ R$2M <em>E</em> payback 1×</strong></td><td class="num"><span class="cap-pill cap-inv">11,25% cada = 22,5%</span></td><td class="num">10% cada = 20%</td><td class="num">14,17% cada = 42,5%</td><td class="num">15%</td><td>Ambas condições cumpridas</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="info"><strong>Milestone 3 · fórmula combinada:</strong> a diluição final dos investidores só dispara quando <em>duas condições simultâneas</em> são cumpridas: ARR anualizado ≥ R$ 2M <em>e</em> investidor já tiver recebido 1× do aporte (R$ 285k). Com o cenário de reinvestimento escalonado, isso ocorre entre M10–M14.</div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px;margin-top:20px">10.3 A matemática da diluição — menos % de mais vale mais</p>
+  <div class="table-wrap" style="margin-bottom:12px">
+    <table>
+      <thead><tr><th>Fase</th><th>Invest. %</th><th>MRR</th><th>Valuation (3× ARR)</th><th>Equity investidor (3×)</th><th>Valuation (5× ARR)</th><th>Equity investidor (5×)</th></tr></thead>
+      <tbody>
+        <tr><td>Assinatura (M1)</td><td>60%</td><td class="num">R$ 10k</td><td class="num">R$ 360k</td><td class="num">R$ 216k</td><td class="num">R$ 600k</td><td class="num">R$ 360k</td></tr>
+        <tr><td>Payback 1× (M11)</td><td>48%</td><td class="num">R$ 146k</td><td class="num">R$ 5,3M</td><td class="num">R$ 2,52M</td><td class="num">R$ 8,8M</td><td class="num">R$ 4,2M</td></tr>
+        <tr><td>40 clientes (M8)</td><td>36%</td><td class="num">R$ 106k</td><td class="num">R$ 3,8M</td><td class="num">R$ 1,37M</td><td class="num">R$ 6,4M</td><td class="num">R$ 2,29M</td></tr>
+        <tr class="yr-row"><td>M36 · cenário base 20%</td><td>22,5%</td><td class="num" id="ms3-mrr">—</td><td class="num" id="ms3-val3">—</td><td class="num" id="ms3-eq3">—</td><td class="num" id="ms3-val5">—</td><td class="num" id="ms3-eq5">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="info"><strong>Leitura-chave:</strong> saindo de 60% para 22,5%, o valor do equity do investidor cresce de R$ 216k para R$ 5M+. Manter 60% de uma empresa que não cresce vale menos de R$ 400k. Ter 22,5% de uma empresa escalada vale mais de 12× isso.</div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px;margin-top:20px">10.4 Política de distribuição de lucros</p>
+  <div class="table-wrap" style="margin-bottom:20px">
+    <table>
+      <thead><tr><th>Fase</th><th>Período estimado</th><th>Reserva</th><th>Distribuível</th><th>Freq.</th><th>Mecânica</th></tr></thead>
+      <tbody>
+        <tr><td>Aporte em curso</td><td>M1–M5</td><td>20% reserva</td><td>0% (reinvestido)</td><td>—</td><td>Lucro reinvestido em operação + reserva de caixa</td></tr>
+        <tr><td>Pré-payback 1×</td><td>M6–~M10</td><td>20% reserva</td><td>80% · 100% ao investidor</td><td>Mensal</td><td>Preferencial até R$ 285k cumulativos</td></tr>
+        <tr><td>Pós 1× · equity 48%</td><td>~M11–M12</td><td>20% reserva</td><td>80% pro-rata</td><td>Mensal</td><td>Investidor 48% · sócios 37% · pool 15%</td></tr>
+        <tr><td>Y2 · 36%</td><td>M13–M24</td><td>15% reserva</td><td>85% pro-rata</td><td>Mensal</td><td>Investidor 36% · sócios 49% · pool 15%</td></tr>
+        <tr class="yr-row"><td>Y3+ · estado final 22,5%</td><td>M25+</td><td>10% reserva</td><td>90% pro-rata</td><td>Mensal</td><td>Investidor 22,5% · sócios 62,5% · pool 15%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px">10.5 Governança · paridade de blocos desde o Dia 1</p>
+  <div class="table-wrap" style="margin-bottom:12px">
+    <table>
+      <thead><tr><th>Bloco</th><th>Membros</th><th>Equity Dia 1</th><th>Votos — matérias reservadas</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Bloco Técnico</strong></td><td>Sócios Técnicos 1, 2 e 3</td><td>15%</td><td class="accent">3 votos</td></tr>
+        <tr><td><strong>Bloco Familiar</strong></td><td>Invest. 1 + Invest. 2 + Filhos 1 e 2</td><td>70%</td><td class="accent">3 votos (família como bloco único)</td></tr>
+      </tbody>
+      <tfoot><tr><td colspan="3"><strong>Resultado</strong></td><td><strong>Paridade 50/50 — nenhum bloco impõe ao outro</strong></td></tr></tfoot>
+    </table>
+  </div>
+  <div class="info">Matérias reservadas (exigem aprovação dos dois blocos): venda da empresa, emissão de novas quotas, alteração da política de lucros, reestruturação do cap table fora dos milestones, contratação/desligamento de C-level, aportes &gt; R$ 500k, mudança de objeto social.</div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px;margin-top:20px">10.6 Mecanismo de saída do investidor</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Mecanismo</th><th>Quem aciona</th><th>Janela</th><th>Fórmula de preço</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Call Option</strong> · recompra pelo Bloco Técnico</td><td>Bloco Técnico</td><td>A partir do M36</td><td>4× EBITDA anual × % do investidor</td></tr>
+        <tr><td><strong>Put Option</strong> · saída para o Bloco Técnico</td><td>Investidores</td><td>A partir do M48</td><td>4× EBITDA anual × % do investidor</td></tr>
+        <tr><td><strong>Tag-Along</strong></td><td>Qualquer minoritário</td><td>Em qualquer venda</td><td>Mesmas condições da venda majoritária</td></tr>
+        <tr><td><strong>Drag-Along</strong></td><td>Exige ambos os blocos</td><td>Após M48</td><td>Nunca acionável unilateralmente</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ 11. PROTEÇÕES E CONTRAPARTIDAS ═══ -->
+<div class="section">
+  <div class="section-eyebrow">11. SHA · Proteções mútuas e contrapartidas</div>
+  <div class="section-heading">Obrigações dos dois lados · nada unilateral</div>
+  <p class="section-sub">O Acordo de Sócios formaliza tanto as proteções do investidor quanto as contrapartidas exigidas. Nenhuma cláusula é unilateral — todas criam obrigações verificáveis nos dois blocos.</p>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px">11.1 Proteções ao investidor</p>
+  <div class="prot-grid" style="margin-bottom:24px">
+    <div class="prot-card">
+      <div class="prot-label">Preferência no payback</div>
+      <div class="prot-title">1× preferencial</div>
+      <div class="prot-desc">100% das distribuições vão ao investidor até que ele receba 1× do capital aportado (R$ 285k). Depois disso, distribuição pro-rata do lucro efetivamente distribuível (após reserva de caixa e reinvestimento) segundo cap table vigente.</div>
+    </div>
+    <div class="prot-card">
+      <div class="prot-label">Em caso de venda</div>
+      <div class="prot-title">Tag-along integral</div>
+      <div class="prot-desc">Se qualquer sócio majoritário vender participação a terceiros, o investidor tem direito de sair nas mesmas condições de preço e prazo.</div>
+    </div>
+    <div class="prot-card">
+      <div class="prot-label">Governança</div>
+      <div class="prot-title">Informação trimestral</div>
+      <div class="prot-desc">DRE, fluxo de caixa e relatório operacional a cada trimestre. Reuniões de Conselho mensais no Y1, trimestrais a partir do Y2.</div>
+    </div>
+    <div class="prot-card">
+      <div class="prot-label">Proteção de equity</div>
+      <div class="prot-title">Anti-diluição weighted average</div>
+      <div class="prot-desc">Proteção contra rodadas de captação a valuation inferior ao Milestone 3. Expansão do pool de talentos é excluída — dilui todos os sócios pro-rata.</div>
+    </div>
+    <div class="prot-card">
+      <div class="prot-label">Skin in the game</div>
+      <div class="prot-title">Vesting 36 meses · cliff 12m</div>
+      <div class="prot-desc">Sócios operacionais (Técnicos + Filhos) têm equity sujeito a vesting linear de 36 meses com cliff de 12 meses. Aplicado a todo equity atual e ganho em milestones futuros.</div>
+    </div>
+    <div class="prot-card">
+      <div class="prot-label">Proteção em M&amp;A</div>
+      <div class="prot-title">Double-trigger acceleration</div>
+      <div class="prot-desc">Se a empresa for vendida <em>e</em> o sócio for desligado sem justa causa nos 12 meses seguintes, vesting acelera para 100%. Protege contra comprador hostil que queira demitir fundadores.</div>
+    </div>
+  </div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px">11.2 Contrapartidas exigidas dos investidores</p>
+  <div class="prot-grid" style="margin-bottom:24px">
+    <div class="prot-card obr">
+      <div class="prot-label">Capital</div>
+      <div class="prot-title">Cronograma de aporte firme</div>
+      <div class="prot-desc">Atraso &gt; 90 dias em qualquer parcela resulta em perda automática de 50% do equity do investidor inadimplente, redistribuído aos sócios operacionais pro-rata.</div>
+    </div>
+    <div class="prot-card obr">
+      <div class="prot-label">Sócio ativo</div>
+      <div class="prot-title">Lead commitment do Edu</div>
+      <div class="prot-desc">Mínimo de 4 leads qualificados/mês por 24 meses. Descumprimento por 3 meses consecutivos reduz equity dele em 5% por trimestre (perda máxima de 20% em 12 meses de inatividade).</div>
+    </div>
+    <div class="prot-card obr">
+      <div class="prot-label">Conflito de interesses</div>
+      <div class="prot-title">Voto exclusivo do Bloco Técnico</div>
+      <div class="prot-desc">Decisões que beneficiem direta ou indiretamente o Bloco Familiar (investidores + filhos) são votadas somente pelos sócios técnicos não-parentes.</div>
+    </div>
+    <div class="prot-card obr">
+      <div class="prot-label">Transferência de equity</div>
+      <div class="prot-title">ROFR · direito de preferência</div>
+      <div class="prot-desc">Sócio que queira vender deve oferecer primeiro aos demais sócios nas mesmas condições de preço e prazo. Prazo de manifestação: 30 dias.</div>
+    </div>
+    <div class="prot-card obr">
+      <div class="prot-label">Decisões estratégicas</div>
+      <div class="prot-title">Matérias de voto qualificado</div>
+      <div class="prot-desc">Venda da empresa, nova rodada, endividamento &gt; R$ 500k exigem 75% do equity ou maioria simples em ambos os blocos.</div>
+    </div>
+    <div class="prot-card obr">
+      <div class="prot-label">Non-compete</div>
+      <div class="prot-title">Non-solicit 24 meses</div>
+      <div class="prot-desc">Sócio investidor não pode investir em agência concorrente no mesmo nicho, nem contratar colaboradores ou clientes da empresa, durante e por 24 meses após saída.</div>
+    </div>
+  </div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px">11.3 Resolução de impasses e revisão</p>
+  <div class="card-grid-2">
+    <div class="card" style="border-left:3px solid var(--primary)">
+      <div class="prot-label">Impasse operacional</div>
+      <div class="prot-title" style="margin-bottom:8px">Conselheiro independente</div>
+      <div class="prot-desc">Em caso de impasse persistente por 90 dias em matéria de voto qualificado, um terceiro neutro escolhido por consenso desempata a decisão. Evita judicialização e é menos dramático que "russian roulette".</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--primary)">
+      <div class="prot-label">Evolução do contrato</div>
+      <div class="prot-title" style="margin-bottom:8px">Revisão anual do SHA</div>
+      <div class="prot-desc">A partir do Y2, qualquer sócio pode convocar revisão anual. Alterações exigem aprovação unânime de todos os sócios com equity ativo. Sem consenso, o SHA original permanece em vigor.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 12. RISCOS ═══ -->
+<div class="section">
+  <div class="section-eyebrow">12. Principais Riscos e Mitigações</div>
+  <div class="section-heading">O que pode dar errado — e como nos protegemos</div>
+  <p class="section-sub">Todo investimento carrega riscos. Abaixo os principais cenários adversos identificados e as mitigações previstas na estrutura societária e operacional.</p>
+
+  <div class="prot-grid" style="margin-bottom:16px">
+    <div class="prot-card" style="border-left-color:var(--red)">
+      <div class="prot-label" style="color:var(--red)">Risco 1</div>
+      <div class="prot-title">Dependência do Canal Edu</div>
+      <div class="prot-desc">Se o Edu deixar de trazer leads, perda estimada de ~48 clientes/ano (4/mês). <strong>Mitigação:</strong> tráfego pago como segundo canal independente + cláusula SHA com penalidade de 5% equity/trimestre de descumprimento.</div>
+    </div>
+    <div class="prot-card" style="border-left-color:var(--red)">
+      <div class="prot-label" style="color:var(--red)">Risco 2</div>
+      <div class="prot-title">Saturação Regional</div>
+      <div class="prot-desc">Mercado de clínicas em Brasília tem teto natural. <strong>Mitigação:</strong> multi-vertical expande TAM (Mercado Total Endereçável) de ~80k para ~500k clínicas. Operação remota possível — sem limite geográfico.</div>
+    </div>
+    <div class="prot-card" style="border-left-color:var(--red)">
+      <div class="prot-label" style="color:var(--red)">Risco 3</div>
+      <div class="prot-title">Mudanças na Política do Meta Ads</div>
+      <div class="prot-desc">Custo de aquisição pode subir com mudanças de algoritmo ou política. <strong>Mitigação:</strong> diversificação de canais (Google Ads, SEO orgânico). Base recorrente reduz dependência de novos clientes.</div>
+    </div>
+    <div class="prot-card" style="border-left-color:var(--red)">
+      <div class="prot-label" style="color:var(--red)">Risco 4</div>
+      <div class="prot-title">Perda de Sócios Pré-Cliff</div>
+      <div class="prot-desc">Saída de sócio operacional antes dos 12 meses. <strong>Mitigação:</strong> cliff de 12 meses + vesting linear de 36 meses. Equity não vestido retorna ao pool de talentos.</div>
+    </div>
+    <div class="prot-card" style="border-left-color:var(--red)">
+      <div class="prot-label" style="color:var(--red)">Risco 5</div>
+      <div class="prot-title">Churn Acima do Projetado</div>
+      <div class="prot-desc">Acima de 100 clientes, churn pode subir para 7%+. <strong>Mitigação:</strong> CS (Customer Success) dedicado a partir de 40 clientes, NPS (Índice de Satisfação) tracking mensal, contratos mínimos de 3 meses.</div>
+    </div>
+  </div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px;margin-top:20px">12.1 Cenário Pessimista — "E se der errado?"</p>
+  <div class="warn"><strong>Premissas do cenário pessimista:</strong> Churn sobe para 7% mensal, Edu para de trazer leads a partir do M12, CAC (Custo de Aquisição) sobe 50% acima do projetado. Neste cenário, a empresa atinge break-even operacional no M7–M8, mas o crescimento estagna em ~50–60 clientes. O payback 1× (R$ 285k) acontece entre M14–M18. A empresa sobrevive mas não escala — investidor recupera o capital com atraso e retorno modesto.</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Métrica</th><th>Cenário Base</th><th>Cenário Pessimista</th></tr></thead>
+      <tbody>
+        <tr><td>Churn mensal</td><td class="num">5%</td><td class="num neg">7%</td></tr>
+        <tr><td>Leads Edu após M12</td><td class="num">4/mês</td><td class="num neg">0/mês</td></tr>
+        <tr><td>CAC via tráfego</td><td class="num">R$ 1,5k–2,5k</td><td class="num neg">R$ 2,3k–3,8k</td></tr>
+        <tr><td>Clientes M36</td><td class="num accent">~274</td><td class="num neg">~50–60</td></tr>
+        <tr><td>Payback 1×</td><td class="num accent">~M10</td><td class="num neg">M14–M18</td></tr>
+        <tr><td>MRR M36</td><td class="num accent">~R$ 1,72M</td><td class="num neg">~R$ 200k–300k</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="info" style="margin-top:12px"><strong>Break-even analysis:</strong> mesmo no cenário pessimista, a operação é positiva a partir do M7–M8 (receita cobre custos). O investidor não perde o capital — apenas o retorno é menor e mais lento. As proteções do SHA (preferência 1× no payback, cláusula Edu, anti-diluição) continuam válidas.</div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="section">
+  <div class="cover" style="padding:44px 48px">
+    <div style="color:var(--purple-light);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;position:relative;z-index:1">Próximos passos</div>
+    <div style="font-size:28px;font-weight:900;color:#fff;margin-bottom:12px;line-height:1.2;position:relative;z-index:1">Pronto para fazer a conta juntos?</div>
+    <div style="color:rgba(255,255,255,.65);font-size:14px;line-height:1.7;max-width:640px;position:relative;z-index:1">Este pack é uma síntese. A minuta do SHA com todas as cláusulas, premissas detalhadas, sensibilidades de mercado e roadmap operacional estão disponíveis para análise na próxima reunião. Documento confidencial · v3 · Mai/2026.</div>
+  </div>
+</div>
+
+</div><!-- end .page -->
+
+<script>
+// ═══════════════════════════════════════════════════════
+// MODEL ENGINE v3
+// ═══════════════════════════════════════════════════════
+const MONTHS = 36;
+const APORTE_TOTAL = 285000;
+const APORTE_MENSAL = [30000,25000,30000,25000,25000,25000,25000,20000,20000,20000,20000,20000];
+
+function ticket(m) {
+  if (m <= 6) return 2500;
+  if (m <= 12) return 2700;
+  if (m <= 18) return 3200;
+  if (m <= 24) return 4000;
+  if (m <= 30) return 5000;
+  return 6500;
+}
+
+function reinvestRate(m) {
+  if (m <= 24) return 0.20;
+  if (m <= 36) return 0.15;
+  return 0.12;
+}
+
+function cashReserveRate(m) {
+  if (m <= 12) return 0.20;
+  if (m <= 24) return 0.15;
+  return 0.10;
+}
+
+function cac(m, budget) {
+  let base;
+  if (m <= 6) base = 2000;
+  else if (m <= 12) base = 1500;
+  else if (m <= 24) base = 1800;
+  else base = 2500;
+  const excesso = Math.max(0, (budget - 5000) / 10000);
+  return Math.round(base * (1 + excesso * 0.10));
+}
+
+function churn(cl) {
+  let base = 0.05;
+  if (cl > 250) base += 0.02;
+  else if (cl > 150) base += 0.01;
+  else if (cl > 80) base += 0.005;
+  return base;
+}
+
+function partnerSalary(cl, mrr) {
+  // Early ramp by client count
+  if (cl < 10) return { sal: 2000, n: 4 };
+  if (cl < 25) return { sal: 2500, n: 5 };
+  if (cl < 35) return { sal: 3000, n: 5 };
+  if (cl < 40) return { sal: 4000, n: 5 };
+  // MRR milestones for 40+ clients
+  if (mrr >= 1000000) return { sal: 10000, n: 5 };
+  if (mrr >= 500000) return { sal: 7000, n: 5 };
+  return { sal: 5000, n: 5 };
+}
+
+function fixedCost(cl, m) {
+  let base = 6000 + 1000; // base + contador
+  if (m > 24) base += 1000; // contador sobe Y3
+  if (cl > 40) base += 2500;
+  if (cl > 80) base += 3500;
+  if (cl > 150) base += 6000;
+  if (cl > 300) base += 9000;
+  return base;
+}
+
+function taxRate(mrr) {
+  const receita12m = mrr * 12;
+  if (receita12m < 180000) return 0.06;
+  if (receita12m < 360000) return 0.08;
+  if (receita12m < 720000) return 0.105;
+  if (receita12m < 1800000) return 0.13;
+  if (receita12m < 3600000) return 0.158;
+  if (receita12m < 4800000) return 0.19;
+  return 0.155;
+}
+
+function computeTeam(cl) {
+  if (cl <= 40) return { cs:0, an:0, des:0, sm:0, coord:0, head:0, dir:0, clevel:0 };
+  const excesso = cl - 40;
+  const cs = Math.ceil(excesso / 33);
+  const an = Math.ceil(excesso / 40);
+  const des = Math.ceil(excesso / 40);
+  const socialCl = Math.round(cl * 0.25);
+  const sm = socialCl >= 10 ? Math.ceil(socialCl / 10) : 1;
+  const front = cs + an + des + sm;
+  const coord = front >= 4 ? 1 : 0;
+  const head = (front + coord) >= 8 ? 1 : 0;
+  const dir = (front + coord + head) >= 15 ? 1 : 0;
+  const total = front + coord + head + dir;
+  const clevel = total + 5 >= 25 ? 1 : 0;
+  return { cs, an, des, sm, coord, head, dir, clevel };
+}
+
+function teamCost(t) {
+  return t.cs*3500 + t.an*4500 + t.des*4000 + t.sm*3000 +
+         t.coord*6000 + t.head*10000 + t.dir*15000 + t.clevel*18000;
+}
+
+function runScenario() {
+  let clientes = 0;
+  let caixa = 0;
+  let aporteAcum = 0;
+  let invReceb = 0;
+  let socReceb = 0;
+  let cumLucro = 0;
+  let trafegoBudget = 0;
+  let paybackMes = null;
+  let ms40 = null;
+  let msArr = null;
+  let prevLucro = 0;
+
+  const data = [];
+
+  for (let m = 1; m <= MONTHS; m++) {
+    if (m <= 12) { caixa += APORTE_MENSAL[m-1]; aporteAcum += APORTE_MENSAL[m-1]; }
+
+    const rRate = reinvestRate(m);
+    const crRate = cashReserveRate(m);
+
+    if (m <= 2) trafegoBudget = 0;
+    else if (m <= 12) trafegoBudget = 5000;
+    else if (prevLucro > 0) trafegoBudget = Math.max(5000, Math.min(prevLucro * rRate, 500000));
+    else trafegoBudget = 5000;
+
+    const edu = m <= 24 ? 4 : 3;
+    const cacAtual = cac(m, trafegoBudget);
+    const trafNovos = trafegoBudget > 0 ? Math.floor(trafegoBudget / cacAtual) : 0;
+    let novos = edu + trafNovos;
+
+    const teamAntes = computeTeam(clientes);
+    const teamDepois = computeTeam(clientes + novos);
+    const deltaTeam = (teamDepois.cs - teamAntes.cs) + (teamDepois.an - teamAntes.an) +
+                      (teamDepois.des - teamAntes.des) + (teamDepois.sm - teamAntes.sm) +
+                      (teamDepois.coord - teamAntes.coord) + (teamDepois.head - teamAntes.head) +
+                      (teamDepois.dir - teamAntes.dir) + (teamDepois.clevel - teamAntes.clevel);
+    if (deltaTeam > 2) {
+      const fator = 2 / deltaTeam;
+      novos = Math.round(novos * (0.75 + 0.25 * fator));
+    }
+
+    const taxaChurn = churn(clientes);
+    const churnN = Math.round(clientes * taxaChurn);
+    clientes = Math.max(0, clientes + novos - churnN);
+
+    const tk = ticket(m) * 0.85 + ticket(Math.max(1, m-6)) * 0.15;
+    const mrr = clientes * tk;
+
+    const ps = partnerSalary(clientes, mrr);
+    const folhaSocios = ps.sal * ps.n;
+    const inss = 1621 * ps.n * 0.20;
+    const team = computeTeam(clientes);
+    const custoTimeBruto = teamCost(team);
+    const custoTime = custoTimeBruto * 1.7;
+    const fixo = fixedCost(clientes, m);
+    const imp = mrr * taxRate(mrr);
+    const custoTotal = folhaSocios + inss + custoTime + fixo + trafegoBudget + imp;
+    const lucro = mrr - custoTotal;
+    caixa += lucro;
+    cumLucro += lucro;
+    prevLucro = lucro;
+
+    // Distribuição efetiva: lucro - reserva de caixa = distribuível
+    let distribuivel = 0;
+    let reservaCaixa = 0;
+    if (lucro > 0) {
+      if (m <= 5) { distribuivel = 0; reservaCaixa = lucro; }
+      else {
+        reservaCaixa = lucro * crRate;
+        distribuivel = lucro - reservaCaixa;
+        if (distribuivel < 0) distribuivel = 0;
+      }
+    }
+
+    let paraInv = 0, paraSoc = 0;
+    if (distribuivel > 0) {
+      if (invReceb < APORTE_TOTAL) {
+        // Pre-payback 1x: 100% to investor
+        const faltam = APORTE_TOTAL - invReceb;
+        paraInv = Math.min(distribuivel, faltam);
+        invReceb += paraInv;
+        const resto = distribuivel - paraInv;
+        if (resto > 0 && invReceb >= APORTE_TOTAL) {
+          let equityInv;
+          if (msArr) equityInv = 0.225;
+          else if (ms40) equityInv = 0.36;
+          else if (paybackMes) equityInv = 0.48;
+          else equityInv = 0.60;
+          paraInv += resto * equityInv;
+          invReceb += resto * equityInv;
+          paraSoc = resto * (1 - equityInv);
+          socReceb += paraSoc;
+        }
+      } else {
+        // Post-payback: pro-rata by equity
+        let equityInv;
+        if (msArr) equityInv = 0.225;
+        else if (ms40) equityInv = 0.36;
+        else if (paybackMes) equityInv = 0.48;
+        else equityInv = 0.60;
+        paraInv = distribuivel * equityInv;
+        invReceb += paraInv;
+        paraSoc = distribuivel * (1 - equityInv);
+        socReceb += paraSoc;
+      }
+    }
+
+    if (paybackMes === null && invReceb >= APORTE_TOTAL) paybackMes = m;
+    if (ms40 === null && clientes >= 40) ms40 = m;
+    const arr = mrr * 12;
+    if (msArr === null && arr >= 2000000 && paybackMes) msArr = m;
+
+    const hc = 5 + team.cs + team.an + team.des + team.sm + team.coord + team.head + team.dir + team.clevel;
+
+    data.push({
+      m, cl: clientes, mrr: Math.round(mrr), arr: Math.round(arr),
+      custoTotal: Math.round(custoTotal),
+      folhaSocios, custoTime: Math.round(custoTime), fixo,
+      trafego: Math.round(trafegoBudget),
+      imp: Math.round(imp),
+      lucro: Math.round(lucro),
+      cumLucro: Math.round(cumLucro),
+      invReceb: Math.round(invReceb),
+      socReceb: Math.round(socReceb),
+      distribuivel: Math.round(distribuivel),
+      reservaCaixa: Math.round(reservaCaixa),
+      team, hc,
+      paybackMes, ms40, msArr,
+      novos, churnN, edu, trafNovos,
+      salSocio: ps.sal,
+      reinvPct: rRate, reservePct: crRate
+    });
+  }
+
+  return {
+    data,
+    paybackMes,
+    ms40, msArr,
+    invRecebFinal: Math.round(invReceb),
+    socRecebFinal: Math.round(socReceb),
+    moic: invReceb / APORTE_TOTAL
+  };
+}
+
+const scenario = runScenario();
+// Compatibility: keep scenarios object for render functions
+const scenarios = { s20: scenario };
+
+// ═══════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════
+const fmt = v => 'R$ ' + Math.round(v).toLocaleString('pt-BR');
+const fmtK = v => v >= 1000000 ? 'R$ ' + (v/1000000).toFixed(2).replace('.', ',') + 'M' : v >= 1000 ? 'R$ ' + Math.round(v/1000) + 'k' : fmt(v);
+const MONTHS_LABELS = ['Mai/26','Jun/26','Jul/26','Ago/26','Set/26','Out/26','Nov/26','Dez/26','Jan/27','Fev/27','Mar/27','Abr/27','Mai/27','Jun/27','Jul/27','Ago/27','Set/27','Out/27','Nov/27','Dez/27','Jan/28','Fev/28','Mar/28','Abr/28','Mai/28','Jun/28','Jul/28','Ago/28','Set/28','Out/28','Nov/28','Dez/28','Jan/29','Fev/29','Mar/29','Abr/29'];
+
+// ═══════════════════════════════════════════════════════
+// CHARTS
+// ═══════════════════════════════════════════════════════
+let charts = {};
+const COLORS = {
+  primary: '#6366F1', dark: '#0B0B0F', green: '#10B981',
+  amber: '#F59E0B', red: '#EF4444', blue: '#3B82F6',
+  purple: '#8B5CF6', pink: '#EC4899', teal: '#14B8A6'
+};
+
+function destroyCharts() {
+  Object.values(charts).forEach(c => c && c.destroy());
+  charts = {};
+}
+
+function renderCharts(scenario) {
+  destroyCharts();
+  const d = scenarios[scenario].data;
+  const labels = d.map(r => MONTHS_LABELS[r.m - 1]);
+
+  charts.clients = new Chart(document.getElementById('chartClients'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Clientes ativos', data: d.map(r => r.cl), borderColor: COLORS.primary, backgroundColor: 'rgba(99,102,241,0.12)', fill: true, tension: 0.4, borderWidth: 2, pointRadius: 0, pointHoverRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.raw + ' clientes' } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#9CA3AF', maxTicksLimit: 12 } },
+        y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { size: 10 }, color: '#9CA3AF' } }
+      }
+    }
+  });
+
+  charts.mrr = new Chart(document.getElementById('chartMRR'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'MRR', data: d.map(r => r.mrr), borderColor: COLORS.primary, backgroundColor: 'rgba(99,102,241,0.08)', fill: true, tension: 0.4, borderWidth: 2, pointRadius: 0 },
+        { label: 'Custos', data: d.map(r => r.custoTotal), borderColor: COLORS.red, backgroundColor: 'rgba(239,68,68,0.07)', fill: true, tension: 0.4, borderWidth: 2, pointRadius: 0, borderDash: [4,3] }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: true, position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + fmtK(ctx.raw) } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#9CA3AF', maxTicksLimit: 12 } },
+        y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { size: 10 }, color: '#9CA3AF', callback: v => fmtK(v) } }
+      }
+    }
+  });
+
+  charts.profit = new Chart(document.getElementById('chartProfit'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Lucro líquido', data: d.map(r => r.lucro), backgroundColor: d.map(r => r.lucro >= 0 ? 'rgba(16,185,129,0.7)' : 'rgba(239,68,68,0.7)'), borderRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => fmtK(ctx.raw) } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#9CA3AF', maxTicksLimit: 12 } },
+        y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { size: 10 }, color: '#9CA3AF', callback: v => fmtK(v) } }
+      }
+    }
+  });
+
+  charts.team = new Chart(document.getElementById('chartTeam'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Headcount', data: d.map(r => r.hc), borderColor: COLORS.dark, backgroundColor: 'rgba(11,11,15,0.07)', fill: true, tension: 0.3, borderWidth: 2, pointRadius: 2 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.raw + ' pessoas' } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#9CA3AF', maxTicksLimit: 12 } },
+        y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { size: 10 }, color: '#9CA3AF' }, min: 0 }
+      }
+    }
+  });
+
+  const tdata = scenarios.s20.data;
+  if (charts.teamStack) charts.teamStack.destroy();
+  charts.teamStack = new Chart(document.getElementById('chartTeamStack'), {
+    type: 'bar',
+    data: {
+      labels: tdata.map(r => MONTHS_LABELS[r.m-1]),
+      datasets: [
+        { label: 'Sócios (5)', data: tdata.map(() => 5), backgroundColor: COLORS.dark, stack: 'team' },
+        { label: 'CS', data: tdata.map(r => r.team.cs), backgroundColor: COLORS.primary, stack: 'team' },
+        { label: 'Analistas', data: tdata.map(r => r.team.an), backgroundColor: COLORS.blue, stack: 'team' },
+        { label: 'Designers', data: tdata.map(r => r.team.des), backgroundColor: COLORS.purple, stack: 'team' },
+        { label: 'Social Media', data: tdata.map(r => r.team.sm), backgroundColor: COLORS.pink, stack: 'team' },
+        { label: 'Coord./Head/Dir.', data: tdata.map(r => r.team.coord + r.team.head + r.team.dir + r.team.clevel), backgroundColor: COLORS.amber, stack: 'team' }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: true, position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 9 }, color: '#9CA3AF', maxTicksLimit: 12 }, stacked: true },
+        y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { size: 10 }, color: '#9CA3AF' }, stacked: true }
+      }
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+// KPIs
+// ═══════════════════════════════════════════════════════
+function renderKPIs(scenario) {
+  const s = scenarios[scenario];
+  const last = s.data[s.data.length - 1];
+  const arr36 = last.arr;
+  const val3 = arr36 * 3;
+  const val5 = arr36 * 5;
+  const eq3 = val3 * 0.225;
+
+  document.getElementById('kpi-row').innerHTML = `
+    <div class="card">
+      <div class="kpi-label">Clientes no M36</div>
+      <div class="kpi-value">${last.cl}</div>
+      <div class="kpi-sub">Base ativa após churn</div>
+      <span class="badge badge-primary">Multi-vertical</span>
+    </div>
+    <div class="card">
+      <div class="kpi-label">MRR no M36</div>
+      <div class="kpi-value">${fmtK(last.mrr)}</div>
+      <div class="kpi-sub">ARR: ${fmtK(arr36)}</div>
+      <span class="badge badge-green">Milestone 3 atingido</span>
+    </div>
+    <div class="card">
+      <div class="kpi-label">Lucro acum. 36M</div>
+      <div class="kpi-value">${fmtK(last.cumLucro)}</div>
+      <div class="kpi-sub">Net, após reinvestimento</div>
+      <span class="badge badge-green">Autofinanciado</span>
+    </div>
+    <div class="card">
+      <div class="kpi-label">MOIC investidor 36M</div>
+      <div class="kpi-value">${s.moic.toFixed(2)}×</div>
+      <div class="kpi-sub">Distribuído: ${fmtK(s.invRecebFinal)}</div>
+      <span class="badge badge-green">Payback 1×: M${s.paybackMes || '?'}</span>
+    </div>
+  `;
+}
+
+// ═══════════════════════════════════════════════════════
+// FINANCIAL TABLE
+// ═══════════════════════════════════════════════════════
+function renderTable(scenario) {
+  const s = scenarios[scenario];
+  const d = s.data;
+  const body = document.getElementById('financial-body');
+  const foot = document.getElementById('financial-foot');
+  let rows = '';
+  let totRev = 0, totTraf = 0, totCost = 0, totImp = 0;
+  d.forEach((r, i) => {
+    if (i === 0) rows += `<tr class="phase-header"><td colspan="10">── ANO 1 · Investidor financia o gap de caixa (M1–M12) ──</td></tr>`;
+    if (i === 12) rows += `<tr class="phase-header"><td colspan="10">── ANO 2 · Reinvestimento 20% → 15% a partir de M25 (M13–M24) ──</td></tr>`;
+    if (i === 24) rows += `<tr class="phase-header"><td colspan="10">── ANO 3 · Reinvestimento 12% · escala total (M25–M36) ──</td></tr>`;
+    totRev += r.mrr; totTraf += r.trafego; totCost += r.custoTotal; totImp += r.imp;
+    const rowClass = (r.m === 12 || r.m === 24 || r.m === 36) ? 'yr-row' : '';
+    const profClass = r.lucro >= 0 ? 'pos' : 'neg';
+    rows += `<tr class="${rowClass}">
+      <td>${r.m}</td>
+      <td>${MONTHS_LABELS[r.m-1]}</td>
+      <td class="accent">${r.cl}</td>
+      <td class="num">${fmt(r.mrr)}</td>
+      <td class="num">${r.trafego > 0 ? fmt(r.trafego) : '—'}</td>
+      <td class="num">${fmt(r.custoTotal)}</td>
+      <td class="num">${fmt(r.imp)}</td>
+      <td class="num ${profClass}">${fmt(r.lucro)}</td>
+      <td class="num ${r.cumLucro >= 0 ? 'pos' : 'neg'}">${fmt(r.cumLucro)}</td>
+      <td>${r.hc}</td>
+    </tr>`;
+  });
+
+  body.innerHTML = rows;
+  const last = d[d.length-1];
+  foot.innerHTML = `<tr>
+    <td colspan="3"><strong>TOTAL 36 MESES</strong></td>
+    <td class="num"><strong>${fmt(totRev)}</strong></td>
+    <td class="num"><strong>${fmt(totTraf)}</strong></td>
+    <td class="num"><strong>${fmt(totCost)}</strong></td>
+    <td class="num"><strong>${fmt(totImp)}</strong></td>
+    <td class="num pos"><strong>${fmt(last.cumLucro)}</strong></td>
+    <td></td>
+    <td class="num"><strong>${last.hc}</strong></td>
+  </tr>`;
+}
+
+// ═══════════════════════════════════════════════════════
+// ROI TABLE
+// ═══════════════════════════════════════════════════════
+function renderROI(scenarioKey) {
+  const s = scenarios.s20;
+  const last = s.data[s.data.length-1];
+  const arr36 = last.arr;
+  const val3 = arr36 * 3;
+  const val5 = arr36 * 5;
+  const eq3 = val3 * 0.225;
+  const eq5 = val5 * 0.225;
+
+  // Single scenario row
+  document.getElementById('roi-comparison').innerHTML = `<tr class="yr-row">
+    <td>🟡 Cenário único · 20% → 15% → 12%</td>
+    <td class="accent">${last.cl}</td>
+    <td class="num">${fmt(last.mrr)}</td>
+    <td class="num">${fmtK(arr36)}</td>
+    <td class="num">${fmtK(val3)}</td>
+    <td class="num pos">${fmtK(eq3)}</td>
+    <td class="num pos">${fmtK(s.invRecebFinal)}</td>
+    <td class="num accent">${s.moic.toFixed(2)}×</td>
+  </tr>`;
+
+  document.getElementById('roi-arr').textContent = fmtK(arr36);
+  document.getElementById('roi-val3').textContent = fmtK(eq3);
+  document.getElementById('roi-val5').textContent = fmtK(eq5);
+  document.getElementById('eq-val3-ret').textContent = '+' + fmtK(eq3);
+  document.getElementById('eq-val5-ret').textContent = '+' + fmtK(eq5);
+
+  // Distribuições Y1-Y2 e Y3
+  const invY12 = s.data[23].invReceb - APORTE_TOTAL;
+  const invY3 = s.data[35].invReceb - s.data[23].invReceb;
+  document.getElementById('dist-y1y2').textContent = '+' + fmtK(Math.max(0, invY12));
+  document.getElementById('dist-y3').textContent = '+' + fmtK(Math.max(0, invY3));
+
+  const totalCash = s.invRecebFinal;
+  const totalRet = totalCash + eq3 - APORTE_TOTAL;
+  const moicTotal = (totalCash + eq3) / APORTE_TOTAL;
+  document.getElementById('total-ret-3').textContent = '+' + fmtK(totalRet);
+  document.getElementById('moic-label').textContent = `MOIC total ${moicTotal.toFixed(1)}× sobre R$ 285k · cash ${s.moic.toFixed(1)}× + equity`;
+
+  // Milestone 3 row
+  document.getElementById('ms3-mrr').textContent = fmtK(last.mrr);
+  document.getElementById('ms3-val3').textContent = fmtK(arr36 * 3);
+  document.getElementById('ms3-eq3').textContent = fmtK(arr36 * 3 * 0.225);
+  document.getElementById('ms3-val5').textContent = fmtK(arr36 * 5);
+  document.getElementById('ms3-eq5').textContent = fmtK(arr36 * 5 * 0.225);
+}
+
+// ═══════════════════════════════════════════════════════
+// TEAM CAPACITY TABLE
+// ═══════════════════════════════════════════════════════
+function renderTeamCapacity() {
+  const milestones = [40, 73, 106, 140, 200, 300];
+  let rows = '';
+  milestones.forEach(cl => {
+    const t = computeTeam(cl);
+    const hc = 5 + t.cs + t.an + t.des + t.sm + t.coord + t.head + t.dir + t.clevel;
+    rows += `<tr><td class="accent"><strong>${cl}</strong></td><td>${t.cs}</td><td>${t.an}</td><td>${t.des}</td><td>${t.sm}</td><td class="accent">${hc}</td></tr>`;
+  });
+  document.getElementById('team-capacity-table').innerHTML = rows;
+}
+
+// ═══════════════════════════════════════════════════════
+// MAIN
+// ═══════════════════════════════════════════════════════
+let currentScenario = 's20';
+
+function initRender() {
+  document.getElementById('scenario-label').textContent = 'Reinvestimento escalonado: 20% (M1–M24) → 15% (M25–M36) → 12% (M37+) do lucro operacional em tráfego pago';
+  renderKPIs('s20');
+  renderCharts('s20');
+  renderTable('s20');
+  renderROI('s20');
+  renderTeamCapacity();
+}
+
+initRender();
+</script>
+</body>
+</html>
