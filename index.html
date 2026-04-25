@@ -50,26 +50,50 @@ body{background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI
 .card-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .card-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:768px){
+  html,body{max-width:100vw;overflow-x:hidden}
   .card-grid-4,.card-grid-3{grid-template-columns:1fr 1fr}
   .card-grid-2{grid-template-columns:1fr}
   .cover{padding:32px 24px}
   .cover-title{font-size:32px}
   .cover-sub{font-size:16px;margin-bottom:24px}
-  .cover-meta{gap:20px}
+  .cover-meta{gap:20px;flex-direction:column;gap:12px}
   .cover-meta-value{font-size:13px}
   .section-heading{font-size:18px}
   .kpi-value{font-size:22px}
   .section{margin-top:40px}
-  .table-wrap{overflow-x:hidden}
-  table{font-size:9px;table-layout:fixed;width:100%}
-  thead th{padding:5px 3px;font-size:8px;white-space:normal;word-wrap:break-word;letter-spacing:0}
-  tbody td{padding:5px 3px;font-size:9px;white-space:normal;word-wrap:break-word}
-  tfoot tr td{padding:5px 3px;font-size:9px;white-space:normal}
-  .num{font-size:8px;font-family:inherit}
-  .phase-header td{font-size:8px!important;padding:4px 3px!important;letter-spacing:0!important}
   .chart-wrap{padding:16px}
-  .cover-meta{flex-direction:column;gap:12px}
   .glossary-cols{columns:1!important}
+  /* Responsive stacked tables: tables become card-style rows */
+  .table-wrap{overflow-x:hidden;box-shadow:none}
+  table,thead,tbody,tfoot,tr,th,td{display:block;width:100%}
+  thead{display:none}
+  tbody tr{background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;padding:10px 14px}
+  tbody tr:hover{background:var(--card)}
+  tbody td{padding:4px 0;font-size:12px;white-space:normal;word-wrap:break-word;text-align:left;border:none;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  tbody td::before{content:attr(data-label);font-weight:700;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;flex-shrink:0;max-width:45%}
+  tbody td .num{font-size:12px;font-family:inherit}
+  .num{font-size:12px;font-family:inherit}
+  tfoot{margin-top:4px}
+  tfoot tr{background:var(--primary-10);border:2px solid var(--primary);border-radius:10px;padding:10px 14px}
+  tfoot tr td{padding:4px 0;font-size:12px;font-weight:800;white-space:normal;border:none;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  tfoot tr td::before{content:attr(data-label);font-weight:700;font-size:10px;color:var(--primary);text-transform:uppercase;letter-spacing:.04em;flex-shrink:0;max-width:45%}
+  /* Hide empty data-label pseudo-elements */
+  td[data-label=""]::before{display:none}
+  /* Phase headers in financial tables */
+  .phase-header{background:var(--primary)!important;border-radius:8px!important;margin-bottom:8px}
+  .phase-header td{color:#fff!important;font-size:11px!important;letter-spacing:.06em!important;text-transform:uppercase;font-weight:700;justify-content:center}
+  .phase-header td::before{display:none}
+  /* yr-row highlight on mobile */
+  .yr-row{border-color:var(--primary)!important;border-width:2px!important}
+  /* Keep 2-col simple tables as normal tables */
+  .simple-table table,.simple-table thead,.simple-table tbody,.simple-table tfoot,.simple-table tr,.simple-table th,.simple-table td{display:revert}
+  .simple-table thead{display:table-header-group}
+  .simple-table table{width:100%;font-size:11px;table-layout:fixed}
+  .simple-table thead th{padding:8px 10px;font-size:10px;white-space:normal;word-wrap:break-word;letter-spacing:0}
+  .simple-table tbody td{padding:6px 10px;font-size:11px;white-space:normal;word-wrap:break-word}
+  .simple-table tfoot tr td{padding:6px 10px;font-size:11px;white-space:normal}
+  /* Aporte grid */
+  .aporte-grid{grid-template-columns:repeat(6,1fr)}
 }
 @media(max-width:480px){
   .card-grid-4,.card-grid-3{grid-template-columns:1fr}
@@ -83,11 +107,8 @@ body{background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI
   .aporte-grid{grid-template-columns:repeat(4,1fr)}
   .page{padding:0 10px 60px}
   .tl-role{font-size:14px}
-  table{font-size:8px}
-  thead th{font-size:7px;padding:4px 2px}
-  tbody td{font-size:8px;padding:4px 2px}
-  tfoot tr td{font-size:8px;padding:4px 2px}
-  .num{font-size:7px}
+  tbody td{font-size:11px}
+  tbody td::before{font-size:9px}
   .prot-desc{font-size:11px}
   .info,.warn,.success{font-size:11px;padding:10px 12px}
   .section-sub{font-size:12px}
@@ -314,7 +335,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
 <div class="section">
   <div class="section-eyebrow">2. Modelo de Negócio</div>
   <div class="section-heading">O que a Pulso faz e como ganha dinheiro</div>
-  <div class="table-wrap">
+  <div class="table-wrap simple-table">
     <table>
       <thead><tr><th>Elemento</th><th>Descrição</th></tr></thead>
       <tbody>
@@ -355,11 +376,11 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
         <table>
           <thead><tr><th>Clientes</th><th>Sócios</th><th>Individual</th><th>Total</th></tr></thead>
           <tbody>
-            <tr><td>0–9 clientes</td><td>4</td><td class="num">R$ 2.000</td><td class="num">R$ 8.000</td></tr>
-            <tr><td>10–24 clientes</td><td>5</td><td class="num">R$ 2.500</td><td class="num">R$ 12.500</td></tr>
-            <tr><td>25–34 clientes</td><td>5</td><td class="num">R$ 3.000</td><td class="num">R$ 15.000</td></tr>
-            <tr><td>35–39 clientes</td><td>5</td><td class="num">R$ 4.000</td><td class="num">R$ 20.000</td></tr>
-            <tr class="yr-row"><td>40+ clientes</td><td>5</td><td class="num">R$ 5.000</td><td class="num">R$ 25.000</td></tr>
+            <tr><td data-label="Clientes">0–9 clientes</td><td data-label="Sócios">4</td><td data-label="Individual" class="num">R$ 2.000</td><td data-label="Total" class="num">R$ 8.000</td></tr>
+            <tr><td data-label="Clientes">10–24 clientes</td><td data-label="Sócios">5</td><td data-label="Individual" class="num">R$ 2.500</td><td data-label="Total" class="num">R$ 12.500</td></tr>
+            <tr><td data-label="Clientes">25–34 clientes</td><td data-label="Sócios">5</td><td data-label="Individual" class="num">R$ 3.000</td><td data-label="Total" class="num">R$ 15.000</td></tr>
+            <tr><td data-label="Clientes">35–39 clientes</td><td data-label="Sócios">5</td><td data-label="Individual" class="num">R$ 4.000</td><td data-label="Total" class="num">R$ 20.000</td></tr>
+            <tr class="yr-row"><td data-label="Clientes">40+ clientes</td><td data-label="Sócios">5</td><td data-label="Individual" class="num">R$ 5.000</td><td data-label="Total" class="num">R$ 25.000</td></tr>
           </tbody>
         </table>
       </div>
@@ -367,7 +388,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
     </div>
     <div>
       <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px">Custos Fixos Mensais · base</p>
-      <div class="table-wrap">
+      <div class="table-wrap simple-table">
         <table>
           <thead><tr><th>Item</th><th>R$/mês</th></tr></thead>
           <tbody>
@@ -411,12 +432,12 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
     <table>
       <thead><tr><th>Faixa anual</th><th>Receita mensal aproximada</th><th>Alíquota efetiva</th><th>Período provável</th></tr></thead>
       <tbody>
-        <tr><td>Até R$ 180k</td><td class="num">até R$ 15k/mês</td><td class="num accent">6,0%</td><td>M1–M4</td></tr>
-        <tr><td>R$ 180k – R$ 360k</td><td class="num">R$ 15k–30k/mês</td><td class="num">8,0%</td><td>M5–M7</td></tr>
-        <tr><td>R$ 360k – R$ 720k</td><td class="num">R$ 30k–60k/mês</td><td class="num">10,5%</td><td>M8–M10</td></tr>
-        <tr><td>R$ 720k – R$ 1,8M</td><td class="num">R$ 60k–150k/mês</td><td class="num">13,0%</td><td>M11–M14</td></tr>
-        <tr class="yr-row"><td>R$ 1,8M – R$ 3,6M</td><td class="num">R$ 150k–300k/mês</td><td class="num">15,8%</td><td>M15–M28</td></tr>
-        <tr><td>Acima de R$ 4,8M</td><td class="num">Lucro Presumido</td><td class="num">~13,3% + ISS</td><td>M29+</td></tr>
+        <tr><td data-label="Faixa anual">Até R$ 180k</td><td data-label="Receita mensal aproximada" class="num">até R$ 15k/mês</td><td data-label="Alíquota efetiva" class="num accent">6,0%</td><td data-label="Período provável">M1–M4</td></tr>
+        <tr><td data-label="Faixa anual">R$ 180k – R$ 360k</td><td data-label="Receita mensal aproximada" class="num">R$ 15k–30k/mês</td><td data-label="Alíquota efetiva" class="num">8,0%</td><td data-label="Período provável">M5–M7</td></tr>
+        <tr><td data-label="Faixa anual">R$ 360k – R$ 720k</td><td data-label="Receita mensal aproximada" class="num">R$ 30k–60k/mês</td><td data-label="Alíquota efetiva" class="num">10,5%</td><td data-label="Período provável">M8–M10</td></tr>
+        <tr><td data-label="Faixa anual">R$ 720k – R$ 1,8M</td><td data-label="Receita mensal aproximada" class="num">R$ 60k–150k/mês</td><td data-label="Alíquota efetiva" class="num">13,0%</td><td data-label="Período provável">M11–M14</td></tr>
+        <tr class="yr-row"><td data-label="Faixa anual">R$ 1,8M – R$ 3,6M</td><td data-label="Receita mensal aproximada" class="num">R$ 150k–300k/mês</td><td data-label="Alíquota efetiva" class="num">15,8%</td><td data-label="Período provável">M15–M28</td></tr>
+        <tr><td data-label="Faixa anual">Acima de R$ 4,8M</td><td data-label="Receita mensal aproximada" class="num">Lucro Presumido</td><td data-label="Alíquota efetiva" class="num">~13,3% + ISS</td><td data-label="Período provável">M29+</td></tr>
       </tbody>
     </table>
   </div>
@@ -445,11 +466,11 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
     <table>
       <thead><tr><th>Métrica</th><th>Mês 1–2 (sem tráfego)</th><th>Mês 3–6 (tráfego R$ 5k/mês)</th><th>Mês 7–12 (cases novos)</th><th>Mês 13–24 (escala)</th><th>Mês 25–36 (saturação)</th></tr></thead>
       <tbody>
-        <tr><td>Custo por cliente (CAC) via anúncios</td><td class="num">—</td><td class="num">R$ 2.000</td><td class="num">R$ 1.500</td><td class="num">R$ 1.800</td><td class="num">R$ 2.500</td></tr>
-        <tr><td>Conversão contato qualificado → cliente</td><td class="num">—</td><td class="num">3–5%</td><td class="num">8–10%</td><td class="num">7–9%</td><td class="num">5–7%</td></tr>
-        <tr><td>Clientes/mês via anúncios</td><td class="num">0</td><td class="num accent">~2</td><td class="num accent">2–3</td><td class="num">escala c/ reinvestimento</td><td class="num">escala c/ reinvestimento</td></tr>
-        <tr><td>Clientes/mês via Edu (fixo)</td><td class="num">4</td><td class="num">4</td><td class="num">4</td><td class="num">4</td><td class="num">3</td></tr>
-        <tr class="yr-row"><td>Total novos/mês</td><td class="num">4</td><td class="num">~6</td><td class="num">6–7</td><td class="num">escala c/ reinvestimento</td><td class="num">escala c/ reinvestimento</td></tr>
+        <tr><td data-label="Métrica">Custo por cliente (CAC) via anúncios</td><td data-label="Mês 1–2 (sem tráfego)" class="num">—</td><td data-label="Mês 3–6 (tráfego R$ 5k/mês)" class="num">R$ 2.000</td><td data-label="Mês 7–12 (cases novos)" class="num">R$ 1.500</td><td data-label="Mês 13–24 (escala)" class="num">R$ 1.800</td><td data-label="Mês 25–36 (saturação)" class="num">R$ 2.500</td></tr>
+        <tr><td data-label="Métrica">Conversão contato qualificado → cliente</td><td data-label="Mês 1–2 (sem tráfego)" class="num">—</td><td data-label="Mês 3–6 (tráfego R$ 5k/mês)" class="num">3–5%</td><td data-label="Mês 7–12 (cases novos)" class="num">8–10%</td><td data-label="Mês 13–24 (escala)" class="num">7–9%</td><td data-label="Mês 25–36 (saturação)" class="num">5–7%</td></tr>
+        <tr><td data-label="Métrica">Clientes/mês via anúncios</td><td data-label="Mês 1–2 (sem tráfego)" class="num">0</td><td data-label="Mês 3–6 (tráfego R$ 5k/mês)" class="num accent">~2</td><td data-label="Mês 7–12 (cases novos)" class="num accent">2–3</td><td data-label="Mês 13–24 (escala)" class="num">escala c/ reinvestimento</td><td data-label="Mês 25–36 (saturação)" class="num">escala c/ reinvestimento</td></tr>
+        <tr><td data-label="Métrica">Clientes/mês via Edu (fixo)</td><td data-label="Mês 1–2 (sem tráfego)" class="num">4</td><td data-label="Mês 3–6 (tráfego R$ 5k/mês)" class="num">4</td><td data-label="Mês 7–12 (cases novos)" class="num">4</td><td data-label="Mês 13–24 (escala)" class="num">4</td><td data-label="Mês 25–36 (saturação)" class="num">3</td></tr>
+        <tr class="yr-row"><td data-label="Métrica">Total novos/mês</td><td data-label="Mês 1–2 (sem tráfego)" class="num">4</td><td data-label="Mês 3–6 (tráfego R$ 5k/mês)" class="num">~6</td><td data-label="Mês 7–12 (cases novos)" class="num">6–7</td><td data-label="Mês 13–24 (escala)" class="num">escala c/ reinvestimento</td><td data-label="Mês 25–36 (saturação)" class="num">escala c/ reinvestimento</td></tr>
       </tbody>
     </table>
   </div>
@@ -644,15 +665,15 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
       <table>
         <thead><tr><th>Componente de retorno</th><th>Estimativa</th><th>Observação</th></tr></thead>
         <tbody>
-          <tr><td>Capital investido (Ano 1)</td><td class="num neg">−R$ 285.000</td><td>12 parcelas mensais · cobre custos do Ano 1</td></tr>
-          <tr><td>Recuperação do capital (payback) 1×</td><td class="num pos">+R$ 285.000</td><td>100% das distribuições até esse piso</td></tr>
-          <tr><td>Distribuições após recuperação · Ano 1–2</td><td class="num pos" id="dist-y1y2">—</td><td>Proporcional à fatia (48% → 36% → 22,5%)</td></tr>
-          <tr><td>Distribuições após recuperação · Ano 3</td><td class="num pos" id="dist-y3">—</td><td>Proporcional · fatia 22,5% após marco 3</td></tr>
-          <tr><td>Valor da fatia no Mês 36 (3× receita anual)</td><td class="num pos" id="eq-val3-ret">—</td><td>22,5% do valor da empresa conservador</td></tr>
-          <tr><td>Valor da fatia no Mês 36 (5× receita anual)</td><td class="num pos" id="eq-val5-ret">—</td><td>22,5% do valor da empresa otimista</td></tr>
+          <tr><td data-label="Componente de retorno">Capital investido (Ano 1)</td><td data-label="Estimativa" class="num neg">−R$ 285.000</td><td data-label="Observação">12 parcelas mensais · cobre custos do Ano 1</td></tr>
+          <tr><td data-label="Componente de retorno">Recuperação do capital (payback) 1×</td><td data-label="Estimativa" class="num pos">+R$ 285.000</td><td data-label="Observação">100% das distribuições até esse piso</td></tr>
+          <tr><td data-label="Componente de retorno">Distribuições após recuperação · Ano 1–2</td><td data-label="Estimativa" class="num pos" id="dist-y1y2">—</td><td data-label="Observação">Proporcional à fatia (48% → 36% → 22,5%)</td></tr>
+          <tr><td data-label="Componente de retorno">Distribuições após recuperação · Ano 3</td><td data-label="Estimativa" class="num pos" id="dist-y3">—</td><td data-label="Observação">Proporcional · fatia 22,5% após marco 3</td></tr>
+          <tr><td data-label="Componente de retorno">Valor da fatia no Mês 36 (3× receita anual)</td><td data-label="Estimativa" class="num pos" id="eq-val3-ret">—</td><td data-label="Observação">22,5% do valor da empresa conservador</td></tr>
+          <tr><td data-label="Componente de retorno">Valor da fatia no Mês 36 (5× receita anual)</td><td data-label="Estimativa" class="num pos" id="eq-val5-ret">—</td><td data-label="Observação">22,5% do valor da empresa otimista</td></tr>
         </tbody>
         <tfoot>
-          <tr><td><strong>RETORNO TOTAL (3× ARR)</strong></td><td class="num accent" id="total-ret-3">—</td><td id="moic-label">MOIC sobre R$ 285k investidos</td></tr>
+          <tr><td data-label="Componente de retorno"><strong>RETORNO TOTAL (3× ARR)</strong></td><td data-label="Estimativa" class="num accent" id="total-ret-3">—</td><td data-label="Observação" id="moic-label">MOIC sobre R$ 285k investidos</td></tr>
         </tfoot>
       </table>
     </div>
@@ -664,11 +685,11 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
       <table>
         <thead><tr><th>Investimento</th><th>Retorno estimado em 36 meses</th><th>Múltiplo (MOIC)</th><th>Risco</th></tr></thead>
         <tbody>
-          <tr><td>Selic (14,75% a.a.)</td><td class="num">~R$ 135k de ganho</td><td class="num">1,47×</td><td>Baixíssimo</td></tr>
-          <tr><td>Fundos imobiliários (FIIs, 10–12% a.a.)</td><td class="num">~R$ 100–115k de ganho</td><td class="num">1,35–1,40×</td><td>Baixo</td></tr>
-          <tr><td>CDB / LCI (13% a.a.)</td><td class="num">~R$ 120k de ganho</td><td class="num">1,42×</td><td>Baixo</td></tr>
-          <tr class="yr-row"><td><strong>Pulso — cenário base (distribuição)</strong></td><td class="num pos"><strong>R$ 2,23M distribuídos</strong></td><td class="num accent"><strong>7,9×</strong></td><td>Médio-alto (participação)</td></tr>
-          <tr class="yr-row"><td><strong>Pulso — cenário base (distribuição + participação)</strong></td><td class="num pos"><strong>Distribuição + participação societária</strong></td><td class="num accent"><strong id="moic-compare-total">—</strong></td><td>Médio-alto (participação)</td></tr>
+          <tr><td data-label="Investimento">Selic (14,75% a.a.)</td><td data-label="Retorno estimado em 36 meses" class="num">~R$ 135k de ganho</td><td data-label="Múltiplo (MOIC)" class="num">1,47×</td><td data-label="Risco">Baixíssimo</td></tr>
+          <tr><td data-label="Investimento">Fundos imobiliários (FIIs, 10–12% a.a.)</td><td data-label="Retorno estimado em 36 meses" class="num">~R$ 100–115k de ganho</td><td data-label="Múltiplo (MOIC)" class="num">1,35–1,40×</td><td data-label="Risco">Baixo</td></tr>
+          <tr><td data-label="Investimento">CDB / LCI (13% a.a.)</td><td data-label="Retorno estimado em 36 meses" class="num">~R$ 120k de ganho</td><td data-label="Múltiplo (MOIC)" class="num">1,42×</td><td data-label="Risco">Baixo</td></tr>
+          <tr class="yr-row"><td data-label="Investimento"><strong>Pulso — cenário base (distribuição)</strong></td><td data-label="Retorno estimado em 36 meses" class="num pos"><strong>R$ 2,23M distribuídos</strong></td><td data-label="Múltiplo (MOIC)" class="num accent"><strong>7,9×</strong></td><td data-label="Risco">Médio-alto (participação)</td></tr>
+          <tr class="yr-row"><td data-label="Investimento"><strong>Pulso — cenário base (distribuição + participação)</strong></td><td data-label="Retorno estimado em 36 meses" class="num pos"><strong>Distribuição + participação societária</strong></td><td data-label="Múltiplo (MOIC)" class="num accent"><strong id="moic-compare-total">—</strong></td><td data-label="Risco">Médio-alto (participação)</td></tr>
         </tbody>
       </table>
     </div>
@@ -720,12 +741,12 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
     <table>
       <thead><tr><th>Sócio / Grupo</th><th>Qtd.</th><th>% Individual</th><th>% Total do Grupo</th><th>Papel</th></tr></thead>
       <tbody>
-        <tr><td><span class="cap-pill cap-inv">Sócios Investidores</span></td><td>2</td><td class="num">30% cada</td><td class="num"><strong>60%</strong></td><td>Capital + rede de contatos (Edu: 4–5 indicações/mês)</td></tr>
-        <tr><td><span class="cap-pill cap-fam">Filhos (Operacionais)</span></td><td>2</td><td class="num">5% cada</td><td class="num"><strong>10%</strong></td><td>Execução · participação gradual 36m · carência 12m</td></tr>
-        <tr><td><span class="cap-pill cap-tec">Sócios Técnicos</span></td><td>3</td><td class="num">5% cada</td><td class="num"><strong>15%</strong></td><td>Execução técnica · participação gradual 36m · carência 12m</td></tr>
-        <tr><td><span class="cap-pill cap-pool">Reserva de Talentos</span></td><td>—</td><td class="num">—</td><td class="num"><strong>15%</strong></td><td>Reserva para futuros talentos-chave · expira em 48 meses · participação não alocada redistribui proporcionalmente</td></tr>
+        <tr><td data-label="Sócio / Grupo"><span class="cap-pill cap-inv">Sócios Investidores</span></td><td data-label="Qtd.">2</td><td data-label="% Individual" class="num">30% cada</td><td data-label="% Total do Grupo" class="num"><strong>60%</strong></td><td data-label="Papel">Capital + rede de contatos (Edu: 4–5 indicações/mês)</td></tr>
+        <tr><td data-label="Sócio / Grupo"><span class="cap-pill cap-fam">Filhos (Operacionais)</span></td><td data-label="Qtd.">2</td><td data-label="% Individual" class="num">5% cada</td><td data-label="% Total do Grupo" class="num"><strong>10%</strong></td><td data-label="Papel">Execução · participação gradual 36m · carência 12m</td></tr>
+        <tr><td data-label="Sócio / Grupo"><span class="cap-pill cap-tec">Sócios Técnicos</span></td><td data-label="Qtd.">3</td><td data-label="% Individual" class="num">5% cada</td><td data-label="% Total do Grupo" class="num"><strong>15%</strong></td><td data-label="Papel">Execução técnica · participação gradual 36m · carência 12m</td></tr>
+        <tr><td data-label="Sócio / Grupo"><span class="cap-pill cap-pool">Reserva de Talentos</span></td><td data-label="Qtd.">—</td><td data-label="% Individual" class="num">—</td><td data-label="% Total do Grupo" class="num"><strong>15%</strong></td><td data-label="Papel">Reserva para futuros talentos-chave · expira em 48 meses · participação não alocada redistribui proporcionalmente</td></tr>
       </tbody>
-      <tfoot><tr><td><strong>TOTAL</strong></td><td>—</td><td>—</td><td class="num accent"><strong>100%</strong></td><td>—</td></tr></tfoot>
+      <tfoot><tr><td data-label="Sócio / Grupo"><strong>TOTAL</strong></td><td data-label="Qtd.">—</td><td data-label="% Individual">—</td><td data-label="% Total do Grupo" class="num accent"><strong>100%</strong></td><td data-label="Papel">—</td></tr></tfoot>
     </table>
   </div>
 
@@ -734,10 +755,10 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
     <table>
       <thead><tr><th>Fase</th><th>Invest. (2×)</th><th>Filhos (2×)</th><th>Técnicos (3×)</th><th>Reserva</th><th>Gatilho verificável</th></tr></thead>
       <tbody>
-        <tr><td><strong>Dia 1</strong></td><td class="num"><span class="cap-pill cap-inv">30% cada = 60%</span></td><td class="num">5% cada = 10%</td><td class="num">5% cada = 15%</td><td class="num">15%</td><td>Assinatura do SHA</td></tr>
-        <tr><td><strong>M1 · Payback 1×</strong></td><td class="num"><span class="cap-pill cap-inv">24% cada = 48%</span></td><td class="num">6,5% cada = 13%</td><td class="num">8% cada = 24%</td><td class="num">15%</td><td>Investidor recebeu R$ 285k acumulado</td></tr>
-        <tr><td><strong>M2 · 40 clientes</strong></td><td class="num"><span class="cap-pill cap-inv">18% cada = 36%</span></td><td class="num">8% cada = 16%</td><td class="num">11% cada = 33%</td><td class="num">15%</td><td>40 clientes ativos por 30 dias consecutivos</td></tr>
-        <tr class="yr-row"><td><strong>M3 · ARR ≥ R$2M <em>E</em> payback 1×</strong></td><td class="num"><span class="cap-pill cap-inv">11,25% cada = 22,5%</span></td><td class="num">10% cada = 20%</td><td class="num">14,17% cada = 42,5%</td><td class="num">15%</td><td>Ambas condições cumpridas</td></tr>
+        <tr><td data-label="Fase"><strong>Dia 1</strong></td><td data-label="Invest. (2×)" class="num"><span class="cap-pill cap-inv">30% cada = 60%</span></td><td data-label="Filhos (2×)" class="num">5% cada = 10%</td><td data-label="Técnicos (3×)" class="num">5% cada = 15%</td><td data-label="Reserva" class="num">15%</td><td data-label="Gatilho verificável">Assinatura do SHA</td></tr>
+        <tr><td data-label="Fase"><strong>M1 · Payback 1×</strong></td><td data-label="Invest. (2×)" class="num"><span class="cap-pill cap-inv">24% cada = 48%</span></td><td data-label="Filhos (2×)" class="num">6,5% cada = 13%</td><td data-label="Técnicos (3×)" class="num">8% cada = 24%</td><td data-label="Reserva" class="num">15%</td><td data-label="Gatilho verificável">Investidor recebeu R$ 285k acumulado</td></tr>
+        <tr><td data-label="Fase"><strong>M2 · 40 clientes</strong></td><td data-label="Invest. (2×)" class="num"><span class="cap-pill cap-inv">18% cada = 36%</span></td><td data-label="Filhos (2×)" class="num">8% cada = 16%</td><td data-label="Técnicos (3×)" class="num">11% cada = 33%</td><td data-label="Reserva" class="num">15%</td><td data-label="Gatilho verificável">40 clientes ativos por 30 dias consecutivos</td></tr>
+        <tr class="yr-row"><td data-label="Fase"><strong>M3 · ARR ≥ R$2M <em>E</em> payback 1×</strong></td><td data-label="Invest. (2×)" class="num"><span class="cap-pill cap-inv">11,25% cada = 22,5%</span></td><td data-label="Filhos (2×)" class="num">10% cada = 20%</td><td data-label="Técnicos (3×)" class="num">14,17% cada = 42,5%</td><td data-label="Reserva" class="num">15%</td><td data-label="Gatilho verificável">Ambas condições cumpridas</td></tr>
       </tbody>
     </table>
   </div>
@@ -748,10 +769,10 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
     <table>
       <thead><tr><th>Fase</th><th>% do investidor</th><th>Receita mensal (MRR)</th><th>Valor empresa (3× receita anual)</th><th>Fatia investidor (3×)</th><th>Valor empresa (5× receita anual)</th><th>Fatia investidor (5×)</th></tr></thead>
       <tbody>
-        <tr><td>Assinatura (M1)</td><td>60%</td><td class="num">R$ 10k</td><td class="num">R$ 360k</td><td class="num">R$ 216k</td><td class="num">R$ 600k</td><td class="num">R$ 360k</td></tr>
-        <tr><td>Payback 1× (M13)</td><td>48%</td><td class="num">R$ 194k</td><td class="num">R$ 7,0M</td><td class="num">R$ 3,34M</td><td class="num">R$ 11,6M</td><td class="num">R$ 5,57M</td></tr>
-        <tr><td>40 clientes (M9)</td><td>36%</td><td class="num">R$ 115k</td><td class="num">R$ 4,1M</td><td class="num">R$ 1,49M</td><td class="num">R$ 6,9M</td><td class="num">R$ 2,48M</td></tr>
-        <tr class="yr-row"><td>M36 · cenário base 20%</td><td>22,5%</td><td class="num" id="ms3-mrr">—</td><td class="num" id="ms3-val3">—</td><td class="num" id="ms3-eq3">—</td><td class="num" id="ms3-val5">—</td><td class="num" id="ms3-eq5">—</td></tr>
+        <tr><td data-label="Fase">Assinatura (M1)</td><td data-label="% do investidor">60%</td><td data-label="Receita mensal (MRR)" class="num">R$ 10k</td><td data-label="Valor empresa (3× receita anual)" class="num">R$ 360k</td><td data-label="Fatia investidor (3×)" class="num">R$ 216k</td><td data-label="Valor empresa (5× receita anual)" class="num">R$ 600k</td><td data-label="Fatia investidor (5×)" class="num">R$ 360k</td></tr>
+        <tr><td data-label="Fase">Payback 1× (M13)</td><td data-label="% do investidor">48%</td><td data-label="Receita mensal (MRR)" class="num">R$ 194k</td><td data-label="Valor empresa (3× receita anual)" class="num">R$ 7,0M</td><td data-label="Fatia investidor (3×)" class="num">R$ 3,34M</td><td data-label="Valor empresa (5× receita anual)" class="num">R$ 11,6M</td><td data-label="Fatia investidor (5×)" class="num">R$ 5,57M</td></tr>
+        <tr><td data-label="Fase">40 clientes (M9)</td><td data-label="% do investidor">36%</td><td data-label="Receita mensal (MRR)" class="num">R$ 115k</td><td data-label="Valor empresa (3× receita anual)" class="num">R$ 4,1M</td><td data-label="Fatia investidor (3×)" class="num">R$ 1,49M</td><td data-label="Valor empresa (5× receita anual)" class="num">R$ 6,9M</td><td data-label="Fatia investidor (5×)" class="num">R$ 2,48M</td></tr>
+        <tr class="yr-row"><td data-label="Fase">M36 · cenário base 20%</td><td data-label="% do investidor">22,5%</td><td data-label="Receita mensal (MRR)" class="num" id="ms3-mrr">—</td><td data-label="Valor empresa (3× receita anual)" class="num" id="ms3-val3">—</td><td data-label="Fatia investidor (3×)" class="num" id="ms3-eq3">—</td><td data-label="Valor empresa (5× receita anual)" class="num" id="ms3-val5">—</td><td data-label="Fatia investidor (5×)" class="num" id="ms3-eq5">—</td></tr>
       </tbody>
     </table>
   </div>
@@ -762,10 +783,10 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
     <table>
       <thead><tr><th>Fase</th><th>Período estimado</th><th>Reserva</th><th>Distribuível</th><th>Freq.</th><th>Mecânica</th></tr></thead>
       <tbody>
-        <tr><td>Aporte em curso</td><td>M1–M5</td><td>15% do lucro líquido²</td><td>0% (acumulado em reserva)</td><td>—</td><td>Todo o lucro líquido vai para reserva de caixa</td></tr>
-        <tr><td>Pré-payback 1×</td><td>M6–~M13</td><td>15% do lucro líquido²</td><td>85% · 100% ao investidor</td><td>Mensal</td><td>Preferencial até R$ 285k cumulativos</td></tr>
-        <tr><td>Pós 1× · Ano 2</td><td>~M13–M24</td><td>15% do lucro líquido²</td><td>85% pro-rata</td><td>Mensal</td><td>Proporcional conforme quadro societário vigente</td></tr>
-        <tr class="yr-row"><td>Ano 3+ · estado final 22,5%</td><td>Mês 25+</td><td>10% do lucro líquido²</td><td>90% proporcional</td><td>Mensal</td><td>Investidor 22,5% · sócios 62,5% · reserva de talentos 15%</td></tr>
+        <tr><td data-label="Fase">Aporte em curso</td><td data-label="Período estimado">M1–M5</td><td data-label="Reserva">15% do lucro líquido²</td><td data-label="Distribuível">0% (acumulado em reserva)</td><td data-label="Freq.">—</td><td data-label="Mecânica">Todo o lucro líquido vai para reserva de caixa</td></tr>
+        <tr><td data-label="Fase">Pré-payback 1×</td><td data-label="Período estimado">M6–~M13</td><td data-label="Reserva">15% do lucro líquido²</td><td data-label="Distribuível">85% · 100% ao investidor</td><td data-label="Freq.">Mensal</td><td data-label="Mecânica">Preferencial até R$ 285k cumulativos</td></tr>
+        <tr><td data-label="Fase">Pós 1× · Ano 2</td><td data-label="Período estimado">~M13–M24</td><td data-label="Reserva">15% do lucro líquido²</td><td data-label="Distribuível">85% pro-rata</td><td data-label="Freq.">Mensal</td><td data-label="Mecânica">Proporcional conforme quadro societário vigente</td></tr>
+        <tr class="yr-row"><td data-label="Fase">Ano 3+ · estado final 22,5%</td><td data-label="Período estimado">Mês 25+</td><td data-label="Reserva">10% do lucro líquido²</td><td data-label="Distribuível">90% proporcional</td><td data-label="Freq.">Mensal</td><td data-label="Mecânica">Investidor 22,5% · sócios 62,5% · reserva de talentos 15%</td></tr>
       </tbody>
     </table>
   </div>
@@ -776,10 +797,10 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
     <table>
       <thead><tr><th>Bloco</th><th>Membros</th><th>Participação Dia 1</th><th>Votos — matérias reservadas</th></tr></thead>
       <tbody>
-        <tr><td><strong>Bloco Técnico</strong></td><td>Sócios Técnicos 1, 2 e 3</td><td>15%</td><td class="accent">3 votos</td></tr>
-        <tr><td><strong>Bloco Familiar</strong></td><td>Invest. 1 + Invest. 2 + Filhos 1 e 2</td><td>70%</td><td class="accent">3 votos (família como bloco único)</td></tr>
+        <tr><td data-label="Bloco"><strong>Bloco Técnico</strong></td><td data-label="Membros">Sócios Técnicos 1, 2 e 3</td><td data-label="Participação Dia 1">15%</td><td data-label="Votos — matérias reservadas" class="accent">3 votos</td></tr>
+        <tr><td data-label="Bloco"><strong>Bloco Familiar</strong></td><td data-label="Membros">Invest. 1 + Invest. 2 + Filhos 1 e 2</td><td data-label="Participação Dia 1">70%</td><td data-label="Votos — matérias reservadas" class="accent">3 votos (família como bloco único)</td></tr>
       </tbody>
-      <tfoot><tr><td colspan="3"><strong>Resultado</strong></td><td><strong>Paridade 50/50 — nenhum bloco impõe ao outro</strong></td></tr></tfoot>
+      <tfoot><tr><td data-label="Bloco" colspan="3"><strong>Resultado</strong></td><td data-label="Membros"><strong>Paridade 50/50 — nenhum bloco impõe ao outro</strong></td></tr></tfoot>
     </table>
   </div>
   <div class="info">Matérias reservadas (exigem aprovação dos dois blocos): venda da empresa, emissão de novas quotas, alteração da política de lucros, reestruturação do quadro societário fora dos marcos, contratação/desligamento de executivos seniores, aportes &gt; R$ 500k, mudança de objeto social.</div>
@@ -789,10 +810,10 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
     <table>
       <thead><tr><th>Mecanismo</th><th>Quem aciona</th><th>Janela</th><th>Fórmula de preço</th></tr></thead>
       <tbody>
-        <tr><td><strong>Opção de recompra (Call Option)</strong> · recompra pelo Bloco Técnico</td><td>Bloco Técnico</td><td>A partir do M36</td><td>4× lucro operacional anual × % do investidor</td></tr>
-        <tr><td><strong>Opção de saída (Put Option)</strong> · saída para o Bloco Técnico</td><td>Investidores</td><td>A partir do M48</td><td>4× lucro operacional anual × % do investidor</td></tr>
-        <tr><td><strong>Direito de acompanhamento (Tag-Along)</strong></td><td>Qualquer minoritário</td><td>Em qualquer venda</td><td>Mesmas condições da venda majoritária</td></tr>
-        <tr><td><strong>Direito de arraste (Drag-Along)</strong></td><td>Exige ambos os blocos</td><td>Após M48</td><td>Nunca acionável unilateralmente</td></tr>
+        <tr><td data-label="Mecanismo"><strong>Opção de recompra (Call Option)</strong> · recompra pelo Bloco Técnico</td><td data-label="Quem aciona">Bloco Técnico</td><td data-label="Janela">A partir do M36</td><td data-label="Fórmula de preço">4× lucro operacional anual × % do investidor</td></tr>
+        <tr><td data-label="Mecanismo"><strong>Opção de saída (Put Option)</strong> · saída para o Bloco Técnico</td><td data-label="Quem aciona">Investidores</td><td data-label="Janela">A partir do M48</td><td data-label="Fórmula de preço">4× lucro operacional anual × % do investidor</td></tr>
+        <tr><td data-label="Mecanismo"><strong>Direito de acompanhamento (Tag-Along)</strong></td><td data-label="Quem aciona">Qualquer minoritário</td><td data-label="Janela">Em qualquer venda</td><td data-label="Fórmula de preço">Mesmas condições da venda majoritária</td></tr>
+        <tr><td data-label="Mecanismo"><strong>Direito de arraste (Drag-Along)</strong></td><td data-label="Quem aciona">Exige ambos os blocos</td><td data-label="Janela">Após M48</td><td data-label="Fórmula de preço">Nunca acionável unilateralmente</td></tr>
       </tbody>
     </table>
   </div>
@@ -917,12 +938,12 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
     <table>
       <thead><tr><th>Métrica</th><th>Cenário Base</th><th>Cenário Pessimista</th></tr></thead>
       <tbody>
-        <tr><td>Taxa de cancelamento mensal</td><td class="num">5%</td><td class="num neg">7%</td></tr>
-        <tr><td>Indicações do Edu após M12</td><td class="num">4/mês</td><td class="num neg">0/mês</td></tr>
-        <tr><td>CAC via tráfego</td><td class="num">R$ 1,5k–2,5k</td><td class="num neg">R$ 2,3k–3,8k</td></tr>
-        <tr><td>Clientes M36</td><td class="num accent">~274</td><td class="num neg">~50–60</td></tr>
-        <tr><td>Payback 1×</td><td class="num accent">~M13</td><td class="num neg">M14–M18</td></tr>
-        <tr><td>MRR M36</td><td class="num accent">~R$ 1,72M</td><td class="num neg">~R$ 200k–300k</td></tr>
+        <tr><td data-label="Métrica">Taxa de cancelamento mensal</td><td data-label="Cenário Base" class="num">5%</td><td data-label="Cenário Pessimista" class="num neg">7%</td></tr>
+        <tr><td data-label="Métrica">Indicações do Edu após M12</td><td data-label="Cenário Base" class="num">4/mês</td><td data-label="Cenário Pessimista" class="num neg">0/mês</td></tr>
+        <tr><td data-label="Métrica">CAC via tráfego</td><td data-label="Cenário Base" class="num">R$ 1,5k–2,5k</td><td data-label="Cenário Pessimista" class="num neg">R$ 2,3k–3,8k</td></tr>
+        <tr><td data-label="Métrica">Clientes M36</td><td data-label="Cenário Base" class="num accent">~274</td><td data-label="Cenário Pessimista" class="num neg">~50–60</td></tr>
+        <tr><td data-label="Métrica">Payback 1×</td><td data-label="Cenário Base" class="num accent">~M13</td><td data-label="Cenário Pessimista" class="num neg">M14–M18</td></tr>
+        <tr><td data-label="Métrica">MRR M36</td><td data-label="Cenário Base" class="num accent">~R$ 1,72M</td><td data-label="Cenário Pessimista" class="num neg">~R$ 200k–300k</td></tr>
       </tbody>
     </table>
   </div>
@@ -1379,31 +1400,32 @@ function renderTable(scenario) {
     const rowClass = (r.m === 12 || r.m === 24 || r.m === 36) ? 'yr-row' : '';
     const profClass = r.lucro >= 0 ? 'pos' : 'neg';
     rows += `<tr class="${rowClass}">
-      <td>${r.m}</td>
-      <td>${MONTHS_LABELS[r.m-1]}</td>
-      <td class="accent">${r.cl}</td>
-      <td class="num">${fmt(r.mrr)}</td>
-      <td class="num">${r.trafego > 0 ? fmt(r.trafego) : '—'}</td>
-      <td class="num">${fmt(r.custoTotal)}</td>
-      <td class="num">${fmt(r.imp)}</td>
-      <td class="num ${profClass}">${fmt(r.lucro)}</td>
-      <td class="num ${r.cumLucro >= 0 ? 'pos' : 'neg'}">${fmt(r.cumLucro)}</td>
-      <td>${r.hc}</td>
+      <td data-label="Mês">${r.m}</td>
+      <td data-label="Data">${MONTHS_LABELS[r.m-1]}</td>
+      <td data-label="Clientes" class="accent">${r.cl}</td>
+      <td data-label="Receita (MRR)" class="num">${fmt(r.mrr)}</td>
+      <td data-label="Tráfego pago" class="num">${r.trafego > 0 ? fmt(r.trafego) : '—'}</td>
+      <td data-label="Custos totais" class="num">${fmt(r.custoTotal)}</td>
+      <td data-label="Impostos" class="num">${fmt(r.imp)}</td>
+      <td data-label="Lucro líquido" class="num ${profClass}">${fmt(r.lucro)}</td>
+      <td data-label="Lucro acumulado" class="num ${r.cumLucro >= 0 ? 'pos' : 'neg'}">${fmt(r.cumLucro)}</td>
+      <td data-label="Equipe">${r.hc}</td>
     </tr>`;
   });
 
   body.innerHTML = rows;
   const last = d[d.length-1];
-  foot.innerHTML = `<tr>
-    <td colspan="3"><strong>TOTAL 36 MESES</strong></td>
-    <td class="num"><strong>${fmt(totRev)}</strong></td>
-    <td class="num"><strong>${fmt(totTraf)}</strong></td>
-    <td class="num"><strong>${fmt(totCost)}</strong></td>
-    <td class="num"><strong>${fmt(totImp)}</strong></td>
-    <td class="num pos"><strong>${fmt(last.cumLucro)}</strong></td>
-    <td></td>
-    <td class="num"><strong>${last.hc}</strong></td>
-  </tr>`;
+  foot.innerHTML = '<tr>' +
+    '<td data-label=""><strong>TOTAL 36 MESES</strong></td>' +
+    '<td data-label=""></td><td data-label=""></td>' +
+    '<td data-label="Receita (MRR)" class="num"><strong>' + fmt(totRev) + '</strong></td>' +
+    '<td data-label="Tráfego pago" class="num"><strong>' + fmt(totTraf) + '</strong></td>' +
+    '<td data-label="Custos totais" class="num"><strong>' + fmt(totCost) + '</strong></td>' +
+    '<td data-label="Impostos" class="num"><strong>' + fmt(totImp) + '</strong></td>' +
+    '<td data-label="Lucro acumulado" class="num pos"><strong>' + fmt(last.cumLucro) + '</strong></td>' +
+    '<td data-label=""></td>' +
+    '<td data-label="Equipe" class="num"><strong>' + last.hc + '</strong></td>' +
+    '</tr>';
 }
 
 // ═══════════════════════════════════════════════════════
@@ -1419,16 +1441,16 @@ function renderROI(scenarioKey) {
   const eq5 = val5 * 0.225;
 
   // Single scenario row
-  document.getElementById('roi-comparison').innerHTML = `<tr class="yr-row">
-    <td>🟡 Cenário único · 20% (M1–M36) → 12% (M37+)</td>
-    <td class="accent">${last.cl}</td>
-    <td class="num">${fmt(last.mrr)}</td>
-    <td class="num">${fmtK(arr36)}</td>
-    <td class="num">${fmtK(val3)}</td>
-    <td class="num pos">${fmtK(eq3)}</td>
-    <td class="num pos">${fmtK(s.invRecebFinal)}</td>
-    <td class="num accent">${s.moic.toFixed(2)}×</td>
-  </tr>`;
+  document.getElementById('roi-comparison').innerHTML = '<tr class="yr-row">' +
+    '<td data-label="Cenário">🟡 Cenário único · 20% (M1–M36) → 12% (M37+)</td>' +
+    '<td data-label="Clientes M36" class="accent">' + last.cl + '</td>' +
+    '<td data-label="MRR M36" class="num">' + fmt(last.mrr) + '</td>' +
+    '<td data-label="ARR M36" class="num">' + fmtK(arr36) + '</td>' +
+    '<td data-label="Valor empresa (3× ARR)" class="num">' + fmtK(val3) + '</td>' +
+    '<td data-label="Fatia investidor (22,5%)" class="num pos">' + fmtK(eq3) + '</td>' +
+    '<td data-label="Distribuído 36 meses" class="num pos">' + fmtK(s.invRecebFinal) + '</td>' +
+    '<td data-label="MOIC" class="num accent">' + s.moic.toFixed(2) + '×</td>' +
+    '</tr>';
 
   document.getElementById('roi-arr').textContent = fmtK(arr36);
   document.getElementById('roi-val3').textContent = fmtK(eq3);
@@ -1469,7 +1491,7 @@ function renderTeamCapacity() {
   milestones.forEach(cl => {
     const t = computeTeam(cl);
     const hc = 5 + t.cs + t.an + t.des + t.sm + t.coord + t.head + t.dir + t.clevel;
-    rows += `<tr><td class="accent"><strong>${cl}</strong></td><td>${t.cs}</td><td>${t.an}</td><td>${t.des}</td><td>${t.sm}</td><td class="accent">${hc}</td></tr>`;
+    rows += '<tr><td data-label="Clientes" class="accent"><strong>' + cl + '</strong></td><td data-label="Atend.">' + t.cs + '</td><td data-label="Analistas">' + t.an + '</td><td data-label="Designers">' + t.des + '</td><td data-label="SM">' + t.sm + '</td><td data-label="Nº funcionários" class="accent">' + hc + '</td></tr>';
   });
   document.getElementById('team-capacity-table').innerHTML = rows;
 }
@@ -1500,27 +1522,28 @@ function renderProfitDest() {
     const rowClass = (r.m === 12 || r.m === 24 || r.m === 36) ? 'yr-row' : '';
     const profClass = r.lucro >= 0 ? 'pos' : 'neg';
     rows += '<tr class="' + rowClass + '">' +
-      '<td>' + r.m + '</td>' +
-      '<td>' + MONTHS_LABELS[r.m-1] + '</td>' +
-      '<td class="num ' + profClass + '">' + fmt(r.lucro) + '</td>' +
-      '<td class="num ' + (r.cumLucro >= 0 ? 'pos' : 'neg') + '">' + fmt(r.cumLucro) + '</td>' +
-      '<td class="num">' + (r.trafego > 0 ? fmt(r.trafego) : '—') + '</td>' +
-      '<td class="num">' + (r.reservaCaixa > 0 ? fmt(r.reservaCaixa) : '—') + '</td>' +
-      '<td class="num">' + (r.paraInv > 0 ? fmt(r.paraInv) : '—') + '</td>' +
-      '<td class="num">' + (r.paraSoc > 0 ? fmt(r.paraSoc) : '—') + '</td>' +
-      '<td class="num pos">' + fmt(Math.round(caixaAcum)) + '</td>' +
+      '<td data-label="Mês">' + r.m + '</td>' +
+      '<td data-label="Data">' + MONTHS_LABELS[r.m-1] + '</td>' +
+      '<td data-label="Lucro do mês" class="num ' + profClass + '">' + fmt(r.lucro) + '</td>' +
+      '<td data-label="Lucro acumulado" class="num ' + (r.cumLucro >= 0 ? 'pos' : 'neg') + '">' + fmt(r.cumLucro) + '</td>' +
+      '<td data-label="Gasto tráfego" class="num">' + (r.trafego > 0 ? fmt(r.trafego) : '—') + '</td>' +
+      '<td data-label="Reserva caixa" class="num">' + (r.reservaCaixa > 0 ? fmt(r.reservaCaixa) : '—') + '</td>' +
+      '<td data-label="Distrib. investidor" class="num">' + (r.paraInv > 0 ? fmt(r.paraInv) : '—') + '</td>' +
+      '<td data-label="Distrib. sócios" class="num">' + (r.paraSoc > 0 ? fmt(r.paraSoc) : '—') + '</td>' +
+      '<td data-label="Caixa acumulado" class="num pos">' + fmt(Math.round(caixaAcum)) + '</td>' +
       '</tr>';
   });
   body.innerHTML = rows;
   foot.innerHTML = '<tr>' +
-    '<td colspan="2"><strong>TOTAL 36 MESES</strong></td>' +
-    '<td class="num pos"><strong>' + fmt(Math.round(totLucro)) + '</strong></td>' +
-    '<td></td>' +
-    '<td class="num"><strong>' + fmt(Math.round(totTraf)) + '</strong></td>' +
-    '<td class="num"><strong>' + fmt(Math.round(totRes)) + '</strong></td>' +
-    '<td class="num"><strong>' + fmt(Math.round(totInv)) + '</strong></td>' +
-    '<td class="num"><strong>' + fmt(Math.round(totSoc)) + '</strong></td>' +
-    '<td class="num pos"><strong>' + fmt(Math.round(caixaAcum)) + '</strong></td>' +
+    '<td data-label=""><strong>TOTAL 36 MESES</strong></td>' +
+    '<td data-label=""></td>' +
+    '<td data-label="Lucro do mês" class="num pos"><strong>' + fmt(Math.round(totLucro)) + '</strong></td>' +
+    '<td data-label=""></td>' +
+    '<td data-label="Gasto tráfego" class="num"><strong>' + fmt(Math.round(totTraf)) + '</strong></td>' +
+    '<td data-label="Reserva caixa" class="num"><strong>' + fmt(Math.round(totRes)) + '</strong></td>' +
+    '<td data-label="Distrib. investidor" class="num"><strong>' + fmt(Math.round(totInv)) + '</strong></td>' +
+    '<td data-label="Distrib. sócios" class="num"><strong>' + fmt(Math.round(totSoc)) + '</strong></td>' +
+    '<td data-label="Caixa acumulado" class="num pos"><strong>' + fmt(Math.round(caixaAcum)) + '</strong></td>' +
     '</tr>';
 }
 
@@ -1547,12 +1570,12 @@ function renderInvestorFlow() {
     const rowClass = isPayback ? 'yr-row' : (m === 12 || m === 24 || m === 36) ? 'yr-row' : '';
     const saldoClass = saldo >= 0 ? 'pos' : 'neg';
     rows += '<tr class="' + rowClass + '">' +
-      '<td>M' + m + '</td>' +
-      '<td class="num">' + (aporteMes > 0 ? fmt(aporteMes) : '—') + '</td>' +
-      '<td class="num">' + fmt(aporteAcum) + '</td>' +
-      '<td class="num">' + (r.paraInv > 0 ? fmt(r.paraInv) : '—') + '</td>' +
-      '<td class="num">' + fmt(Math.round(distAcum)) + '</td>' +
-      '<td class="num ' + saldoClass + '">' + fmt(Math.round(saldo)) + '</td>' +
+      '<td data-label="Mês">M' + m + '</td>' +
+      '<td data-label="Aporte no mês" class="num">' + (aporteMes > 0 ? fmt(aporteMes) : '—') + '</td>' +
+      '<td data-label="Aporte acumulado" class="num">' + fmt(aporteAcum) + '</td>' +
+      '<td data-label="Distribuição no mês" class="num">' + (r.paraInv > 0 ? fmt(r.paraInv) : '—') + '</td>' +
+      '<td data-label="Distribuição acumulada" class="num">' + fmt(Math.round(distAcum)) + '</td>' +
+      '<td data-label="Saldo líquido" class="num ' + saldoClass + '">' + fmt(Math.round(saldo)) + '</td>' +
       '</tr>';
   });
   body.innerHTML = rows;
