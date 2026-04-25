@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumo Investidor — Pulso · v3 · Clínicas da Saúde</title>
+<style>
+:root {
+  --bg: #EEF0FF;
+  --primary: #6366F1;
+  --primary-d: #4F46E5;
+  --primary-10: rgba(99,102,241,0.10);
+  --primary-20: rgba(99,102,241,0.20);
+  --dark: #0B0B0F;
+  --card: #FFFFFF;
+  --muted: #6B7280;
+  --text: #1F2937;
+  --border: #E5E7EB;
+  --green: #10B981;
+  --green-10: rgba(16,185,129,0.10);
+  --red: #EF4444;
+  --red-10: rgba(239,68,68,0.10);
+  --amber: #F59E0B;
+  --amber-10: rgba(245,158,11,0.10);
+  --purple-light: #A5B4FC;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--text);font-size:14px;line-height:1.5}
+.page{max-width:1100px;margin:0 auto;padding:0 20px 100px}
+.section{margin-top:60px}
+.section-eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);font-weight:700;margin-bottom:6px}
+.section-heading{font-size:22px;font-weight:800;color:var(--dark);margin-bottom:8px;line-height:1.3}
+.section-sub{font-size:13px;color:var(--muted);max-width:640px;margin-bottom:24px;line-height:1.7}
+.cover{background:var(--dark);border-radius:20px;padding:52px 56px;margin-top:24px;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:-80px;right:-80px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,.35) 0%,transparent 70%)}
+.cover::after{content:'';position:absolute;bottom:-40px;left:40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,.15) 0%,transparent 70%)}
+.cover-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(99,102,241,.2);border:1px solid rgba(99,102,241,.4);border-radius:20px;padding:4px 14px;font-size:11px;color:var(--purple-light);letter-spacing:.06em;margin-bottom:20px;position:relative;z-index:1}
+.cover-title{font-size:52px;font-weight:900;color:#fff;line-height:1;margin-bottom:8px;letter-spacing:-.02em;position:relative;z-index:1}
+.cover-sub{font-size:20px;color:rgba(255,255,255,.55);margin-bottom:36px;font-weight:400;position:relative;z-index:1}
+.cover-meta{display:flex;gap:40px;flex-wrap:wrap;position:relative;z-index:1}
+.cover-meta-label{font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.1em}
+.cover-meta-value{font-size:15px;color:#fff;font-weight:700;margin-top:3px}
+.card{background:var(--card);border-radius:14px;padding:22px 26px}
+.card-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media screen and (max-width:768px){
+  html,body{max-width:100vw;overflow-x:hidden}
+  .page{overflow-x:hidden}
+  .card-grid-4{grid-template-columns:1fr 1fr}
+  .card-grid-2{grid-template-columns:1fr}
+  .card{min-width:0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .section>*{min-width:0;max-width:100%;overflow-x:hidden}
+  .cover{padding:32px 24px}
+  .cover-title{font-size:32px}
+  .cover-sub{font-size:16px;margin-bottom:24px}
+  .cover-meta{flex-direction:column;gap:12px}
+  .cover-meta-value{font-size:13px}
+  .section-heading{font-size:18px}
+  .kpi-value{font-size:22px}
+  .section{margin-top:40px}
+  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+  table{min-width:500px;font-size:11px}
+  thead th{padding:8px 10px;font-size:10px;white-space:normal;word-wrap:break-word;letter-spacing:.02em}
+  tbody td{padding:7px 10px;font-size:11px;white-space:normal;word-wrap:break-word}
+  tfoot tr td{padding:7px 10px;font-size:11px;white-space:normal;word-wrap:break-word}
+  .num{font-size:10px;font-family:inherit}
+  .phase-header td{font-size:9px!important;padding:5px 10px!important;letter-spacing:.04em!important}
+  .prot-grid{grid-template-columns:1fr}
+  .aporte-grid{grid-template-columns:repeat(6,1fr)}
+}
+@media screen and (max-width:480px){
+  .card-grid-4{grid-template-columns:1fr}
+  .card{padding:16px 18px}
+  .cover{padding:24px 18px;border-radius:14px}
+  .cover-title{font-size:28px}
+  .cover-badge{font-size:10px;padding:3px 10px}
+  .cover-meta{gap:10px}
+  .kpi-value{font-size:20px}
+  .aporte-grid{grid-template-columns:repeat(4,1fr)}
+  .page{padding:0 10px 60px}
+  table{font-size:10px}
+  thead th{font-size:9px;padding:6px 8px}
+  tbody td{font-size:10px;padding:6px 8px}
+  tfoot tr td{font-size:10px;padding:6px 8px}
+  .num{font-size:9px}
+  .prot-desc{font-size:11px}
+  .info,.warn,.success{font-size:11px;padding:10px 12px}
+  .section-sub{font-size:12px}
+  .cap-pill{font-size:10px;padding:2px 6px}
+}
+.kpi-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.kpi-value{font-size:28px;font-weight:800;color:var(--dark);letter-spacing:-.02em}
+.kpi-sub{font-size:12px;color:var(--muted);margin-top:3px}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:10px;margin-top:6px}
+.badge-green{background:var(--green-10);color:var(--green)}
+.badge-primary{background:var(--primary-10);color:var(--primary)}
+.badge-amber{background:var(--amber-10);color:var(--amber)}
+.table-wrap{overflow-x:auto;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card)}
+thead th{background:var(--dark);color:#fff;padding:11px 14px;text-align:left;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+thead th:first-child{border-radius:8px 0 0 0}
+thead th:last-child{border-radius:0 8px 0 0}
+tbody tr{border-bottom:1px solid var(--border);transition:background .12s}
+tbody tr:hover{background:var(--bg)}
+tbody td{padding:9px 14px;white-space:nowrap}
+tfoot tr td{padding:11px 14px;font-weight:800;background:var(--primary-10);border-top:2px solid var(--primary);white-space:nowrap}
+.num{text-align:right;font-variant-numeric:tabular-nums;font-family:'SF Mono','Fira Code',monospace;font-size:12px}
+.pos{color:var(--green);font-weight:700}
+.neg{color:var(--red);font-weight:700}
+.accent{color:var(--primary);font-weight:800}
+.yr-row td{background:rgba(99,102,241,.07)!important;font-weight:700}
+.phase-header td{background:var(--primary)!important;color:#fff!important;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:6px 14px!important}
+.info{background:var(--primary-10);border-left:3px solid var(--primary);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;line-height:1.6;margin:14px 0}
+.success{background:var(--green-10);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;line-height:1.6;margin:14px 0;color:#065f46}
+.cap-pill{display:inline-block;padding:3px 10px;border-radius:10px;font-size:12px;font-weight:700}
+.cap-inv{background:#EDE9FE;color:#7C3AED}
+.cap-fam{background:#D1FAE5;color:#059669}
+.cap-tec{background:#FEE2E2;color:#DC2626}
+.cap-pool{background:#FEF3C7;color:#D97706}
+.scenario-tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--primary);background:var(--primary-10);padding:4px 12px;border-radius:8px;margin-bottom:16px}
+.prot-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.prot-card{background:var(--card);border-radius:12px;padding:18px 20px;border-left:3px solid var(--primary)}
+.prot-card.obr{border-left-color:var(--amber)}
+.prot-label{font-size:10px;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+.prot-card.obr .prot-label{color:var(--amber)}
+.prot-title{font-size:14px;font-weight:800;color:var(--dark);margin-bottom:6px}
+.prot-desc{font-size:12px;color:var(--muted);line-height:1.6}
+.aporte-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin-top:12px}
+.aporte-mes{background:var(--primary-10);border-radius:6px;padding:10px 4px;text-align:center}
+.aporte-mes-lbl{font-size:9px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
+.aporte-mes-val{font-size:11px;font-weight:800;color:var(--primary);font-variant-numeric:tabular-nums}
+hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
+@media print{
+  body{background:#fff;font-size:11px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .page{max-width:100%;padding:0 12px 20px}
+  .section{margin-top:24px}
+  .cover{padding:28px 32px;border-radius:12px;page-break-after:always}
+  .card-grid-4{grid-template-columns:repeat(4,1fr)}
+  .card-grid-2{grid-template-columns:1fr 1fr}
+  .card{padding:12px 14px;box-shadow:none;border:1px solid var(--border);page-break-inside:avoid}
+  .table-wrap{box-shadow:none;border:1px solid var(--border);page-break-inside:auto;overflow-x:visible}
+  table{page-break-inside:auto;font-size:10px;table-layout:fixed;width:100%}
+  thead th{font-size:9px;padding:6px 5px;white-space:normal;word-wrap:break-word}
+  tbody td{padding:5px 5px;white-space:normal;word-wrap:break-word}
+  tfoot tr td{padding:6px 5px;white-space:normal}
+  tr{page-break-inside:avoid}
+  thead{display:table-header-group}
+  tfoot{display:table-footer-group}
+  .prot-grid{page-break-inside:avoid}
+  .prot-card{box-shadow:none;border:1px solid var(--border);page-break-inside:avoid}
+  .info,.success{page-break-inside:avoid}
+  .kpi-value{font-size:22px}
+  .section-heading{font-size:17px;page-break-after:avoid}
+  .section-eyebrow{page-break-after:avoid}
+  .section-sub{page-break-after:avoid}
+  .aporte-grid{grid-template-columns:repeat(12,1fr);page-break-inside:avoid}
+  .num{font-size:10px}
+  .scenario-tag{page-break-after:avoid}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-badge">🔒 Documento Confidencial — Apresentação Exclusiva ao Grupo Investidor</div>
+  <div class="cover-title">Pulso</div>
+  <div class="cover-sub">Resumo Executivo · Investidor</div>
+  <div class="cover-meta">
+    <div><div class="cover-meta-label">Cenário</div><div class="cover-meta-value">B — Multi-vertical · Reinvestimento 20% (Mês 1–36) · 12% após Mês 36</div></div>
+    <div><div class="cover-meta-label">Período</div><div class="cover-meta-value">Mai/2026 – Abr/2029 · 36 meses</div></div>
+    <div><div class="cover-meta-label">Aporte Total</div><div class="cover-meta-value">R$ 285.000 · Ano 1</div></div>
+    <div><div class="cover-meta-label">Versão</div><div class="cover-meta-value">v3 · Maio 2026</div></div>
+    <div><div class="cover-meta-label">Composição Societária</div><div class="cover-meta-value">2 Investidores · 3 Técnicos · 2 Filhos</div></div>
+  </div>
+</div>
+
+<!-- 1. TESE DE INVESTIMENTO -->
+<div class="section">
+  <div class="section-eyebrow">1. Tese de Investimento</div>
+  <div class="section-heading">Recuperação rápida do capital, escala comprovada, proteção dos dois lados</div>
+  <div class="card-grid-4" style="margin-bottom:20px">
+    <div class="card">
+      <div class="kpi-label">Aporte total Ano 1</div>
+      <div class="kpi-value">R$ 285k</div>
+      <div class="kpi-sub">12 parcelas · cronograma firme</div>
+      <span class="badge badge-primary">Único aporte previsto</span>
+    </div>
+    <div class="card">
+      <div class="kpi-label">Recuperação do capital (payback) 1×</div>
+      <div class="kpi-value">~Mês 13</div>
+      <div class="kpi-sub">R$ 285k devolvidos ao investidor</div>
+      <span class="badge badge-green">Preferencial integral</span>
+    </div>
+    <div class="card">
+      <div class="kpi-label">Receita mensal no Mês 36</div>
+      <div class="kpi-value">R$ 1,72M</div>
+      <div class="kpi-sub">Receita anual (ARR) R$ 20,6M</div>
+      <span class="badge badge-primary">Cenário base</span>
+    </div>
+    <div class="card">
+      <div class="kpi-label">Múltiplo de retorno (MOIC) · 36 meses</div>
+      <div class="kpi-value">7,9×</div>
+      <div class="kpi-sub">Retorno sobre capital</div>
+      <span class="badge badge-green">Cenário único · 20% reinvestimento</span>
+    </div>
+  </div>
+</div>
+
+<!-- 5. PROJEÇÃO — big numbers -->
+<div class="section">
+  <div class="section-eyebrow">5. Projeção de Crescimento — 36 Meses</div>
+  <div class="section-heading">Cenário único · reinvestimento 20% em tráfego pago</div>
+  <div class="scenario-tag">Reinvestimento de 20% do lucro operacional em tráfego pago (M1–M36) · 12% após M36 · Reserva de caixa: 15% (M1–M24) → 10% (M25+)</div>
+  <div class="card-grid-4" id="kpi-row" style="margin-bottom:20px"></div>
+</div>
+
+<hr class="divider">
+
+<!-- 9. DEMONSTRATIVO MENSAL + CRONOGRAMA APORTES -->
+<div class="section">
+  <div class="section-eyebrow">9. Demonstrativo Financeiro do Investidor</div>
+  <div class="section-heading">Demonstrativo mensal · cenário selecionado</div>
+  <p class="section-sub">Tabela com visão completa do fluxo financeiro: receita, custos, lucro e distribuição — mês a mês.</p>
+  <div class="table-wrap" style="margin-bottom:24px">
+    <table>
+      <thead><tr><th>Mês</th><th>Data</th><th>Clientes</th><th>Receita (MRR)</th><th>Custos totais</th><th>Lucro líquido</th><th>Distrib. investidor</th><th>Distrib. sócios</th></tr></thead>
+      <tbody id="demo-body"></tbody>
+      <tfoot id="demo-foot"></tfoot>
+    </table>
+  </div>
+  <div class="success" id="investor-summary-box"></div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px;margin-top:32px">Cronograma de aporte · 12 parcelas</p>
+  <div class="table-wrap" style="margin-bottom:12px">
+    <table>
+      <thead><tr><th>Parcela</th><th>Mês</th><th>Valor</th></tr></thead>
+      <tbody>
+        <tr><td>1ª</td><td>M1 — Mai/2026</td><td class="num">R$ 30.000</td></tr>
+        <tr><td>2ª</td><td>M2 — Jun/2026</td><td class="num">R$ 25.000</td></tr>
+        <tr><td>3ª</td><td>M3 — Jul/2026</td><td class="num">R$ 30.000</td></tr>
+        <tr><td>4ª</td><td>M4 — Ago/2026</td><td class="num">R$ 25.000</td></tr>
+        <tr><td>5ª</td><td>M5 — Set/2026</td><td class="num">R$ 25.000</td></tr>
+        <tr><td>6ª</td><td>M6 — Out/2026</td><td class="num">R$ 25.000</td></tr>
+        <tr><td>7ª</td><td>M7 — Nov/2026</td><td class="num">R$ 25.000</td></tr>
+        <tr><td>8ª</td><td>M8 — Dez/2026</td><td class="num">R$ 20.000</td></tr>
+        <tr><td>9ª</td><td>M9 — Jan/2027</td><td class="num">R$ 20.000</td></tr>
+        <tr><td>10ª</td><td>M10 — Fev/2027</td><td class="num">R$ 20.000</td></tr>
+        <tr><td>11ª</td><td>M11 — Mar/2027</td><td class="num">R$ 20.000</td></tr>
+        <tr><td>12ª</td><td>M12 — Abr/2027</td><td class="num">R$ 20.000</td></tr>
+      </tbody>
+      <tfoot><tr><td colspan="2"><strong>TOTAL</strong></td><td class="num accent"><strong>R$ 285.000</strong></td></tr></tfoot>
+    </table>
+  </div>
+  <div class="aporte-grid">
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M1</div><div class="aporte-mes-val">30k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M2</div><div class="aporte-mes-val">25k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M3</div><div class="aporte-mes-val">30k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M4</div><div class="aporte-mes-val">25k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M5</div><div class="aporte-mes-val">25k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M6</div><div class="aporte-mes-val">25k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M7</div><div class="aporte-mes-val">25k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M8</div><div class="aporte-mes-val">20k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M9</div><div class="aporte-mes-val">20k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M10</div><div class="aporte-mes-val">20k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M11</div><div class="aporte-mes-val">20k</div></div>
+    <div class="aporte-mes"><div class="aporte-mes-lbl">M12</div><div class="aporte-mes-val">20k</div></div>
+  </div>
+  <div class="info" style="margin-top:12px">Tolerância: ±15% de ajuste no cronograma, desde que o total de R$ 285k seja completado em até 12 meses.</div>
+</div>
+
+<hr class="divider">
+
+<!-- 10. PROPOSTA SOCIETÁRIA -->
+<div class="section">
+  <div class="section-eyebrow">10. Proposta Societária</div>
+  <div class="section-heading">Construção Gradual · Paridade Real · Valor Crescente</div>
+  <p class="section-sub">A estrutura alinha o interesse de todos os sócios em torno de um objetivo: fazer a empresa crescer. A participação de cada parte aumenta em valor absoluto à medida que a receita mensal cresce — mesmo com diluição percentual dos investidores ao longo dos marcos.</p>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px">10.1 Composição inicial · Dia 1</p>
+  <div class="table-wrap" style="margin-bottom:20px">
+    <table>
+      <thead><tr><th>Sócio / Grupo</th><th>Qtd.</th><th>% Individual</th><th>% Total do Grupo</th><th>Papel</th></tr></thead>
+      <tbody>
+        <tr><td><span class="cap-pill cap-inv">Sócios Investidores</span></td><td>2</td><td class="num">30% cada</td><td class="num"><strong>60%</strong></td><td>Capital + rede de contatos (Edu: 4–5 indicações/mês)</td></tr>
+        <tr><td><span class="cap-pill cap-fam">Filhos (Operacionais)</span></td><td>2</td><td class="num">5% cada</td><td class="num"><strong>10%</strong></td><td>Execução · participação gradual 36m · carência 12m</td></tr>
+        <tr><td><span class="cap-pill cap-tec">Sócios Técnicos</span></td><td>3</td><td class="num">5% cada</td><td class="num"><strong>15%</strong></td><td>Execução técnica · participação gradual 36m · carência 12m</td></tr>
+        <tr><td><span class="cap-pill cap-pool">Reserva de Talentos</span></td><td>—</td><td class="num">—</td><td class="num"><strong>15%</strong></td><td>Reserva para futuros talentos-chave · expira em 48 meses</td></tr>
+      </tbody>
+      <tfoot><tr><td><strong>TOTAL</strong></td><td>—</td><td>—</td><td class="num accent"><strong>100%</strong></td><td>—</td></tr></tfoot>
+    </table>
+  </div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px">10.2 Evolução do quadro societário por marco</p>
+  <div class="table-wrap" style="margin-bottom:12px">
+    <table>
+      <thead><tr><th>Fase</th><th>Invest. (2×)</th><th>Filhos (2×)</th><th>Técnicos (3×)</th><th>Reserva</th><th>Gatilho verificável</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Dia 1</strong></td><td class="num"><span class="cap-pill cap-inv">30% cada = 60%</span></td><td class="num">5% cada = 10%</td><td class="num">5% cada = 15%</td><td class="num">15%</td><td>Assinatura do SHA</td></tr>
+        <tr><td><strong>M1 · Payback 1×</strong></td><td class="num"><span class="cap-pill cap-inv">24% cada = 48%</span></td><td class="num">6,5% cada = 13%</td><td class="num">8% cada = 24%</td><td class="num">15%</td><td>Investidor recebeu R$ 285k acumulado</td></tr>
+        <tr><td><strong>M2 · 40 clientes</strong></td><td class="num"><span class="cap-pill cap-inv">18% cada = 36%</span></td><td class="num">8% cada = 16%</td><td class="num">11% cada = 33%</td><td class="num">15%</td><td>40 clientes ativos por 30 dias consecutivos</td></tr>
+        <tr class="yr-row"><td><strong>M3 · ARR ≥ R$2M <em>E</em> payback 1×</strong></td><td class="num"><span class="cap-pill cap-inv">11,25% cada = 22,5%</span></td><td class="num">10% cada = 20%</td><td class="num">14,17% cada = 42,5%</td><td class="num">15%</td><td>Ambas condições cumpridas</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="info"><strong>Marco 3 · fórmula combinada:</strong> a diluição final dos investidores só dispara quando <em>duas condições simultâneas</em> são cumpridas: ARR anualizado ≥ R$ 2M <em>e</em> investidor já tiver recebido 1× do aporte (R$ 285k).</div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px;margin-top:20px">10.3 A matemática da diluição — menos % de mais vale mais</p>
+  <div class="table-wrap" style="margin-bottom:12px">
+    <table>
+      <thead><tr><th>Fase</th><th>% investidor</th><th>MRR</th><th>Empresa (3× ARR)</th><th>Fatia invest. (3×)</th><th>Empresa (5× ARR)</th><th>Fatia invest. (5×)</th></tr></thead>
+      <tbody>
+        <tr><td>Assinatura (M1)</td><td>60%</td><td class="num">R$ 10k</td><td class="num">R$ 360k</td><td class="num">R$ 216k</td><td class="num">R$ 600k</td><td class="num">R$ 360k</td></tr>
+        <tr><td>Payback 1× (M13)</td><td>48%</td><td class="num">R$ 194k</td><td class="num">R$ 7,0M</td><td class="num">R$ 3,34M</td><td class="num">R$ 11,6M</td><td class="num">R$ 5,57M</td></tr>
+        <tr><td>40 clientes (M9)</td><td>36%</td><td class="num">R$ 115k</td><td class="num">R$ 4,1M</td><td class="num">R$ 1,49M</td><td class="num">R$ 6,9M</td><td class="num">R$ 2,48M</td></tr>
+        <tr class="yr-row"><td>M36 · cenário base</td><td>22,5%</td><td class="num" id="ms3-mrr">—</td><td class="num" id="ms3-val3">—</td><td class="num" id="ms3-eq3">—</td><td class="num" id="ms3-val5">—</td><td class="num" id="ms3-eq5">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="info"><strong>Leitura-chave:</strong> saindo de 60% para 22,5%, o valor da participação do investidor cresce de R$ 216k para R$ 5M+. Manter 60% de uma empresa que não cresce vale menos de R$ 400k. Ter 22,5% de uma empresa escalada vale mais de 12× isso.</div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px;margin-top:20px">10.4 Política de distribuição de lucros</p>
+  <div class="table-wrap" style="margin-bottom:20px">
+    <table>
+      <thead><tr><th>Fase</th><th>Período</th><th>Reserva</th><th>Distribuível</th><th>Freq.</th><th>Mecânica</th></tr></thead>
+      <tbody>
+        <tr><td>Aporte em curso</td><td>M1–M5</td><td>15%</td><td>0%</td><td>—</td><td>Todo o lucro vai para reserva de caixa</td></tr>
+        <tr><td>Pré-payback 1×</td><td>M6–~M13</td><td>15%</td><td>85% · 100% ao investidor</td><td>Mensal</td><td>Preferencial até R$ 285k cumulativos</td></tr>
+        <tr><td>Pós 1× · Ano 2</td><td>~M13–M24</td><td>15%</td><td>85% pro-rata</td><td>Mensal</td><td>Proporcional ao quadro societário vigente</td></tr>
+        <tr class="yr-row"><td>Ano 3+</td><td>Mês 25+</td><td>10%</td><td>90% proporcional</td><td>Mensal</td><td>Investidor 22,5% · sócios 62,5% · reserva 15%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px">10.5 Governança · paridade de blocos desde o Dia 1</p>
+  <div class="table-wrap" style="margin-bottom:12px">
+    <table>
+      <thead><tr><th>Bloco</th><th>Membros</th><th>Participação Dia 1</th><th>Votos — matérias reservadas</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Bloco Técnico</strong></td><td>Sócios Técnicos 1, 2 e 3</td><td>15%</td><td class="accent">3 votos</td></tr>
+        <tr><td><strong>Bloco Familiar</strong></td><td>Invest. 1 + Invest. 2 + Filhos 1 e 2</td><td>70%</td><td class="accent">3 votos (família como bloco único)</td></tr>
+      </tbody>
+      <tfoot><tr><td colspan="3"><strong>Resultado</strong></td><td><strong>Paridade 50/50 — nenhum bloco impõe ao outro</strong></td></tr></tfoot>
+    </table>
+  </div>
+  <div class="info">Matérias reservadas (exigem aprovação dos dois blocos): venda da empresa, emissão de novas quotas, alteração da política de lucros, reestruturação societária, contratação/desligamento de executivos seniores, aportes &gt; R$ 500k, mudança de objeto social.</div>
+</div>
+
+<hr class="divider">
+
+<!-- 11. PROTEÇÕES E CONTRAPARTIDAS -->
+<div class="section">
+  <div class="section-eyebrow">11. SHA · Proteções mútuas e contrapartidas</div>
+  <div class="section-heading">Obrigações dos dois lados · nada unilateral</div>
+  <p class="section-sub">O Acordo de Sócios formaliza tanto as proteções do investidor quanto as contrapartidas exigidas. Nenhuma cláusula é unilateral — todas criam obrigações verificáveis nos dois blocos.</p>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px">11.1 Proteções ao investidor</p>
+  <div class="prot-grid" style="margin-bottom:24px">
+    <div class="prot-card">
+      <div class="prot-label">Preferência no payback</div>
+      <div class="prot-title">1× preferencial</div>
+      <div class="prot-desc">100% das distribuições vão ao investidor até que ele receba 1× do capital aportado (R$ 285k). Depois, distribuição pro-rata segundo quadro societário vigente.</div>
+    </div>
+    <div class="prot-card">
+      <div class="prot-label">Em caso de venda</div>
+      <div class="prot-title">Direito de acompanhamento integral (tag-along)</div>
+      <div class="prot-desc">Se qualquer sócio majoritário vender participação a terceiros, o investidor tem direito de sair nas mesmas condições de preço e prazo.</div>
+    </div>
+    <div class="prot-card">
+      <div class="prot-label">Governança</div>
+      <div class="prot-title">Informação trimestral</div>
+      <div class="prot-desc">DRE, fluxo de caixa e relatório operacional a cada trimestre. Reuniões de Conselho mensais no Ano 1, trimestrais a partir do Ano 2.</div>
+    </div>
+    <div class="prot-card">
+      <div class="prot-label">Proteção de participação</div>
+      <div class="prot-title">Anti-diluição</div>
+      <div class="prot-desc">Se futuro investimento avaliar a empresa abaixo do Marco 3, o investidor original recebe mais participação para compensar a perda de valor.</div>
+    </div>
+    <div class="prot-card">
+      <div class="prot-label">Comprometimento</div>
+      <div class="prot-title">Vesting 36m com cliff de 12m</div>
+      <div class="prot-desc">Sócios operacionais não recebem participação nos primeiros 12 meses. Após o cliff, liberação gradual ao longo de 36 meses.</div>
+    </div>
+  </div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px">11.2 Contrapartidas exigidas dos investidores</p>
+  <div class="prot-grid" style="margin-bottom:24px">
+    <div class="prot-card obr">
+      <div class="prot-label">Proteção em caso de venda</div>
+      <div class="prot-title">Aceleração de vesting na venda</div>
+      <div class="prot-desc">Se a empresa for vendida e o sócio operacional for desligado sem justa causa em 12 meses, toda a participação pendente é liberada imediatamente.</div>
+    </div>
+    <div class="prot-card obr">
+      <div class="prot-label">Sócio ativo</div>
+      <div class="prot-title">Compromisso mínimo de indicações</div>
+      <div class="prot-desc">Mínimo de 4 indicações qualificadas/mês por 24 meses. Falha por 3 meses consecutivos altera a política de payback 100%.</div>
+    </div>
+    <div class="prot-card obr">
+      <div class="prot-label">Conflito de interesses</div>
+      <div class="prot-title">Voto exclusivo do Bloco Técnico</div>
+      <div class="prot-desc">Decisões que beneficiem o Bloco Familiar são votadas somente pelos sócios técnicos não-parentes.</div>
+    </div>
+    <div class="prot-card obr">
+      <div class="prot-label">Transferência</div>
+      <div class="prot-title">ROFR · 30 dias</div>
+      <div class="prot-desc">Qualquer sócio que queira vender deve oferecer primeiro aos demais, nas mesmas condições. 30 dias para decidir.</div>
+    </div>
+    <div class="prot-card obr">
+      <div class="prot-label">Decisões estratégicas</div>
+      <div class="prot-title">Aprovação especial (75% ou ambos blocos)</div>
+      <div class="prot-desc">Venda da empresa, nova rodada de investimento e endividamento acima de R$ 500k exigem aprovação de 75% ou maioria em ambos os blocos.</div>
+    </div>
+    <div class="prot-card obr">
+      <div class="prot-label">Não-concorrência</div>
+      <div class="prot-title">24 meses pós-saída</div>
+      <div class="prot-desc">Investidor não pode investir em agência concorrente, nem contratar colaboradores ou clientes da empresa durante a sociedade e por 24 meses após saída.</div>
+    </div>
+  </div>
+
+  <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px">11.3 Resolução de impasses</p>
+  <div class="card-grid-2">
+    <div class="card" style="border-left:3px solid var(--primary)">
+      <div class="prot-label">Impasse operacional</div>
+      <div class="prot-title" style="margin-bottom:8px">Conselheiro independente</div>
+      <div class="prot-desc">Impasse de 90 dias em matéria reservada: terceiro neutro escolhido por consenso desempata. Evita judicialização.</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--primary)">
+      <div class="prot-label">Evolução do contrato</div>
+      <div class="prot-title" style="margin-bottom:8px">Revisão anual do SHA</div>
+      <div class="prot-desc">A partir do Ano 2, qualquer sócio pode convocar revisão. Alterações exigem unanimidade. Sem consenso, SHA original permanece.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="section">
+  <div class="cover" style="padding:44px 48px">
+    <div style="color:var(--purple-light);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;position:relative;z-index:1">Documento completo</div>
+    <div style="font-size:28px;font-weight:900;color:#fff;margin-bottom:12px;line-height:1.2;position:relative;z-index:1">Este é o resumo executivo.</div>
+    <div style="color:rgba(255,255,255,.65);font-size:14px;line-height:1.7;max-width:640px;position:relative;z-index:1">Para detalhes sobre modelo de negócio, premissas financeiras, expansão de time e análise de riscos, consulte o <a href="../" style="color:var(--purple-light);text-decoration:underline">Investor Pack completo</a>.</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+// MODEL ENGINE v3
+var MONTHS=36,APORTE_TOTAL=285000,APORTE_MENSAL=[30000,25000,30000,25000,25000,25000,25000,20000,20000,20000,20000,20000];
+function ticket(m){if(m<=6)return 2500;if(m<=12)return 2700;if(m<=18)return 3200;if(m<=24)return 4000;if(m<=30)return 5000;return 6500}
+function reinvestRate(m){return m<=36?.20:.12}
+function cashReserveRate(m){return m<=24?.15:.10}
+function cac(m,b){var base;if(m<=6)base=2000;else if(m<=12)base=1500;else if(m<=24)base=1800;else base=2500;return Math.round(base*(1+Math.max(0,(b-5000)/10000)*.10))}
+function churn(c){var b=.05;if(c>250)b+=.02;else if(c>150)b+=.01;else if(c>80)b+=.005;return b}
+function partnerSalary(c,m){if(c<10)return{sal:2000,n:4};if(c<25)return{sal:2500,n:5};if(c<35)return{sal:3000,n:5};if(c<40)return{sal:4000,n:5};if(m>=1000000)return{sal:10000,n:5};if(m>=500000)return{sal:7000,n:5};return{sal:5000,n:5}}
+function fixedCost(c,m){var b=7000;if(m>24)b+=1000;if(c>40)b+=2500;if(c>80)b+=3500;if(c>150)b+=6000;if(c>300)b+=9000;return b}
+function taxRate(m){var r=m*12;if(r<180000)return.06;if(r<360000)return.08;if(r<720000)return.105;if(r<1800000)return.13;if(r<3600000)return.158;if(r<4800000)return.19;return.155}
+function computeTeam(c){if(c<=40)return{cs:0,an:0,des:0,sm:0,coord:0,head:0,dir:0,clevel:0};var e=c-40,cs=Math.ceil(e/33),an=Math.ceil(e/40),des=Math.ceil(e/40),sc=Math.round(c*.25),sm=sc>=10?Math.ceil(sc/10):1,f=cs+an+des+sm,co=f>=4?1:0,h=(f+co)>=8?1:0,d=(f+co+h)>=15?1:0,t=f+co+h+d,cl=t+5>=25?1:0;return{cs:cs,an:an,des:des,sm:sm,coord:co,head:h,dir:d,clevel:cl}}
+function teamCost(t){return t.cs*3500+t.an*4500+t.des*4000+t.sm*3000+t.coord*6000+t.head*10000+t.dir*15000+t.clevel*18000}
+
+function runScenario(){
+  var cl=0,cx=0,aa=0,ir=0,sr=0,cum=0,tb=0,pm=null,m40=null,ma=null,pl=0,data=[];
+  for(var m=1;m<=MONTHS;m++){
+    if(m<=12){cx+=APORTE_MENSAL[m-1];aa+=APORTE_MENSAL[m-1]}
+    if(m<=2)tb=0;else if(m<=12)tb=5000;else if(pl>0)tb=Math.max(5000,Math.min(pl*reinvestRate(m),500000));else tb=5000;
+    var edu=m<=24?4:3,ca=cac(m,tb),tn=tb>0?Math.floor(tb/ca):0,nov=edu+tn;
+    var ta=computeTeam(cl),td=computeTeam(cl+nov),dt=(td.cs-ta.cs)+(td.an-ta.an)+(td.des-ta.des)+(td.sm-ta.sm)+(td.coord-ta.coord)+(td.head-ta.head)+(td.dir-ta.dir)+(td.clevel-ta.clevel);
+    if(dt>2)nov=Math.round(nov*(.75+.25*(2/dt)));
+    var ch=Math.round(cl*churn(cl));cl=Math.max(0,cl+nov-ch);
+    var tk=ticket(m)*.85+ticket(Math.max(1,m-6))*.15,mrr=cl*tk;
+    var ps=partnerSalary(cl,mrr),fs=ps.sal*ps.n,ins=1621*ps.n*.20,tm=computeTeam(cl),tc=teamCost(tm)*1.7,fx=fixedCost(cl,m),imp=mrr*taxRate(mrr);
+    var ct=fs+ins+tc+fx+tb+imp,luc=mrr-ct;cx+=luc;cum+=luc;pl=luc;
+    var dist=0,res=0;if(luc>0){if(m<=5){dist=0;res=luc}else{res=luc*cashReserveRate(m);dist=Math.max(0,luc-res)}}
+    var pi=0,pso=0;
+    if(dist>0){if(ir<APORTE_TOTAL){var f=APORTE_TOTAL-ir;pi=Math.min(dist,f);ir+=pi;var r=dist-pi;if(r>0&&ir>=APORTE_TOTAL){var eq=ma?.225:m40?.36:pm?.48:.60;pi+=r*eq;ir+=r*eq;pso=r*(1-eq);sr+=pso}}else{var eq=ma?.225:m40?.36:pm?.48:.60;pi=dist*eq;ir+=pi;pso=dist*(1-eq);sr+=pso}}
+    if(pm===null&&ir>=APORTE_TOTAL)pm=m;if(m40===null&&cl>=40)m40=m;var arr=mrr*12;if(ma===null&&arr>=2000000&&pm)ma=m;
+    var hc=5+tm.cs+tm.an+tm.des+tm.sm+tm.coord+tm.head+tm.dir+tm.clevel;
+    data.push({m:m,cl:cl,mrr:Math.round(mrr),arr:Math.round(arr),custoTotal:Math.round(ct),lucro:Math.round(luc),cumLucro:Math.round(cum),invReceb:Math.round(ir),paraInv:Math.round(pi),paraSoc:Math.round(pso),hc:hc})
+  }
+  return{data:data,paybackMes:pm,invRecebFinal:Math.round(ir),socRecebFinal:Math.round(sr),moic:ir/APORTE_TOTAL}
+}
+
+var sc=runScenario(),d=sc.data;
+var fmt=function(v){return'R$ '+Math.round(v).toLocaleString('pt-BR')};
+var fmtK=function(v){return v>=1000000?'R$ '+(v/1000000).toFixed(2).replace('.',',')+' M':v>=1000?'R$ '+Math.round(v/1000)+'k':fmt(v)};
+var ML=['Mai/26','Jun/26','Jul/26','Ago/26','Set/26','Out/26','Nov/26','Dez/26','Jan/27','Fev/27','Mar/27','Abr/27','Mai/27','Jun/27','Jul/27','Ago/27','Set/27','Out/27','Nov/27','Dez/27','Jan/28','Fev/28','Mar/28','Abr/28','Mai/28','Jun/28','Jul/28','Ago/28','Set/28','Out/28','Nov/28','Dez/28','Jan/29','Fev/29','Mar/29','Abr/29'];
+
+// Section 5 KPIs
+(function(){
+  var last=d[d.length-1],arr=last.arr,eq3=arr*3*.225;
+  var el=document.getElementById('kpi-row');
+  var h='';
+  h+='<div class="card"><div class="kpi-label">Clientes no M36</div><div class="kpi-value">'+last.cl+'</div><div class="kpi-sub">Base ativa</div><span class="badge badge-primary">Multi-vertical</span></div>';
+  h+='<div class="card"><div class="kpi-label">MRR no M36</div><div class="kpi-value">'+fmtK(last.mrr)+'</div><div class="kpi-sub">ARR: '+fmtK(arr)+'</div><span class="badge badge-green">Marco 3 atingido</span></div>';
+  h+='<div class="card"><div class="kpi-label">Lucro acum. 36M</div><div class="kpi-value">'+fmtK(last.cumLucro)+'</div><div class="kpi-sub">Após reinvestimento</div><span class="badge badge-green">Autofinanciado</span></div>';
+  h+='<div class="card"><div class="kpi-label">MOIC investidor</div><div class="kpi-value">'+sc.moic.toFixed(2)+'×</div><div class="kpi-sub">Distribuído: '+fmtK(sc.invRecebFinal)+'</div><span class="badge badge-green">Payback 1×: M'+(sc.paybackMes||'?')+'</span></div>';
+  el.textContent='';
+  el.insertAdjacentHTML('beforeend',h);
+})();
+
+// Section 9 table
+(function(){
+  var body=document.getElementById('demo-body');
+  var foot=document.getElementById('demo-foot');
+  var h='',tR=0,tC=0,tI=0,tS=0;
+  for(var i=0;i<d.length;i++){
+    var r=d[i];
+    if(i===0)h+='<tr class="phase-header"><td colspan="8">── ANO 1 · M1–M12 ──</td></tr>';
+    if(i===12)h+='<tr class="phase-header"><td colspan="8">── ANO 2 · M13–M24 ──</td></tr>';
+    if(i===24)h+='<tr class="phase-header"><td colspan="8">── ANO 3 · M25–M36 ──</td></tr>';
+    tR+=r.mrr;tC+=r.custoTotal;tI+=r.paraInv;tS+=r.paraSoc;
+    var rc=(r.m===12||r.m===24||r.m===36)?'yr-row':'';
+    var pc=r.lucro>=0?'pos':'neg';
+    h+='<tr class="'+rc+'"><td>'+r.m+'</td><td>'+ML[r.m-1]+'</td><td class="accent">'+r.cl+'</td><td class="num">'+fmt(r.mrr)+'</td><td class="num">'+fmt(r.custoTotal)+'</td><td class="num '+pc+'">'+fmt(r.lucro)+'</td><td class="num">'+(r.paraInv>0?fmt(r.paraInv):'—')+'</td><td class="num">'+(r.paraSoc>0?fmt(r.paraSoc):'—')+'</td></tr>';
+  }
+  body.textContent='';
+  body.insertAdjacentHTML('beforeend',h);
+  var last=d[d.length-1];
+  var fh='<tr><td colspan="3"><strong>TOTAL 36M</strong></td><td class="num"><strong>'+fmt(tR)+'</strong></td><td class="num"><strong>'+fmt(tC)+'</strong></td><td class="num pos"><strong>'+fmt(last.cumLucro)+'</strong></td><td class="num"><strong>'+fmt(Math.round(tI))+'</strong></td><td class="num"><strong>'+fmt(Math.round(tS))+'</strong></td></tr>';
+  foot.textContent='';
+  foot.insertAdjacentHTML('beforeend',fh);
+  var sb=document.getElementById('investor-summary-box');
+  sb.textContent='';
+  var sumText='Resumo do investidor: Payback 1× no mês '+(sc.paybackMes||'—')+'. Total distribuído: '+fmt(sc.invRecebFinal)+'. MOIC cash: '+sc.moic.toFixed(1)+'× sobre R$ 285k.';
+  sb.textContent=sumText;
+})();
+
+// Section 10.3 M36 row
+(function(){
+  var last=d[d.length-1],arr=last.arr;
+  document.getElementById('ms3-mrr').textContent=fmtK(last.mrr);
+  document.getElementById('ms3-val3').textContent=fmtK(arr*3);
+  document.getElementById('ms3-eq3').textContent=fmtK(arr*3*.225);
+  document.getElementById('ms3-val5').textContent=fmtK(arr*5);
+  document.getElementById('ms3-eq5').textContent=fmtK(arr*5*.225);
+})();
+</script>
+</body>
+</html>
