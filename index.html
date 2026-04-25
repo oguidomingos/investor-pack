@@ -411,7 +411,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
     </div>
   </div>
 
-  <div class="info" style="margin-top:20px"><strong>Nota sobre o reinvestimento:</strong> 20% do lucro operacional é reinvestido em tráfego pago durante os primeiros 36 meses, caindo para 12% após o Mês 36. A reserva de caixa (proteção contra imprevistos) é de 15% nos primeiros 24 meses e 10% a partir do Mês 25. Lucro distribuível = lucro operacional − reinvestimento − reserva − impostos.</div>
+  <div class="info" style="margin-top:20px"><strong>Nota sobre o reinvestimento:</strong> O tráfego pago é um <strong>custo operacional</strong> — no Ano 1 é fixo em R$ 5k/mês (a partir do Mês 3), e a partir do Ano 2 é calculado como 20% do lucro do mês anterior (mínimo R$ 5k, máximo R$ 500k), caindo para 12% após o Mês 36. Esse custo já está incluído no cálculo do lucro líquido. A reserva de caixa (proteção contra imprevistos) é de 15% nos primeiros 24 meses e 10% a partir do Mês 25. <strong>Lucro distribuível = Lucro líquido − Reserva de caixa.</strong> Ou seja: M1–M24 → 85% do lucro é distribuível; M25+ → 90% do lucro é distribuível.</div>
 </div>
 
 <!-- ═══ 6. EXPANSÃO DE TIME ═══ -->
@@ -509,13 +509,13 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
   <!-- Sub-tabela: Destinação dos Lucros -->
   <div style="margin-top:24px">
     <div class="section-heading">Destinação dos lucros da operação — mês a mês</div>
-    <p class="section-sub">Quanto cada real de lucro vira caixa, reinvestimento em tráfego, reserva e distribuição para sócios e investidor.</p>
+    <p class="section-sub">Como o lucro líquido (já descontado tráfego e impostos) é dividido entre reserva de caixa e distribuição para sócios e investidor. A coluna "Gasto em tráfego" é informativa — esse valor já está incluído nos custos que geraram o lucro.</p>
     <div class="table-wrap">
       <table id="profit-dest-table">
         <thead>
           <tr>
             <th>Mês</th><th>Data</th><th>Lucro do mês</th><th>Lucro acumulado</th>
-            <th>Reinvestimento em tráfego</th><th>Reserva de caixa</th>
+            <th>Gasto em tráfego¹</th><th>Reserva de caixa</th>
             <th>Distribuído ao investidor</th><th>Distribuído aos sócios</th>
             <th>Caixa acumulado</th>
           </tr>
@@ -523,6 +523,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
         <tbody id="profit-dest-body"></tbody>
         <tfoot id="profit-dest-foot"></tfoot>
       </table>
+      <p style="font-size:11px;color:#888;margin-top:8px">¹ O gasto em tráfego já está incluído nos custos operacionais que geraram o "Lucro do mês". Esta coluna é informativa — mostra quanto foi investido em anúncios, mas <strong>não é descontado novamente</strong> do lucro. A conta é: Lucro líquido = Receita − todos os custos (incluindo tráfego e impostos). Distribuível = Lucro líquido − Reserva de caixa.</p>
     </div>
   </div>
 </div>
@@ -664,13 +665,14 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
     <table>
       <thead><tr><th>Fase</th><th>Período estimado</th><th>Reserva</th><th>Distribuível</th><th>Freq.</th><th>Mecânica</th></tr></thead>
       <tbody>
-        <tr><td>Aporte em curso</td><td>M1–M5</td><td>15% reserva</td><td>0% (reinvestido)</td><td>—</td><td>Lucro reinvestido em operação + reserva de caixa</td></tr>
-        <tr><td>Pré-payback 1×</td><td>M6–~M13</td><td>15% reserva</td><td>85% · 100% ao investidor</td><td>Mensal</td><td>Preferencial até R$ 285k cumulativos</td></tr>
-        <tr><td>Pós 1× · Ano 2</td><td>~M13–M24</td><td>15% reserva</td><td>85% pro-rata</td><td>Mensal</td><td>Investidor 22,5% · sócios 62,5% · pool 15% (após milestone 3)</td></tr>
-        <tr class="yr-row"><td>Ano 3+ · estado final 22,5%</td><td>Mês 25+</td><td>10% reserva</td><td>90% pro-rata</td><td>Mensal</td><td>Investidor 22,5% · sócios 62,5% · pool 15%</td></tr>
+        <tr><td>Aporte em curso</td><td>M1–M5</td><td>15% do lucro líquido²</td><td>0% (acumulado em reserva)</td><td>—</td><td>Todo o lucro líquido vai para reserva de caixa</td></tr>
+        <tr><td>Pré-payback 1×</td><td>M6–~M10</td><td>15% do lucro líquido²</td><td>85% · 100% ao investidor</td><td>Mensal</td><td>Preferencial até R$ 285k cumulativos</td></tr>
+        <tr><td>Pós 1× · Ano 2</td><td>~M11–M24</td><td>15% do lucro líquido²</td><td>85% pro-rata</td><td>Mensal</td><td>Pro-rata conforme cap table vigente</td></tr>
+        <tr class="yr-row"><td>Ano 3+ · estado final 22,5%</td><td>Mês 25+</td><td>10% do lucro líquido²</td><td>90% pro-rata</td><td>Mensal</td><td>Investidor 22,5% · sócios 62,5% · pool 15%</td></tr>
       </tbody>
     </table>
   </div>
+  <p style="font-size:11px;color:#888;margin-top:8px">² "Lucro líquido" = Receita mensal − todos os custos operacionais (salários, equipe, infraestrutura, tráfego pago e impostos). O tráfego já está deduzido antes de chegar ao lucro líquido. A reserva de caixa é a única dedução adicional antes da distribuição.</p>
 
   <p style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px">10.5 Governança · paridade de blocos desde o Dia 1</p>
   <div class="table-wrap" style="margin-bottom:12px">
