@@ -176,24 +176,35 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
 .vert-desc{font-size:11px;color:var(--muted);line-height:1.5}
 /* PRINT / PDF */
 @media print{
-  body{background:#fff;font-size:11px}
-  .page{max-width:100%;padding:0 16px 20px}
-  .section{margin-top:30px;page-break-inside:avoid}
+  body{background:#fff;font-size:11px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .page{max-width:100%;padding:0 12px 20px}
+  .section{margin-top:24px}
   .cover{padding:28px 32px;border-radius:12px;page-break-after:always}
   .card-grid-4,.card-grid-3{grid-template-columns:repeat(4,1fr)}
   .card-grid-2{grid-template-columns:1fr 1fr}
-  .card{padding:14px 16px;box-shadow:none;border:1px solid var(--border)}
+  .card{padding:12px 14px;box-shadow:none;border:1px solid var(--border)}
   .chart-wrap{page-break-inside:avoid;box-shadow:none;border:1px solid var(--border)}
-  .table-wrap{box-shadow:none;border:1px solid var(--border);page-break-inside:auto}
-  table{page-break-inside:auto}
+  .table-wrap{box-shadow:none;border:1px solid var(--border);page-break-inside:auto;overflow-x:visible}
+  table{page-break-inside:auto;font-size:10px;table-layout:fixed;width:100%}
+  thead th{font-size:9px;padding:6px 5px;white-space:normal;word-wrap:break-word}
+  tbody td{padding:5px 5px;white-space:normal;word-wrap:break-word}
+  tfoot tr td{padding:6px 5px;white-space:normal}
   tr{page-break-inside:avoid;page-break-after:auto}
   thead{display:table-header-group}
   tfoot{display:table-footer-group}
   .prot-grid{page-break-inside:avoid}
-  .prot-card{box-shadow:none;border:1px solid var(--border)}
+  .prot-card{box-shadow:none;border:1px solid var(--border);page-break-inside:avoid}
   .info,.warn,.success{page-break-inside:avoid}
-  .timeline{page-break-inside:avoid}
-  canvas{max-height:200px!important}
+  .timeline{page-break-inside:avoid;padding-left:28px}
+  .tl-item{margin-bottom:14px}
+  .tl-role{font-size:13px}
+  .tl-detail{font-size:11px}
+  canvas{max-height:180px!important}
+  .kpi-value{font-size:22px}
+  .section-heading{font-size:17px}
+  .aporte-grid{grid-template-columns:repeat(12,1fr)}
+  .vert-grid{grid-template-columns:repeat(3,1fr)}
+  .num{font-size:10px}
 }
 </style>
 </head>
