@@ -196,7 +196,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
     <div class="card">
       <div class="kpi-label">Receita mensal no Mês 36</div>
       <div class="kpi-value">R$ 1,71M</div>
-      <div class="kpi-sub">Receita anual (ARR) R$ 20,6M</div>
+      <div class="kpi-sub">Receita anual (ARR) R$ 20,56M</div>
       <span class="badge badge-primary">Cenário base</span>
     </div>
     <div class="card">
@@ -521,7 +521,7 @@ var ML=['Mai/26','Jun/26','Jul/26','Ago/26','Set/26','Out/26','Nov/26','Dez/26',
   foot.insertAdjacentHTML('beforeend',fh);
   var sb=document.getElementById('investor-summary-box');
   sb.textContent='';
-  var sumText='Resumo do investidor: Payback 1× no mês '+(sc.paybackMes||'—')+'. Total distribuído: '+fmt(sc.invRecebFinal)+'. MOIC cash: '+sc.moic.toFixed(1)+'× sobre R$ 285k.';
+  var sumText='Resumo do investidor: Payback 1× no mês '+(sc.paybackMes||'—')+'. Total distribuído: '+fmt(sc.invRecebFinal)+'. MOIC cash: '+sc.moic.toFixed(2)+'× sobre R$ 285k.';
   sb.textContent=sumText;
 })();
 

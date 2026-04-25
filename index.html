@@ -307,7 +307,7 @@ hr.divider{border:none;border-top:1px solid var(--border);margin:48px 0}
     <div class="card">
       <div class="kpi-label">Receita mensal no Mês 36</div>
       <div class="kpi-value">R$ 1,71M</div>
-      <div class="kpi-sub">Receita anual (ARR) R$ 20,6M</div>
+      <div class="kpi-sub">Receita anual (ARR) R$ 20,56M</div>
       <span class="badge badge-primary">Cenário base</span>
     </div>
     <div class="card">
@@ -1364,7 +1364,7 @@ function renderKPIs(scenario) {
     <div class="card">
       <div class="kpi-label">Múltiplo de retorno (MOIC) investidor</div>
       <div class="kpi-value">${s.moic.toFixed(2)}×</div>
-      <div class="kpi-sub">Distribuído: ${fmtK(s.invRecebFinal)}<br><small style="color:#888">MOIC total (distribuição + participação 3× ARR): ${((s.invRecebFinal + eq3) / APORTE_TOTAL).toFixed(1)}×</small></div>
+      <div class="kpi-sub">Distribuído: ${fmtK(s.invRecebFinal)}<br><small style="color:#888">MOIC total (distribuição + participação 3× ARR): ${((s.invRecebFinal + eq3) / APORTE_TOTAL).toFixed(2)}×</small></div>
       <span class="badge badge-green">Payback 1×: M${s.paybackMes || '?'}</span>
     </div>
   `;
@@ -1456,11 +1456,11 @@ function renderROI(scenarioKey) {
   const totalRet = totalCash + eq3 - APORTE_TOTAL;
   const moicTotal = (totalCash + eq3) / APORTE_TOTAL;
   document.getElementById('total-ret-3').textContent = '+' + fmtK(totalRet);
-  document.getElementById('moic-label').textContent = `MOIC total ${moicTotal.toFixed(1)}× sobre R$ 285k · distribuição ${s.moic.toFixed(1)}× + participação`;
+  document.getElementById('moic-label').textContent = `MOIC total ${moicTotal.toFixed(2)}× sobre R$ 285k · distribuição ${s.moic.toFixed(2)}× + participação`;
 
   // Comparative table
   const compareEl = document.getElementById('moic-compare-total');
-  if (compareEl) compareEl.textContent = moicTotal.toFixed(1) + '×';
+  if (compareEl) compareEl.textContent = moicTotal.toFixed(2) + '×';
 
   // Milestone 3 row
   document.getElementById('ms3-mrr').textContent = fmtK(last.mrr);
@@ -1572,7 +1572,7 @@ function renderInvestorFlow() {
   const totalDist = fmt(Math.round(s.invRecebFinal));
   document.getElementById('investor-flow-summary').innerHTML =
     'Payback 1× no <strong>mês ' + payM + '</strong>. Total distribuído em 36 meses: <strong>' + totalDist + '</strong>. ' +
-    'MOIC cash: <strong>' + s.moic.toFixed(1) + '×</strong> sobre R$ 285k investidos.';
+    'MOIC cash: <strong>' + s.moic.toFixed(2) + '×</strong> sobre R$ 285k investidos.';
 }
 
 let currentScenario = 's20';
