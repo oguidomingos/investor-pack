@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contraproposta Societária — Sócios Operadores | Pulso</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #f8f9fa;
+    color: #1a1a2e;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 32px 16px;
+  }
+
+  .page {
+    background: #fff;
+    width: 100%;
+    max-width: 860px;
+    border-radius: 12px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+    overflow: hidden;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0f2043 0%, #1a3a6b 100%);
+    color: #fff;
+    padding: 36px 48px 28px;
+  }
+  .header-meta {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #7eb3f5;
+    margin-bottom: 10px;
+  }
+  .header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .header p {
+    font-size: 13px;
+    color: #a0bfe8;
+  }
+
+  /* INTRO */
+  .intro {
+    padding: 24px 48px 0;
+    font-size: 13.5px;
+    color: #444;
+    line-height: 1.7;
+    border-bottom: 1px solid #eef0f5;
+    padding-bottom: 20px;
+  }
+
+  /* BODY */
+  .body { padding: 24px 48px 36px; }
+
+  .item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid #e4e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .item-label {
+    grid-column: 1 / -1;
+    background: #f0f4fb;
+    padding: 10px 18px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #3a5a99;
+    border-bottom: 1px solid #e4e8f0;
+  }
+
+  .col {
+    padding: 14px 18px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .col:first-of-type {
+    border-right: 1px solid #e4e8f0;
+    background: #fdf6f6;
+    color: #6b4444;
+  }
+  .col:last-of-type {
+    background: #f5fdf7;
+    color: #2d5a3d;
+  }
+
+  .col-header {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    opacity: 0.65;
+  }
+
+  .col:first-of-type .col-header { color: #c0392b; }
+  .col:last-of-type .col-header { color: #27ae60; }
+
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-bottom: 6px;
+  }
+  .tag-original { background: #fde8e8; color: #c0392b; }
+  .tag-proposta { background: #e2f5ea; color: #1e8449; }
+
+  /* CLAUSULAS NOVAS */
+  .new-section {
+    margin-top: 20px;
+    border: 1px solid #d5e8ff;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .new-section-header {
+    background: #e8f2ff;
+    padding: 10px 18px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #1a5276;
+    border-bottom: 1px solid #d5e8ff;
+  }
+  .new-section-body {
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .clause {
+    background: #f5f9ff;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: #2c3e50;
+    border-left: 3px solid #3a7bd5;
+  }
+  .clause strong {
+    display: block;
+    font-size: 11px;
+    color: #1a5276;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecf0;
+    padding: 16px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11.5px;
+    color: #888;
+  }
+  .footer strong { color: #1a1a2e; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-meta">Contraproposta Societária · Junho 2026</div>
+    <h1>Proposta dos Sócios Operadores</h1>
+    <p>Documento de alinhamento — pontos de revisão sobre o acordo previamente discutido</p>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    Este documento reúne, de forma objetiva, os pontos em que os sócios operadores propõem ajustes ao acordo inicialmente discutido. A base do acordo permanece — as alterações abaixo visam proteger os dois lados e criar incentivos claros de longo prazo.
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- ITEM 1: EQUITY PROGRESSIVO -->
+    <div class="item">
+      <div class="item-label">01 · Progressão de Equity (+1% ao ano)</div>
+      <div class="col">
+        <div class="col-header">Acordo Original</div>
+        <span class="tag tag-original">Original</span><br>
+        +1% por ano de operação, independente de resultado, até o limite de 10% por sócio.
+      </div>
+      <div class="col">
+        <div class="col-header">Contraproposta</div>
+        <span class="tag tag-proposta">Proposta</span><br>
+        <strong>+1% (de 8% → 9%):</strong> Após 12 meses de operação + MRR ≥ R$ 80.000 por 2 meses consecutivos.<br><br>
+        <strong>+1% adicional (de 9% → 10%):</strong> Quando MRR ≥ R$ 140.000 por 2 meses consecutivos — sem prazo mínimo adicional.
+      </div>
+    </div>
+
+    <!-- ITEM 2: DISTRIBUIÇÃO DE LUCROS -->
+    <div class="item">
+      <div class="item-label">02 · Distribuição de Lucros — Estágios</div>
+      <div class="col">
+        <div class="col-header">Acordo Original</div>
+        <span class="tag tag-original">Original</span><br>
+        4% do lucro por sócio operador após 6 meses. Liberação do restante do equity após milestone não definido.
+      </div>
+      <div class="col">
+        <div class="col-header">Contraproposta</div>
+        <span class="tag tag-proposta">Proposta</span><br>
+        <strong>Estágio 1</strong> — 6 meses: 4% lucro/sócio (mantido).<br>
+        <strong>Estágio 2</strong> — MRR ≥ R$ 80k: 50% do equity convertido em distribuição.<br>
+        <strong>Estágio 3</strong> — MRR ≥ R$ 140k <em>ou</em> 24 meses: 100% proporcional ao equity. O prazo máximo garante que nenhum sócio fique preso indefinidamente.
+      </div>
+    </div>
+
+    <!-- ITEM 3: AJUDA DE CUSTO -->
+    <div class="item">
+      <div class="item-label">03 · Ajuda de Custo — Revisão Pós-Milestone</div>
+      <div class="col">
+        <div class="col-header">Acordo Original</div>
+        <span class="tag tag-original">Original</span><br>
+        R$ 2.000/mês → R$ 4.000/mês máximo em 40 clientes. Sem revisão posterior prevista.
+      </div>
+      <div class="col">
+        <div class="col-header">Contraproposta</div>
+        <span class="tag tag-proposta">Proposta</span><br>
+        Estrutura atual mantida. Adicionamos: após atingimento do milestone de equity (Estágio 3), revisão automática para <strong>R$ 6.000/mês ou 5% do MRR ÷ sócios operadores</strong>, o que for maior.
+      </div>
+    </div>
+
+    <!-- CLÁUSULAS NOVAS -->
+    <div class="new-section">
+      <div class="new-section-header">04 · Cláusulas Adicionais Solicitadas (novas — não estavam no acordo)</div>
+      <div class="new-section-body">
+
+        <div class="clause">
+          <strong>Vesting com Cliff (12 meses)</strong>
+          Equity protegido nos primeiros 12 meses. Saída anterior não gera perda automática — exige processo de desligamento formal.
+        </div>
+
+        <div class="clause">
+          <strong>Anti-Diluição Básica</strong>
+          Em novas rodadas de investimento, sócios operadores mantêm participação proporcional ou recebem opções equivalentes.
+        </div>
+
+        <div class="clause">
+          <strong>Non-Compete Razoável</strong>
+          Limitado a 12 meses pós-saída, restrito ao segmento de clínicas médicas na cidade de operação. Não impede atuação em outras áreas de marketing ou tecnologia.
+        </div>
+
+        <div class="clause">
+          <strong>Quórum de Decisão</strong>
+          Decisões operacionais: maioria dos sócios operadores. Decisões estratégicas (venda, fusão, nova rodada): unanimidade incluindo investidores.
+        </div>
+
+        <div class="clause">
+          <strong>Justa Causa Documentada</strong>
+          Redução de equity ou desligamento exige causa documentada + 60 dias de defesa/correção. Não se aplica a crescimento lento ou divergências estratégicas.
+        </div>
+
+        <div class="clause">
+          <strong>Direito de Criação de Subsidiárias</strong>
+          Sócios operadores têm direito de preferência e participação majoritária (mín. 51%) em iniciativas adjacentes que usem marca, clientes ou infraestrutura da empresa principal.
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span><strong>Sócios Operadores — Pulso</strong> · Junho 2026</span>
+    <span>Documento interno de negociação · Sujeito a revisão jurídica</span>
+  </div>
+
+</div>
+</body>
+</html>
