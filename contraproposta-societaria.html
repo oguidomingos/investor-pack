@@ -207,6 +207,19 @@
   }
   .note strong { color: #3a2e00; }
 
+  /* INFO BOX */
+  .info-box {
+    background: #f0f6ff;
+    border: 1px solid #b8d4f8;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #1a3a6b;
+    margin-bottom: 16px;
+  }
+  .info-box strong { color: #0f2043; }
+
   /* FOOTER */
   .footer {
     background: #f8f9fa;
@@ -248,6 +261,10 @@
     <!-- SEÇÃO 1: PARTICIPAÇÃO SOCIETÁRIA -->
     <div class="section-title">Participação Societária</div>
 
+    <div class="info-box">
+      <strong>Estrutura atual:</strong> 5 sócios operadores + 2 sócios investidores. Cada sócio operador começa com 8% de participação. Os sócios investidores detêm o negócio e aportam recursos e captação de clientes quando necessário.
+    </div>
+
     <div class="card">
       <div class="card-header">Como a participação de cada sócio operador cresce ao longo do tempo</div>
       <div class="card-cols">
@@ -257,8 +274,8 @@
         </div>
         <div class="col col-proposta">
           <span class="col-tag tag-proposta">Nossa proposta</span><br>
-          <strong>Primeiro aumento (de 8% para 9%):</strong> Acontece após 1 ano de operação, desde que o faturamento mensal recorrente da empresa já esteja acima de R$ 80.000 por pelo menos 2 meses seguidos.<br><br>
-          <strong>Segundo aumento (de 9% para 10%):</strong> Acontece assim que o faturamento mensal recorrente ultrapassar R$ 140.000 por 2 meses seguidos — sem prazo mínimo adicional. Crescimento rápido = reconhecimento rápido.
+          <strong>Primeiro aumento (de 8% para 9%):</strong> Acontece após 1 ano de operação, desde que o faturamento mensal recorrente (MRR — receita que entra todo mês de forma previsível) já esteja acima de R$ 80.000 por pelo menos 2 meses seguidos.<br><br>
+          <strong>Segundo aumento (de 9% para 10%):</strong> Acontece assim que o MRR ultrapassar R$ 140.000 por 2 meses seguidos — sem prazo mínimo adicional. Crescimento rápido = reconhecimento rápido.
         </div>
       </div>
     </div>
@@ -275,9 +292,9 @@
         </div>
         <div class="col col-proposta">
           <span class="col-tag tag-proposta">Nossa proposta</span><br>
-          <strong>Fase 1 — Após 6 meses:</strong> Cada sócio começa a receber 4% dos lucros mensais (mantido como acordado).<br><br>
-          <strong>Fase 2 — Faturamento acima de R$ 80 mil/mês:</strong> Os sócios passam a receber metade da sua participação total em lucros.<br><br>
-          <strong>Fase 3 — Faturamento acima de R$ 140 mil/mês, ou após 24 meses:</strong> Os sócios recebem 100% da sua participação proporcional nos lucros. O prazo máximo de 24 meses garante que ninguém fique esperando para sempre, mesmo se o crescimento for mais lento.
+          <strong>Fase 1 — Após 6 meses:</strong> Cada sócio operador começa a receber metade da sua participação em lucros — ou seja, 4% dos 8% que possui. Esse valor já começa a remunerar o esforço da construção inicial da empresa.<br><br>
+          <strong>Fase 2 — Após 1 ano + MRR acima de R$ 80 mil por 2 meses seguidos:</strong> Os sócios passam a receber 100% da sua participação proporcional nos lucros — os 8% completos, proporcional à fatia que cada um possui.<br><br>
+          <strong>Conforme a participação societária cresce</strong> (para 9% ou 10%, pelas regras acima), a parte dos lucros acompanha automaticamente.
         </div>
       </div>
     </div>
@@ -286,7 +303,8 @@
     <div class="section-title">Pró-labore (remuneração mensal dos sócios operadores)</div>
 
     <p style="font-size:13.5px;line-height:1.75;color:#444;margin-bottom:14px;">
-      O valor pago hoje como "ajuda de custo" já não sai mais do bolso dos investidores — ele sai diretamente do faturamento da empresa, que já cobre essa despesa. Com isso, faz sentido tratar esse valor como <strong>pró-labore</strong> (remuneração formal dos sócios que trabalham na operação), e não como ajuda emergencial. Abaixo, nossa sugestão de valores por fase:
+      <strong>O que é pró-labore:</strong> é a remuneração mensal de quem trabalha na operação da empresa — diferente da distribuição de lucros, que é paga sobre o resultado. O pró-labore sai do custo operacional da empresa antes do lucro ser calculado, ou seja, não vem do bolso dos investidores: já está dentro do faturamento da empresa.<br><br>
+      Com 5 sócios operadores, o pró-labore total precisa ser compatível com a margem da empresa para não comprimir o caixa cedo demais. Nossa proposta considera isso:
     </p>
 
     <table class="prolabore-table">
@@ -294,33 +312,43 @@
         <tr>
           <th>Fase</th>
           <th>Situação da empresa</th>
-          <th>Pró-labore sugerido<br>por sócio/mês</th>
+          <th>Pró-labore por sócio/mês</th>
+          <th>Total mensal (5 sócios)</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><span class="fase-label">Fase 1</span><br><em>Meses 1 a 6</em></td>
-          <td>Até 40 clientes · faturamento de até R$ 108k/mês</td>
-          <td><span class="valor">R$ 4.000</span><br><small style="color:#888">Sobe junto com os clientes, mas tem este como valor de chegada</small></td>
+          <td>Fase de construção · sem distribuição de lucros ainda</td>
+          <td><span class="valor">R$ 3.000</span><br><small style="color:#888">Valor base, cresce junto com os clientes até R$ 3.500 ao final da fase</small></td>
+          <td><span class="valor">R$ 15.000</span><br><small style="color:#888">≈ 10–15% do MRR esperado nessa fase</small></td>
         </tr>
         <tr>
-          <td><span class="fase-label">Fase 2</span><br><em>A partir do mês 6</em></td>
-          <td>Distribuição de lucros ativa (4% por sócio)</td>
-          <td><span class="valor">R$ 5.000</span> + 4% do lucro líquido</td>
+          <td><span class="fase-label">Fase 2</span><br><em>Mês 6+ (com distribuição de lucros)</em></td>
+          <td>MRR acima de R$ 80k · distribuição de 4% ativa por sócio</td>
+          <td><span class="valor">R$ 3.500</span> + 4% do lucro líquido</td>
+          <td><span class="valor">R$ 17.500</span> + distribuição de lucros</td>
         </tr>
         <tr>
-          <td><span class="fase-label">Fase 3</span><br><em>Faturamento acima de R$ 140k/mês</em></td>
-          <td>Distribuição de lucros plena (100% proporcional)</td>
-          <td><span class="valor">R$ 6.000 a R$ 8.000</span> + participação proporcional integral</td>
+          <td><span class="fase-label">Fase 3</span><br><em>Após 1 ano + MRR R$ 80k/2 meses</em></td>
+          <td>Distribuição de lucros plena (participação integral)</td>
+          <td><span class="valor">R$ 4.000</span> + participação proporcional integral</td>
+          <td><span class="valor">R$ 20.000</span> + distribuição de lucros</td>
+        </tr>
+        <tr>
+          <td><span class="fase-label">Fase 4</span><br><em>MRR acima de R$ 140k</em></td>
+          <td>Empresa madura · participação societária cresceu</td>
+          <td><span class="valor">R$ 5.000</span> ou 3% do faturamento líquido ÷ 5, o que for maior</td>
+          <td><span class="valor">R$ 25.000+</span> + distribuição de lucros proporcional</td>
         </tr>
       </tbody>
     </table>
 
     <div class="note">
-      <strong>Por que esse valor?</strong> Com 6 clientes pagantes no primeiro mês e faturamento em torno de R$ 15.000, a empresa já cobre o pró-labore de R$ 2.000 por sócio sem depender dos investidores. Conforme o faturamento cresce, o pró-labore acompanha — sem pressionar o caixa cedo e sem prejudicar o crescimento da empresa.
+      <strong>Por que esses valores fazem sentido?</strong> Com 50% de margem de lucro estimada, no MRR de R$ 80.000 o lucro mensal é de R$ 40.000. O pró-labore total de R$ 17.500 representa cerca de 22% do faturamento — dentro do padrão de empresas de serviços nesse estágio. Os sócios investidores recebem sobre os lucros depois do pró-labore: no R$ 80k MRR, o lucro disponível para distribuição é de ~R$ 22.500 (descontado o pró-labore), do qual recebem a fatia proporcional à participação deles.
     </div>
 
-    <!-- SEÇÃO 4: REVISÃO PRÓ-LABORE PÓS-MILESTONE -->
+    <!-- SEÇÃO 4: REVISÃO PRÓ-LABORE PÓS-META -->
     <div class="section-title">Revisão automática da remuneração</div>
 
     <div class="card">
@@ -332,7 +360,7 @@
         </div>
         <div class="col col-proposta">
           <span class="col-tag tag-proposta">Nossa proposta</span><br>
-          Assim que a meta de distribuição plena for atingida (Fase 3), a remuneração mensal de cada sócio operador passa a ser automaticamente <strong>R$ 6.000 por mês, ou 5% do faturamento líquido mensal dividido entre os sócios operadores</strong> — o que for maior. Isso garante que, conforme a empresa cresce, a remuneração de quem a opera também cresce de forma justa.
+          Assim que a empresa atingir o MRR de R$ 140.000 (Fase 4), o pró-labore de cada sócio operador passa a ser automaticamente <strong>R$ 5.000 por mês, ou 3% do faturamento líquido mensal dividido entre os 5 sócios operadores</strong> — o que for maior. Isso garante que, conforme a empresa cresce, a remuneração de quem a opera acompanha — sem precisar renegociar a cada fase.
         </div>
       </div>
     </div>
