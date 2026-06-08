@@ -3,18 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contraproposta Societária — Sócios Operadores | Pulso</title>
+<title>Contraproposta dos Sócios Operadores — Pulso</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: #f8f9fa;
+    background: #f0f4f8;
     color: #1a1a2e;
-    min-height: 100vh;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
     padding: 32px 16px;
   }
 
@@ -22,6 +18,7 @@
     background: #fff;
     width: 100%;
     max-width: 860px;
+    margin: 0 auto;
     border-radius: 12px;
     box-shadow: 0 4px 32px rgba(0,0,0,0.10);
     overflow: hidden;
@@ -53,117 +50,162 @@
 
   /* INTRO */
   .intro {
-    padding: 24px 48px 0;
-    font-size: 13.5px;
+    padding: 24px 48px 20px;
+    font-size: 14px;
     color: #444;
-    line-height: 1.7;
+    line-height: 1.75;
     border-bottom: 1px solid #eef0f5;
-    padding-bottom: 20px;
   }
 
   /* BODY */
-  .body { padding: 24px 48px 36px; }
+  .body { padding: 28px 48px 44px; }
 
-  .item {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
+  /* SECTION TITLE */
+  .section-title {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #3a5a99;
+    margin: 32px 0 14px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #e4eaf8;
+  }
+  .section-title:first-child { margin-top: 0; }
+
+  /* COMPARISON CARD */
+  .card {
     border: 1px solid #e4e8f0;
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
     margin-bottom: 16px;
   }
 
-  .item-label {
-    grid-column: 1 / -1;
-    background: #f0f4fb;
-    padding: 10px 18px;
-    font-size: 11px;
+  .card-header {
+    background: #f5f7fc;
+    padding: 12px 20px;
+    font-size: 13px;
     font-weight: 700;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    color: #3a5a99;
+    color: #1a2e5a;
     border-bottom: 1px solid #e4e8f0;
   }
 
-  .col {
-    padding: 14px 18px;
-    font-size: 13px;
-    line-height: 1.6;
-  }
-  .col:first-of-type {
-    border-right: 1px solid #e4e8f0;
-    background: #fdf6f6;
-    color: #6b4444;
-  }
-  .col:last-of-type {
-    background: #f5fdf7;
-    color: #2d5a3d;
-  }
-
-  .col-header {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-    opacity: 0.65;
-  }
-
-  .col:first-of-type .col-header { color: #c0392b; }
-  .col:last-of-type .col-header { color: #27ae60; }
-
-  .tag {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 20px;
-    margin-bottom: 6px;
-  }
-  .tag-original { background: #fde8e8; color: #c0392b; }
-  .tag-proposta { background: #e2f5ea; color: #1e8449; }
-
-  /* CLAUSULAS NOVAS */
-  .new-section {
-    margin-top: 20px;
-    border: 1px solid #d5e8ff;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .new-section-header {
-    background: #e8f2ff;
-    padding: 10px 18px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    color: #1a5276;
-    border-bottom: 1px solid #d5e8ff;
-  }
-  .new-section-body {
-    padding: 14px 18px;
+  .card-cols {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
   }
-  .clause {
-    background: #f5f9ff;
-    border-radius: 6px;
-    padding: 10px 12px;
-    font-size: 12.5px;
-    line-height: 1.55;
-    color: #2c3e50;
-    border-left: 3px solid #3a7bd5;
+
+  .col {
+    padding: 16px 20px;
+    font-size: 13.5px;
+    line-height: 1.7;
   }
-  .clause strong {
-    display: block;
-    font-size: 11px;
-    color: #1a5276;
-    margin-bottom: 4px;
-    text-transform: uppercase;
+  .col-original {
+    border-right: 1px solid #e4e8f0;
+    background: #fdf8f8;
+    color: #5a3535;
+  }
+  .col-proposta {
+    background: #f5fdf7;
+    color: #1e4d2e;
+  }
+
+  .col-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 3px 9px;
+    border-radius: 20px;
+    margin-bottom: 8px;
     letter-spacing: 0.5px;
+    text-transform: uppercase;
   }
+  .tag-original { background: #fde8e8; color: #b03030; }
+  .tag-proposta { background: #d4f5e2; color: #1a6b3a; }
+
+  /* CLAUSE CARDS */
+  .clause-card {
+    border: 1px solid #dce8ff;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .clause-header {
+    background: #eaf1ff;
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a3a6b;
+    border-bottom: 1px solid #dce8ff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .clause-num {
+    background: #1a3a6b;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .clause-body {
+    padding: 16px 20px;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: #2c3e50;
+    background: #f8fbff;
+  }
+  .clause-body strong {
+    color: #1a3a6b;
+  }
+
+  /* PRO-LABORE TABLE */
+  .prolabore-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin-top: 4px;
+  }
+  .prolabore-table th {
+    background: #f0f4fb;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #3a5a99;
+    border-bottom: 2px solid #e4e8f0;
+  }
+  .prolabore-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid #eef0f5;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .prolabore-table tr:last-child td { border-bottom: none; }
+  .prolabore-table tr:nth-child(even) td { background: #fafbfd; }
+  .valor { font-weight: 700; color: #1a6b3a; }
+  .fase-label { font-weight: 700; color: #1a2e5a; }
+
+  /* NOTE BOX */
+  .note {
+    background: #fffbea;
+    border: 1px solid #f0d060;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #5a4a00;
+    margin-top: 14px;
+  }
+  .note strong { color: #3a2e00; }
 
   /* FOOTER */
   .footer {
@@ -177,6 +219,12 @@
     color: #888;
   }
   .footer strong { color: #1a1a2e; }
+
+  @media (max-width: 600px) {
+    .header, .intro, .body, .footer { padding-left: 20px; padding-right: 20px; }
+    .card-cols { grid-template-columns: 1fr; }
+    .col-original { border-right: none; border-bottom: 1px solid #e4e8f0; }
+  }
 </style>
 </head>
 <body>
@@ -184,102 +232,175 @@
 
   <!-- HEADER -->
   <div class="header">
-    <div class="header-meta">Contraproposta Societária · Junho 2026</div>
-    <h1>Proposta dos Sócios Operadores</h1>
-    <p>Documento de alinhamento — pontos de revisão sobre o acordo previamente discutido</p>
+    <div class="header-meta">Contraproposta dos Sócios Operadores · Junho 2026</div>
+    <h1>Nossa Proposta de Revisão do Acordo</h1>
+    <p>Pontos onde sugerimos ajustes em relação ao que foi discutido anteriormente — para alinhar melhor os interesses de todos os lados.</p>
   </div>
 
   <!-- INTRO -->
   <div class="intro">
-    Este documento reúne, de forma objetiva, os pontos em que os sócios operadores propõem ajustes ao acordo inicialmente discutido. A base do acordo permanece — as alterações abaixo visam proteger os dois lados e criar incentivos claros de longo prazo.
+    Este documento não cancela o que foi acordado — ele propõe melhorias em pontos específicos. A ideia é que todos os sócios, operadores e investidores, comecem com regras claras e justas para os dois lados.
   </div>
 
   <!-- BODY -->
   <div class="body">
 
-    <!-- ITEM 1: EQUITY PROGRESSIVO -->
-    <div class="item">
-      <div class="item-label">01 · Progressão de Equity (+1% ao ano)</div>
-      <div class="col">
-        <div class="col-header">Acordo Original</div>
-        <span class="tag tag-original">Original</span><br>
-        +1% por ano de operação, independente de resultado, até o limite de 10% por sócio.
-      </div>
-      <div class="col">
-        <div class="col-header">Contraproposta</div>
-        <span class="tag tag-proposta">Proposta</span><br>
-        <strong>+1% (de 8% → 9%):</strong> Após 12 meses de operação + MRR ≥ R$ 80.000 por 2 meses consecutivos.<br><br>
-        <strong>+1% adicional (de 9% → 10%):</strong> Quando MRR ≥ R$ 140.000 por 2 meses consecutivos — sem prazo mínimo adicional.
-      </div>
-    </div>
+    <!-- SEÇÃO 1: PARTICIPAÇÃO SOCIETÁRIA -->
+    <div class="section-title">Participação Societária</div>
 
-    <!-- ITEM 2: DISTRIBUIÇÃO DE LUCROS -->
-    <div class="item">
-      <div class="item-label">02 · Distribuição de Lucros — Estágios</div>
-      <div class="col">
-        <div class="col-header">Acordo Original</div>
-        <span class="tag tag-original">Original</span><br>
-        4% do lucro por sócio operador após 6 meses. Liberação do restante do equity após milestone não definido.
-      </div>
-      <div class="col">
-        <div class="col-header">Contraproposta</div>
-        <span class="tag tag-proposta">Proposta</span><br>
-        <strong>Estágio 1</strong> — 6 meses: 4% lucro/sócio (mantido).<br>
-        <strong>Estágio 2</strong> — MRR ≥ R$ 80k: 50% do equity convertido em distribuição.<br>
-        <strong>Estágio 3</strong> — MRR ≥ R$ 140k <em>ou</em> 24 meses: 100% proporcional ao equity. O prazo máximo garante que nenhum sócio fique preso indefinidamente.
+    <div class="card">
+      <div class="card-header">Como a participação de cada sócio operador cresce ao longo do tempo</div>
+      <div class="card-cols">
+        <div class="col col-original">
+          <span class="col-tag tag-original">Como estava</span><br>
+          Cada sócio operador começa com 8% da empresa e ganha mais 1% a cada ano de operação, independentemente dos resultados, até chegar em 10%.
+        </div>
+        <div class="col col-proposta">
+          <span class="col-tag tag-proposta">Nossa proposta</span><br>
+          <strong>Primeiro aumento (de 8% para 9%):</strong> Acontece após 1 ano de operação, desde que o faturamento mensal recorrente da empresa já esteja acima de R$ 80.000 por pelo menos 2 meses seguidos.<br><br>
+          <strong>Segundo aumento (de 9% para 10%):</strong> Acontece assim que o faturamento mensal recorrente ultrapassar R$ 140.000 por 2 meses seguidos — sem prazo mínimo adicional. Crescimento rápido = reconhecimento rápido.
+        </div>
       </div>
     </div>
 
-    <!-- ITEM 3: AJUDA DE CUSTO -->
-    <div class="item">
-      <div class="item-label">03 · Ajuda de Custo — Revisão Pós-Milestone</div>
-      <div class="col">
-        <div class="col-header">Acordo Original</div>
-        <span class="tag tag-original">Original</span><br>
-        R$ 2.000/mês → R$ 4.000/mês máximo em 40 clientes. Sem revisão posterior prevista.
-      </div>
-      <div class="col">
-        <div class="col-header">Contraproposta</div>
-        <span class="tag tag-proposta">Proposta</span><br>
-        Estrutura atual mantida. Adicionamos: após atingimento do milestone de equity (Estágio 3), revisão automática para <strong>R$ 6.000/mês ou 5% do MRR ÷ sócios operadores</strong>, o que for maior.
+    <!-- SEÇÃO 2: DISTRIBUIÇÃO DE LUCROS -->
+    <div class="section-title">Distribuição dos Lucros</div>
+
+    <div class="card">
+      <div class="card-header">Como e quando cada sócio começa a receber parte dos lucros da empresa</div>
+      <div class="card-cols">
+        <div class="col col-original">
+          <span class="col-tag tag-original">Como estava</span><br>
+          4% dos lucros para cada sócio operador após 6 meses. O restante seria liberado depois de atingir uma meta ainda a definir.
+        </div>
+        <div class="col col-proposta">
+          <span class="col-tag tag-proposta">Nossa proposta</span><br>
+          <strong>Fase 1 — Após 6 meses:</strong> Cada sócio começa a receber 4% dos lucros mensais (mantido como acordado).<br><br>
+          <strong>Fase 2 — Faturamento acima de R$ 80 mil/mês:</strong> Os sócios passam a receber metade da sua participação total em lucros.<br><br>
+          <strong>Fase 3 — Faturamento acima de R$ 140 mil/mês, ou após 24 meses:</strong> Os sócios recebem 100% da sua participação proporcional nos lucros. O prazo máximo de 24 meses garante que ninguém fique esperando para sempre, mesmo se o crescimento for mais lento.
+        </div>
       </div>
     </div>
 
-    <!-- CLÁUSULAS NOVAS -->
-    <div class="new-section">
-      <div class="new-section-header">04 · Cláusulas Adicionais Solicitadas (novas — não estavam no acordo)</div>
-      <div class="new-section-body">
+    <!-- SEÇÃO 3: PRÓ-LABORE -->
+    <div class="section-title">Pró-labore (remuneração mensal dos sócios operadores)</div>
 
-        <div class="clause">
-          <strong>Vesting com Cliff (12 meses)</strong>
-          Equity protegido nos primeiros 12 meses. Saída anterior não gera perda automática — exige processo de desligamento formal.
+    <p style="font-size:13.5px;line-height:1.75;color:#444;margin-bottom:14px;">
+      O valor pago hoje como "ajuda de custo" já não sai mais do bolso dos investidores — ele sai diretamente do faturamento da empresa, que já cobre essa despesa. Com isso, faz sentido tratar esse valor como <strong>pró-labore</strong> (remuneração formal dos sócios que trabalham na operação), e não como ajuda emergencial. Abaixo, nossa sugestão de valores por fase:
+    </p>
+
+    <table class="prolabore-table">
+      <thead>
+        <tr>
+          <th>Fase</th>
+          <th>Situação da empresa</th>
+          <th>Pró-labore sugerido<br>por sócio/mês</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="fase-label">Fase 1</span><br><em>Meses 1 a 6</em></td>
+          <td>Até 40 clientes · faturamento de até R$ 108k/mês</td>
+          <td><span class="valor">R$ 4.000</span><br><small style="color:#888">Sobe junto com os clientes, mas tem este como valor de chegada</small></td>
+        </tr>
+        <tr>
+          <td><span class="fase-label">Fase 2</span><br><em>A partir do mês 6</em></td>
+          <td>Distribuição de lucros ativa (4% por sócio)</td>
+          <td><span class="valor">R$ 5.000</span> + 4% do lucro líquido</td>
+        </tr>
+        <tr>
+          <td><span class="fase-label">Fase 3</span><br><em>Faturamento acima de R$ 140k/mês</em></td>
+          <td>Distribuição de lucros plena (100% proporcional)</td>
+          <td><span class="valor">R$ 6.000 a R$ 8.000</span> + participação proporcional integral</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Por que esse valor?</strong> Com 6 clientes pagantes no primeiro mês e faturamento em torno de R$ 15.000, a empresa já cobre o pró-labore de R$ 2.000 por sócio sem depender dos investidores. Conforme o faturamento cresce, o pró-labore acompanha — sem pressionar o caixa cedo e sem prejudicar o crescimento da empresa.
+    </div>
+
+    <!-- SEÇÃO 4: REVISÃO PRÓ-LABORE PÓS-MILESTONE -->
+    <div class="section-title">Revisão automática da remuneração</div>
+
+    <div class="card">
+      <div class="card-header">O que acontece com o pró-labore quando a empresa atingir as metas</div>
+      <div class="card-cols">
+        <div class="col col-original">
+          <span class="col-tag tag-original">Como estava</span><br>
+          Ajuda de custo limitada a R$ 4.000/mês com 40 clientes. Sem previsão de revisão depois disso.
         </div>
-
-        <div class="clause">
-          <strong>Anti-Diluição Básica</strong>
-          Em novas rodadas de investimento, sócios operadores mantêm participação proporcional ou recebem opções equivalentes.
+        <div class="col col-proposta">
+          <span class="col-tag tag-proposta">Nossa proposta</span><br>
+          Assim que a meta de distribuição plena for atingida (Fase 3), a remuneração mensal de cada sócio operador passa a ser automaticamente <strong>R$ 6.000 por mês, ou 5% do faturamento líquido mensal dividido entre os sócios operadores</strong> — o que for maior. Isso garante que, conforme a empresa cresce, a remuneração de quem a opera também cresce de forma justa.
         </div>
+      </div>
+    </div>
 
-        <div class="clause">
-          <strong>Non-Compete Razoável</strong>
-          Limitado a 12 meses pós-saída, restrito ao segmento de clínicas médicas na cidade de operação. Não impede atuação em outras áreas de marketing ou tecnologia.
-        </div>
+    <!-- SEÇÃO 5: PROTEÇÕES CONTRATUAIS -->
+    <div class="section-title">Proteções contratuais que propomos incluir</div>
 
-        <div class="clause">
-          <strong>Quórum de Decisão</strong>
-          Decisões operacionais: maioria dos sócios operadores. Decisões estratégicas (venda, fusão, nova rodada): unanimidade incluindo investidores.
-        </div>
+    <p style="font-size:13.5px;line-height:1.75;color:#444;margin-bottom:18px;">
+      As cláusulas abaixo não existem no acordo atual. Elas protegem tanto os sócios operadores quanto os investidores, deixando claro como situações difíceis devem ser tratadas — antes que elas aconteçam.
+    </p>
 
-        <div class="clause">
-          <strong>Justa Causa Documentada</strong>
-          Redução de equity ou desligamento exige causa documentada + 60 dias de defesa/correção. Não se aplica a crescimento lento ou divergências estratégicas.
-        </div>
+    <div class="clause-card">
+      <div class="clause-header">
+        <div class="clause-num">1</div>
+        Período de carência para a participação societária
+      </div>
+      <div class="clause-body">
+        Nos primeiros <strong>12 meses de operação</strong>, a participação de cada sócio operador fica protegida: mesmo que ele precise sair da empresa por qualquer motivo, não perde automaticamente sua parte. Qualquer desligamento nesse período precisa seguir um processo formal, com prazo e condições definidas em contrato. Isso evita que um desentendimento no começo da operação resulte em prejuízo desproporcional para qualquer lado.
+      </div>
+    </div>
 
-        <div class="clause">
-          <strong>Direito de Criação de Subsidiárias</strong>
-          Sócios operadores têm direito de preferência e participação majoritária (mín. 51%) em iniciativas adjacentes que usem marca, clientes ou infraestrutura da empresa principal.
-        </div>
+    <div class="clause-card">
+      <div class="clause-header">
+        <div class="clause-num">2</div>
+        Proteção contra diluição da participação
+      </div>
+      <div class="clause-body">
+        Se no futuro a empresa precisar buscar novos investidores ou captar mais recursos, a participação dos sócios operadores <strong>não pode ser reduzida sem o consentimento deles</strong>. Caso a empresa emita novas cotas ou ações para novos sócios, os operadores têm o direito de manter sua porcentagem proporcional — ou receber uma compensação equivalente, combinada entre as partes antes de qualquer negociação com terceiros.
+      </div>
+    </div>
 
+    <div class="clause-card">
+      <div class="clause-header">
+        <div class="clause-num">3</div>
+        Limite para a cláusula de não concorrência
+      </div>
+      <div class="clause-body">
+        Caso um sócio operador saia da empresa, ele <strong>não pode montar ou trabalhar em um negócio concorrente direto</strong> — ou seja, uma empresa que preste os mesmos serviços para o mesmo tipo de cliente, na mesma região — pelo prazo de <strong>12 meses</strong> após a saída. Fora disso, ele é livre para trabalhar em qualquer outra área de marketing, tecnologia ou gestão, mesmo que use conhecimentos adquiridos durante a operação. Essa cláusula protege a empresa sem impedir que as pessoas sigam suas carreiras.
+      </div>
+    </div>
+
+    <div class="clause-card">
+      <div class="clause-header">
+        <div class="clause-num">4</div>
+        Regras para decisões importantes
+      </div>
+      <div class="clause-body">
+        Decisões do dia a dia — como contratar alguém, ajustar preços, escolher fornecedores ou definir estratégias de operação — ficam <strong>na mão dos sócios operadores</strong>, que são quem está na empresa e conhece a realidade. Decisões grandes e que mudam a estrutura da empresa — como vender a empresa, trazer novos investidores ou fechar parcerias estratégicas — <strong>precisam da aprovação de todos os sócios, incluindo os investidores</strong>. Isso garante que ninguém tome uma decisão que afete toda a sociedade sem consultar os demais.
+      </div>
+    </div>
+
+    <div class="clause-card">
+      <div class="clause-header">
+        <div class="clause-num">5</div>
+        Processo para redução ou retirada de participação
+      </div>
+      <div class="clause-body">
+        A participação de um sócio operador <strong>só pode ser reduzida ou cancelada por motivo grave e comprovado</strong> — como fraude, abandono da função por mais de 30 dias sem justificativa ou conduta antiética documentada. Discordâncias estratégicas, crescimento mais lento do que o esperado ou simples desentendimentos <strong>não são motivo válido</strong> para retirar ou reduzir a participação de ninguém. Além disso, qualquer processo dessa natureza deve dar ao sócio um prazo de <strong>60 dias para se defender ou corrigir o problema</strong> antes de qualquer decisão ser tomada.
+      </div>
+    </div>
+
+    <div class="clause-card">
+      <div class="clause-header">
+        <div class="clause-num">6</div>
+        Direito de criar empresas e projetos ligados à Pulso
+      </div>
+      <div class="clause-body">
+        Os sócios operadores têm o <strong>direito de preferência para criar, liderar e ter participação majoritária</strong> (mínimo de 51%) em qualquer nova empresa ou projeto que use a marca, a base de clientes ou a estrutura da Pulso como ponto de partida — como uma empresa de tecnologia, de cursos, de consultoria ou qualquer outro modelo complementar. Isso garante que o trabalho de construção de marca e relacionamento que os operadores fazem hoje possa gerar frutos também no futuro, em novos formatos de negócio.
       </div>
     </div>
 
@@ -288,7 +409,7 @@
   <!-- FOOTER -->
   <div class="footer">
     <span><strong>Sócios Operadores — Pulso</strong> · Junho 2026</span>
-    <span>Documento interno de negociação · Sujeito a revisão jurídica</span>
+    <span>Documento de negociação · Sujeito a revisão jurídica</span>
   </div>
 
 </div>
