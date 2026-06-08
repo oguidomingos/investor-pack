@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta Societária — Sócios Operadores | Pulso</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #f8f9fa;
+    color: #1a1a2e;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 32px 16px;
+  }
+
+  .page {
+    background: #fff;
+    width: 100%;
+    max-width: 760px;
+    border-radius: 12px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+    overflow: hidden;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #0f2043 0%, #1a3a6b 100%);
+    color: #fff;
+    padding: 32px 44px 24px;
+  }
+  .header-meta {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #7eb3f5;
+    margin-bottom: 8px;
+  }
+  .header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .body { padding: 28px 44px 40px; }
+
+  .section {
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid #eef0f5;
+  }
+  .section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #1a5276;
+    margin-bottom: 14px;
+  }
+
+  .highlight {
+    background: #f0f6ff;
+    border-left: 3px solid #3a7bd5;
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #1a2a4a;
+    margin-bottom: 10px;
+  }
+  .highlight strong {
+    display: block;
+    font-size: 11.5px;
+    color: #1a5276;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  /* Tabela pró-labore */
+  .prolabore-wrap {
+    overflow-x: auto;
+    margin-bottom: 10px;
+  }
+  .prolabore-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  .prolabore-table thead tr {
+    background: #1a3a6b;
+    color: #fff;
+  }
+  .prolabore-table thead th {
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+  .prolabore-table thead th:last-child,
+  .prolabore-table tbody td:last-child {
+    text-align: right;
+  }
+  .prolabore-table tbody tr {
+    border-bottom: 1px solid #e8edf5;
+  }
+  .prolabore-table tbody tr:last-child {
+    background: #f0f6ff;
+    font-weight: 700;
+    border-bottom: none;
+  }
+  .prolabore-table tbody td {
+    padding: 11px 14px;
+    color: #1a1a2e;
+    vertical-align: top;
+  }
+  .prolabore-table tbody td small {
+    display: block;
+    font-size: 11px;
+    color: #777;
+    font-weight: 400;
+    margin-top: 2px;
+  }
+  .valor-destaque {
+    font-weight: 700;
+    color: #1a3a6b;
+  }
+  .nota-tabela {
+    font-size: 11.5px;
+    color: #666;
+    line-height: 1.6;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border-radius: 4px;
+  }
+
+  .clause-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .clause {
+    background: #f5f9ff;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: #2c3e50;
+    border-left: 3px solid #3a7bd5;
+  }
+  .clause strong {
+    display: block;
+    font-size: 11px;
+    color: #1a5276;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .footer {
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecf0;
+    padding: 14px 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11.5px;
+    color: #888;
+  }
+  .footer strong { color: #1a1a2e; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-meta">Proposta Societária · Junho 2026</div>
+    <h1>Sócios Operadores — Pulso</h1>
+  </div>
+
+  <div class="body">
+
+    <!-- SEÇÃO 1: DIVISÃO DE LUCROS E EQUITY -->
+    <div class="section">
+      <div class="section-title">Divisão dos Lucros e Participação na Empresa</div>
+
+      <div class="highlight">
+        <strong>Primeiros 6 meses — só pró-labore, sem distribuição de lucros</strong>
+        Cada sócio operador entra com 8% de participação na empresa desde o primeiro dia. Durante os primeiros 6 meses, a remuneração é exclusivamente o pró-labore mensal — sem distribuição de lucros ainda.
+      </div>
+
+      <div class="highlight">
+        <strong>A partir do 7º mês — começa a participação nos lucros</strong>
+        Cada sócio operador passa a receber 4% do lucro líquido da empresa por mês — equivalente à metade da sua participação atual. A fatia na empresa continua em 8%.
+      </div>
+
+      <div class="highlight">
+        <strong>Após 1 ano de operação com faturamento acima de R$ 80 mil por mês (por 2 meses seguidos)</strong>
+        A participação sobe de 8% para 9% da empresa. A distribuição de lucros acompanha: cada sócio recebe 9% do lucro líquido.
+      </div>
+
+      <div class="highlight">
+        <strong>Quando o faturamento mensal ultrapassar R$ 140 mil (por 2 meses seguidos)</strong>
+        A participação sobe de 9% para 10%, com distribuição de lucros proporcional. Sem prazo mínimo adicional — vale o resultado.
+      </div>
+    </div>
+
+    <!-- SEÇÃO 2: PRÓ-LABORE -->
+    <div class="section">
+      <div class="section-title">Remuneração Mensal (Pró-labore)</div>
+
+      <p style="font-size:13px;line-height:1.7;color:#444;margin-bottom:14px;">
+        O pró-labore é a remuneração fixa mensal de quem opera a empresa — independente do lucro. Ele sai do custo da empresa antes do lucro ser calculado, ou seja, não vem do bolso dos investidores.
+      </p>
+
+      <div class="prolabore-wrap">
+        <table class="prolabore-table">
+          <thead>
+            <tr>
+              <th>Faixa de faturamento mensal</th>
+              <th>Por sócio / mês</th>
+              <th>Total (5 sócios)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                Meses 1–6
+                <small>Fase de construção · sem lucros ainda</small>
+              </td>
+              <td><span class="valor-destaque">R$ 3.000–3.500</span></td>
+              <td>R$ 15.000–17.500</td>
+            </tr>
+            <tr>
+              <td>
+                A partir do 7º mês
+                <small>+ 4% do lucro líquido por sócio</small>
+              </td>
+              <td><span class="valor-destaque">R$ 3.500</span></td>
+              <td>R$ 17.500</td>
+            </tr>
+            <tr>
+              <td>
+                Faturamento &gt; R$ 80 mil/mês
+                <small>+ participação integral nos lucros (9%)</small>
+              </td>
+              <td><span class="valor-destaque">R$ 4.000</span></td>
+              <td>R$ 20.000</td>
+            </tr>
+            <tr>
+              <td>
+                Faturamento &gt; R$ 140 mil/mês
+                <small>+ participação nos lucros proporcional ao equity (10%)</small>
+              </td>
+              <td><span class="valor-destaque">R$ 5.000</span><small>ou 3% do faturamento ÷ 5, o que for maior</small></td>
+              <td>R$ 25.000+</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="nota-tabela">O pró-labore cresce automaticamente conforme a empresa avança de faixa — sem precisar renegociar a cada etapa.</p>
+    </div>
+
+    <!-- SEÇÃO 3: CLÁUSULAS DE PROTEÇÃO -->
+    <div class="section">
+      <div class="section-title">Cláusulas de Proteção</div>
+
+      <div class="clause-grid">
+        <div class="clause">
+          <strong>Vesting com Cliff (12 meses)</strong>
+          Equity protegido nos primeiros 12 meses. Saída anterior exige processo de desligamento formal — não gera perda automática.
+        </div>
+        <div class="clause">
+          <strong>Anti-Diluição</strong>
+          Em novas rodadas de investimento, sócios operadores mantêm participação proporcional ou recebem opções equivalentes.
+        </div>
+        <div class="clause">
+          <strong>Non-Compete</strong>
+          Limitado a 12 meses pós-saída, restrito ao segmento de clínicas médicas na cidade de operação. Não impede atuação em outras áreas.
+        </div>
+        <div class="clause">
+          <strong>Quórum de Decisão</strong>
+          Decisões operacionais: maioria dos sócios operadores. Decisões estratégicas (venda, fusão, nova rodada): unanimidade.
+        </div>
+        <div class="clause">
+          <strong>Justa Causa</strong>
+          Redução de equity ou desligamento exige causa documentada + 60 dias de defesa. Não se aplica a crescimento lento.
+        </div>
+        <div class="clause">
+          <strong>Subsidiárias</strong>
+          Sócios operadores têm direito de preferência e participação majoritária (mín. 51%) em iniciativas que usem marca ou base de clientes da Pulso.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span><strong>Sócios Operadores — Pulso</strong> · Junho 2026</span>
+    <span>Documento interno · Sujeito a revisão jurídica</span>
+  </div>
+
+</div>
+</body>
+</html>
